@@ -14,5 +14,20 @@
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
-  }
+  },
+  "devDependencies": {
+    "standard": "17.0.0"
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/alt2cl/ecommerce-next-13-app.git"
+  },
+  "author": "Aldo Diaz Saavedra Alt2cl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alt2cl/ecommerce-next-13-app/issues"
+  },
+  "homepage": "https://github.com/alt2cl/ecommerce-next-13-app#readme"
 }
