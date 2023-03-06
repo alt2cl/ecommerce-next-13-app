@@ -1,3 +1,7 @@
+
+import {CarritoProvider} from '@/context/CarritoContext'
+import Head from 'next/head'
+import { Header } from '@/components/Header'
 import './globals.css'
 
 export const metadata = {
@@ -7,8 +11,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    
+    <html lang="es">
+      <Head>
+        <title>Guitars</title>
+      </Head>
+      <body>
+        <Header />
+        <CarritoProvider>
+        {children}
+        </CarritoProvider>
+        </body>
     </html>
   )
 }
