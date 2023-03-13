@@ -17,8 +17,9 @@ export default function RootLayout({ children }) {
         <title>Guitars</title>
       </Head>
       <body>
+      <CarritoProvider>
         <Header />
-        <CarritoProvider>
+        
         {children}
         </CarritoProvider>
         </body>

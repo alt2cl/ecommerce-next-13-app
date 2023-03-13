@@ -2,14 +2,14 @@ import ProductList from "./productList";
 
 export default function TiendaPage(props) {
     return (
-        <div className="container px-4">
-            <div className="grid grid-cols-12 gap-10">
-                <main className="col-span-12 md:col-span-9">
-                    <section className="grid  grid-cols-1 lg:grid-cols-3 gap-7">
+        <div className="container px-4 pt-9">
+            <div className="grid lg:grid-cols-12 lg:gap-12">
+                <main className="col-span-12 lg:col-span-8 mb-8">
+                    <section className="grid  grid-cols-2 lg:grid-cols-4 gap-6">
                         <ProductList shortPost />
                     </section>
                 </main>
-                <aside className="col-span-12 md:col-span-3">
+                <aside className="bg-slate-500 min-h-screen block col-span-12 lg:col-span-4">
                     aside
                 </aside>
 

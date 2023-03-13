@@ -21,15 +21,23 @@ export default async function PostsList({shortPost}) {
                         const item = post.attributes
                         const {titulo, publishedAt, url, imagen, contenido} = item
                         return(
-                        <article key={post.id} >
+                        <article key={post.id} className='mb-10' >
                             <div>
-                                <h3 className="title">{titulo}</h3>
-                                <p>{publishedAt}</p>
-                                <Image src={imagen.data.attributes.formats.medium.url} alt={`imagen de articulo ${titulo}`} width={800} height={400}></Image>
+                                <Link href={`/blog/${url}`}>
+                                <h3 className="title text-3xl text-slate-900 font-semibold mb-5">{titulo}</h3>
+                                </Link>
+                                <p className="text-xs text-slate-400 mb-3">{publishedAt}</p>
+                                <Link href={`/blog/${url}`} className="rounded">
+                                    <Image src={imagen.data.attributes.formats.medium.url} 
+                                    alt={`imagen de articulo ${titulo}`} 
+                                    width={800} 
+                                    height={400}
+                                    className="mb-3 rounded"
+                                    ></Image>
+                                </Link>
                             </div>
                             <div>
-                                <p className={shortPost ? 'lineclamp-4': ''}>{contenido}</p>
-                                <Link href={`/blog/${url}`}>Leer post...</Link>
+                                <p className={`${shortPost ? 'lineclamp-4': ''} text-slate-500 text-sm`}>{contenido}</p>
                             </div>
                         </article>
 

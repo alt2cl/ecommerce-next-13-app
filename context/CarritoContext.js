@@ -16,18 +16,26 @@ export const CarritoProvider = ({children}) => {
     //const carritoLS = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('carrito')) : []
 
 
-
-
     const [carrito, setCarrito] = useState(carritoLS)
-    const [color, setColor] = useState('red');
+    const [color, setColor] = useState('red')
+    const [counterProduct, setCounterProduct] = useState(0)
+
+
 
     useEffect(()=>{
         setPaginaLista(true)
+        
       })
 
     useEffect(()=>{
-        console.log('localstorage', localStorage.getItem('carrito'), typeof window)
+        
         localStorage.setItem('carrito', JSON.stringify(carrito))
+
+        
+        //const countObject = carritoItems.map(item=>item.cantidad).reduce((prev,curr) => prev + curr, 0)
+        let itemReduce = carrito.reduce((acumulador, actual)=> acumulador + actual.cantidad, 0)
+        setCounterProduct(itemReduce)
+
       },[carrito])
 
     const agregarCarrito = guitarra => {
@@ -43,10 +51,13 @@ export const CarritoProvider = ({children}) => {
             // Se asigna al array
             setCarrito([...carritoActualizado]);
             localStorage.setItem('carrito', JSON.stringify( carrito ));
+            
         } else {
             // En caso de que el articulo no exista, es nuevo y se agrega
             setCarrito([...carrito, guitarra]);
             localStorage.setItem('carrito', JSON.stringify( carrito ));
+            console.log('guitarra cantidad:', guitarra.cantidad)
+            
         }
     }
     
@@ -68,7 +79,7 @@ export const CarritoProvider = ({children}) => {
     }
 
     return (
-        <CarritoContext.Provider value={{paginaLista,color, setColor, carrito, setCarrito, agregarCarrito, eliminarProducto, actualizarCantidad }}>
+        <CarritoContext.Provider value={{paginaLista,color, setColor, carrito, setCarrito, agregarCarrito, eliminarProducto, actualizarCantidad, setCounterProduct, counterProduct}}>
             {children}
         </CarritoContext.Provider>
     )

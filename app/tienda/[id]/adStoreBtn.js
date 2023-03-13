@@ -1,13 +1,20 @@
 'use client'
 
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {useCarritoContext} from "@/context/CarritoContext";
+
 
 function AdStoreBtn({ product,imagen, nombre, precio }) {
 
-    const {agregarCarrito} = useCarritoContext();
+    const {agregarCarrito, setCounterProduct, counterProduct} = useCarritoContext();
     const [cantidad, setCantidad] = useState(0)
+
+
+    useEffect(()=>{
+        setCounterProduct(counterProduct + Number(cantidad))
+
+    },[])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -31,6 +38,7 @@ function AdStoreBtn({ product,imagen, nombre, precio }) {
         //pasando la informacion al carrito
 
         agregarCarrito(productoSeleccionado)
+        
 
 
     }
@@ -38,7 +46,7 @@ function AdStoreBtn({ product,imagen, nombre, precio }) {
     return (
         <div>
 
-            <form onSubmit={handleSubmit} className="formulario border-gray-100 p-5 mt-10 bg-slate-300">
+            <form onSubmit={handleSubmit} className="formulario border-gray-100 p-4 mt-5 bg-slate-300 rounded">
                 <div className="grid grid-cols-2 gap-5 mb-5">
                     <label htmlFor="cantidad">Cantidad</label>
                     <select id="cantidad" onChange={e=> setCantidad(+e.target.value)}>
@@ -56,7 +64,7 @@ function AdStoreBtn({ product,imagen, nombre, precio }) {
                         <option value="10">10</option>
                     </select>
                 </div>
-                <input type="submit" value="Agregar al carrito" className="block w-full p-3 text-center bg-black text-white" />
+                <input type="submit" value="Agregar al carrito" className="block w-full p-3 text-center bg-orange-600 hover:bg-slate-900 text-white rounded" />
                 
             </form>
             

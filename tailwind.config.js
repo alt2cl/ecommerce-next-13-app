@@ -6,7 +6,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        //'header':'2.25rem',
+        //'sub':'1.25rem',
+        //'paragraph': '1rem',
+        //'description': '1.2rem'
+      },
+      fontColor: {
+        'grayFont': '#ccc'
+      }
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
@@ -26,6 +36,12 @@ module.exports = {
     container: {
       center: true,
     },
+    fontFamily: {
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+    },
+
+
   },
   plugins: [],
 }
