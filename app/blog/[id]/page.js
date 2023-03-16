@@ -2,9 +2,14 @@ import PostsList from "../postsList";
 import Image from "next/image";
 import Link from "next/link";
 
-const fetchPost = (id) => {
-    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?filters[url]=${id}&populate=imagen`)
-    .then(res => res.json())
+async function fetchPost(id){
+    const res = fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?filters[url]=${id}&populate=imagen`)
+
+    if (!res.ok) {
+        throw new error('Failed falla to fetch data blog id')
+        
+    }
+    return res.json();
 }
 
 
