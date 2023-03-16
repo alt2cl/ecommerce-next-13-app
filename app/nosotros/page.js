@@ -1,19 +1,12 @@
 import Image from "next/image";
-async function fetchNosotros (){
-    const res = fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/guitarras?populate=imagen`)
-
-    if (!res.ok) {
-        throw new error('Failed falla to fetch data nosotros');
-    }
-
-    return res.json()
+const fetchNosotros = () => {
+    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/guitarras?populate=imagen`)
+    .then(res => res.json())
 }
 
 export default async function NosotrosPage(props) {
 
     const content = await fetchNosotros()
-
-    console.log('content de nosotros pendiente', nosotros)
 
     return (
         <div className="container px-4 pt-9">

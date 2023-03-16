@@ -1,15 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 
-async function fetchPosts() {
-    const res = fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?populate=imagen`)
-
-    if (!res.ok) {
-        throw new error('Failed falla to fetch data postList')
-        
-    }
-
-    return res.json();
+const fetchPosts = () => {
+    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?populate=imagen`)
+    .then(res => res.json())
 }
 
 export default async function PostsList({shortPost}) {
