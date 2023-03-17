@@ -16,6 +16,6 @@ export default function TiendaPage(props) {
             </div>
            
         </div>
-    );
+    )
 }
 

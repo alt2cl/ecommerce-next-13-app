@@ -1,16 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 
-async function fetchPosts() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/guitarras?populate=imagen`)
-
-    // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed falla to fetch data');
-  }
-
-   return res.json();
+async function fetchPosts (){
+    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/guitarras?populate=imagen`)
+    .then(res => res.json())
 }
 
 export default async function ProductList({shortPost}) {
@@ -38,7 +31,7 @@ export default async function ProductList({shortPost}) {
                                 <p className={`${shortPost ? 'lineclamp-4 mb-5': 'mb-5'} text-slate-500 text-sm `}>{descripcion}</p>
                                 <p className="text-md text-slate-800 font-medium mb-6">${precio}</p>
                                 
-                                <Link href={`/tienda/${url}`} as={`/tienda/${url}`} className="rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white">
+                                <Link href={`/tienda/${url}`} className="rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white">
                                     Ir al producto...
                                 </Link>
                             </div>
