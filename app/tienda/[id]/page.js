@@ -2,7 +2,7 @@ import Image from "next/image";
 import AdStoreBtn from "./adStoreBtn";
 
 async function getPost(id) {
-    const res = await fetch(`https://cms-strapi-guitar.onrender.com/api/guitarras?filters[url]=${id}&populate=imagen`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/guitarras?filters[url]=${id}&populate=imagen`)
     return res.json();
     
 }
@@ -12,8 +12,6 @@ export default async function ProductoPage({params: { id }}) {
 
     const product = await getPost(id)
     //const product = await productData;
-
-    console.log('productoss:', product)
 
     const {imagen, nombre, descripcion, precio} = product.data[0].attributes
 
@@ -31,7 +29,7 @@ export default async function ProductoPage({params: { id }}) {
                                 <p className={` text-slate-500 text-sm mb-4`}>{descripcion}</p>
                                 <p className="text-md text-slate-800 font-medium ">${precio}</p>
                                 
-                                {/* <AdStoreBtn product={product} imagen={imagen} nombre={nombre} descripcion={descripcion} precio={precio}/> */}
+                                <AdStoreBtn product={product} imagen={imagen} nombre={nombre} descripcion={descripcion} precio={precio}/>
                                 
                             </div>
                         </div>

@@ -1,22 +1,19 @@
-'use client'
 
-import PostsList from "../postsList";
+//import PostsList from "../postsList";
 import Image from "next/image";
-import Link from "next/link";
 
-async function fetchPost(id){
-    const res = fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?filters[url]=${id}&populate=imagen`)
-
-    if (!res.ok) {
-        throw new Error('Failed falla to fetch data blog id')
-    }
+async function getPost(id){
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?filters[url]=${id}&populate=imagen`)
     return res.json();
 }
 
 
-export default async function PostPage({params:{id}}) {
+export default async function PostPage({params:{ id }}) {
 
-    const post = await fetchPost(id)
+    const post = await getPost(id)
+
+    console.log('post blog', post)
+
     const {titulo, contenido, imagen, publishedAt} = post.data[0].attributes
    
     return (
@@ -44,7 +41,7 @@ export default async function PostPage({params:{id}}) {
                     </article>
                 </main>
                 <aside className="bg-slate-500 min-h-screen block col-span-12 lg:col-span-4">
-                <PostsList shortPost={true} />
+                {/* <PostsList shortPost={true} /> */}
                 </aside>
 
             </div>
