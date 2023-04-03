@@ -2,24 +2,29 @@ import Image from "next/image"
 import Link from "next/link"
 
 async function fetchPosts (){
-    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/guitarras?populate=imagen`)
-    .then(res => res.json())
+    let res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=imagen`)
+    return res.json();
 }
 
 export default async function ProductList({shortPost}) {
-    const posts = await fetchPosts()
+    const {data} = await fetchPosts()
+    console.log('la dataxxx:', data)
     return (
-        
             <>
                 {
-                    posts.data.map(post=>{
+                    data.map(post=>{
                         const item = post.attributes
                         const {nombre, descripcion, publishedAt, url, imagen, precio} = item
+                        console.log('imagen_',imagen)
                         return(
                         <div key={post.id} className={'flex flex-col gap-3 mb-5 lg:mb-16'} >
                             <div className="flex justify-center">
+                                
+
+                                
+                                
                                 <Image 
-                                src={imagen.data.attributes.formats.medium.url} 
+                                src={imagen.data[0].attributes.formats.medium ? imagen.data[0].attributes.formats.medium.url : imagen.data[0].attributes.url} 
                                 alt={`imagen de ${nombre}`} 
                                 width={400} 
                                 height={400}

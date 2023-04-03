@@ -2,7 +2,7 @@
 import {CarritoProvider} from '@/context/CarritoContext'
 import Head from 'next/head'
 import { Header } from '@/components/Header'
-import './globals.css'
+import './globals.scss'
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <Head>
         <title>Guitars</title>
       </Head>
-      <body>
+      <body className=' bg-slate-100'>
       <CarritoProvider>
         <Header />
         

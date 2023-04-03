@@ -1,9 +1,11 @@
-import Image from "next/image";
-import AdStoreBtn from "./adStoreBtn";
 
-async function getPost(id) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/guitarras?filters[url]=${id}&populate=imagen`)
-    return res.json();
+import AdStoreBtn from "./adStoreBtn";
+import markdownToHtml from "@/app/utils/markdownToHtml";
+import Carousel from "@/components/Carousel";
+
+const getPost = (id)=> {
+    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?filters[url]=${id}&populate=imagen`, { cache: 'no-store' })
+    .then(res=> res.json())
     
 }
 
@@ -13,7 +15,11 @@ export default async function ProductoPage({params: { id }}) {
     const product = await getPost(id)
     //const product = await productData;
 
+    console.log('product data:', product.data[0].attributes)
+
     const {imagen, nombre, descripcion, precio} = product.data[0].attributes
+
+    const richtext = await markdownToHtml(descripcion)
 
     return (
         <div className="container px-4 pt-6">
@@ -22,11 +28,14 @@ export default async function ProductoPage({params: { id }}) {
                     <section className="section">
                         <div className='grid grid-cols-7 gap-6'>
                             <div className="flex justify-center col-span-7 lg:col-span-3">
-                            <Image src={imagen.data.attributes.url} alt={`Imagen ${nombre}`} width={500} height={500}  className={'rounded-xl'} />
+
+                                <Carousel arrayImage={imagen.data} passId={`carousel${id}`} />
+                                
                             </div>
                             <div className='flex flex-col col-span-7 lg:col-span-4'>
                                 <h3 className="text-md lg:text-3xl mb-3 font-semibold text-slate-900">{nombre}</h3>
-                                <p className={` text-slate-500 text-sm mb-4`}>{descripcion}</p>
+                                {/* <p className={` text-slate-500 text-sm mb-4`}>{descripcion}</p> */}
+                                <div className="prose prose-slate mb-4" dangerouslySetInnerHTML={{__html: richtext}}></div>
                                 <p className="text-md text-slate-800 font-medium ">${precio}</p>
                                 
                                 <AdStoreBtn product={product} imagen={imagen} nombre={nombre} descripcion={descripcion} precio={precio}/>
@@ -36,7 +45,7 @@ export default async function ProductoPage({params: { id }}) {
                         
                     </section>
                 </main>
-                <aside className=" bg-slate-500 min-h-screen block col-span-12 lg:col-span-4">
+                <aside className="  block col-span-12 lg:col-span-4">
                     aside
                 </aside>
 

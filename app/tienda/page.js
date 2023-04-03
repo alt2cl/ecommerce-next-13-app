@@ -9,7 +9,7 @@ export default function TiendaPage(props) {
                         <ProductList shortPost />
                     </section>
                 </main>
-                <aside className="bg-slate-500 min-h-screen block col-span-12 lg:col-span-4">
+                <aside className="block col-span-12 lg:col-span-4">
                     aside
                 </aside>
 

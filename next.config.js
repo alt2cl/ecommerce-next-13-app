@@ -6,6 +6,9 @@ const nextConfig = {
   images:{
     formats: ['image/avif', 'image/webp'],
     domains: [`${process.env.DOMAIN}`]
+  },
+  env: {
+    NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL
   }
 }
 

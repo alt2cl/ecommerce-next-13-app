@@ -1,23 +1,24 @@
 import Image from "next/image"
 import Link from "next/link"
 
-const fetchPosts = () => {
-    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?populate=imagen`)
-    .then(res => res.json())
+async function getData() {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?populate=imagen`);
+    return res.json();
+
+    
 }
 
 export default async function PostsList({shortPost}) {
-    
 
-    const posts = await fetchPosts()
+    let {data} = await getData()
     //const {titulo, imagen , contenido, url, publishedAt} = posts.attributes
-    console.log('los imagen:', posts.data[0].attributes.imagen)
+    console.log('resjson:', data)
 
     return (
         
             <>
                 {
-                    posts.data.map(post=>{
+                    data.map(post=>{
                         const item = post.attributes
                         const {titulo, publishedAt, url, imagen, contenido} = item
                         return(
@@ -28,7 +29,7 @@ export default async function PostsList({shortPost}) {
                                 </Link>
                                 <p className="text-xs text-slate-400 mb-3">{publishedAt}</p>
                                 <Link href={`/blog/${url}`} className="rounded">
-                                    <Image src={imagen.data.attributes.formats.medium.url} 
+                                    <Image src={imagen.data.attributes.formats.medium? imagen.data.attributes.formats.medium.url : imagen.data.attributes.url} 
                                     alt={`imagen de articulo ${titulo}`} 
                                     width={800} 
                                     height={400}

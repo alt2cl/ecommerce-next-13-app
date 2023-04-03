@@ -1,7 +1,7 @@
 
-import PostsList from "./postsList";
+import PostsList from "./postsList.jsx";
 
-export default function BlogPage(props) {
+export default async function BlogPage({ params }) {
 
     return (
         
@@ -12,7 +12,7 @@ export default function BlogPage(props) {
                         <PostsList shortPost/>
                     </section>
                 </main>
-                <aside className="bg-slate-500 min-h-screen block col-span-12 lg:col-span-4">
+                <aside className=" block col-span-12 lg:col-span-4">
                     aside
                 </aside>
 

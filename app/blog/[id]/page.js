@@ -1,20 +1,20 @@
 
 //import PostsList from "../postsList";
 import Image from "next/image";
+import markdownToHtml from "@/app/utils/markdownToHtml";
 
-async function getPost(id){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?filters[url]=${id}&populate=imagen`)
-    return res.json();
+const getPost = (id) => { 
+    return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?filters[url]=${id}&populate=imagen`, {next:{revalidate:60}}, { cache: 'no-store' })
+    .then(res => res.json())
 }
 
 
 export default async function PostPage({params:{ id }}) {
 
     const post = await getPost(id)
-
-    console.log('post blog', post)
-
     const {titulo, contenido, imagen, publishedAt} = post.data[0].attributes
+
+    const richtext = await markdownToHtml(contenido)
    
     return (
         <div className="container px-4 pt-9">
@@ -32,15 +32,17 @@ export default async function PostPage({params:{ id }}) {
                         height={450} 
                         className="mb-3 rounded" />
 
-                        <p className="text-slate-700 text-md">
-                        {contenido}
-                        </p>
+                        <div className="text-slate-700 text-md">
+                            {richtext && <div className="prose prose-slate" dangerouslySetInnerHTML={{__html: richtext}}></div>
+
+                            }
+                        </div>
                        
                        
                        
                     </article>
                 </main>
-                <aside className="bg-slate-500 min-h-screen block col-span-12 lg:col-span-4">
+                <aside className=" block col-span-12 lg:col-span-4">
                 {/* <PostsList shortPost={true} /> */}
                 </aside>
 

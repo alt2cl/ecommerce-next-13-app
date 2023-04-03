@@ -20,16 +20,14 @@ function AdStoreBtn({ product,imagen, nombre, precio }) {
         e.preventDefault()
 
         if(cantidad < 1){
-
             alert('Cantidad invalida')
             return
-
         }
 
         //construir un objeto
         const productoSeleccionado = {
             id: product.data[0].id,
-            imagen: imagen.data.attributes.formats.medium.url,
+            imagen: imagen.data[0].attributes.url,
             nombre,
             precio,
             cantidad

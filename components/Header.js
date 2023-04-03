@@ -24,13 +24,13 @@ export function Header(props) {
 
     return (
         <>
-        <div className=" bg-gray-50" style={{backgroundImage:'linear-gradient(to right, rgb(0 0 0 / .8), rgb(0 0 0 / .7)), url(/img/header.jpg)'}} >
-            <div className='container mx-auto lg:py-1 lg:flex items-center'>
+        <div className="sticky top-0 z-30" style={{backgroundImage:'linear-gradient(to right, rgb(0 0 0 / .8), rgb(0 0 0 / .7)), url(/img/header.jpg)'}} >
+            <div className='container cont mx-auto lg:py-1 lg:flex items-center'>
                 <div className='flex flex-row justify-between w-full'>
                 <Link href="/" className='pl-4 flex justify-center'>
                     <Image className='p-6' src={'/img/cafemas.png'} width={248} height={56} alt="Logo" />  
                 </Link>
-                <div className='menues flex flex-row justify-center p-5 gap-4'>
+                <div className='menues flex flex-row justify-center p-5 gap-4 '>
                     <div className={`${ open ? 'right-0 open': '-right-full'} lg:right-0 transition-all menu bg-current z-30 top-0  fixed max-w-xs min-h-screen lg:max-w-none lg:static lg:min-h-0`}>
                         <div className='clsedbtn absolute top-4 right-4 block lg:hidden'>
                             <button className='closed text-white' onClick={()=> closed()}>
