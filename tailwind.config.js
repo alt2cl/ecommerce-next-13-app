@@ -8,10 +8,10 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        //'header':'2.25rem',
-        //'sub':'1.25rem',
-        //'paragraph': '1rem',
-        //'description': '1.2rem'
+        'header':'2.25rem',
+        'sub':'1.25rem',
+        'paragraph': '1rem',
+        'description': '1.2rem'
       },
       fontColor: {
         'grayFont': '#ccc'

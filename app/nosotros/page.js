@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import markdownToHtml from "@/app/utils/markdownToHtml";
@@ -17,13 +18,13 @@ export default async function NosotrosPage(props) {
             const richtext = await markdownToHtml(content.attributes.contenido)
             
             return await (
-                <section className="pb-8">
+                <section className="pb-8 mb-8">
                     <div>
                         <h2 className=" text-4xl font-semibold text-slate-900 text-center block mb-10">
                             {content.attributes.tituloseccion}
                         </h2>
                     </div>
-                    <div className='grid grid-cols-5 gap-10'>
+                    <div className='grid grid-cols-1 lg:grid-cols-5 gap-10'>
                             <div className="col-span-2">
                                 <Image 
                                 src={content.attributes.imagen.data.attributes.formats?.medium ? 

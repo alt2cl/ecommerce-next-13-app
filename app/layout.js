@@ -2,7 +2,7 @@
 import {CarritoProvider} from '@/context/CarritoContext'
 import Head from 'next/head'
 import { Header } from '@/components/Header'
-import { Inter } from 'next/font/google'
+import { Inter, Barlow } from 'next/font/google'
 import './globals.scss'
 
 export const metadata = {
@@ -12,10 +12,12 @@ export const metadata = {
 
 const inter = Inter({ subsets: ['latin'] })
 
+const barlow = Barlow({ subsets: ['latin'], weight:['300','400','500','700','900'], variable: '--font-barlow' })
+
 export default function RootLayout({ children }) {
   return (
     
-    <html lang="es" className={inter.className}>
+    <html lang="es" className={barlow.className}>
       <Head>
         <title>Guitars</title>
       </Head>
