@@ -10,14 +10,16 @@ const getPost = (id)=> {
 }
 
 
-export default async function ProductoPage({params: { id }}) {
+export default async function ProductoPage({params: { slug }}) {
+
+    const id = slug.slice(-1)
 
     const product = await getPost(id)
     //const product = await productData;
 
     console.log('product data:', product.data[0].attributes)
 
-    const {imagen, nombre, descripcion, precio} = product.data[0].attributes
+    const {imagen, titulo, descripcion, precio} = product.data[0].attributes
 
     const richtext = await markdownToHtml(descripcion)
 
@@ -33,12 +35,12 @@ export default async function ProductoPage({params: { id }}) {
                                 
                             </div>
                             <div className='flex flex-col col-span-7 lg:col-span-4'>
-                                <h3 className="text-md lg:text-3xl mb-3 font-semibold text-slate-900">{nombre}</h3>
+                                <h3 className="text-md lg:text-3xl mb-3 font-semibold text-slate-900">{titulo}</h3>
                                 {/* <p className={` text-slate-500 text-sm mb-4`}>{descripcion}</p> */}
                                 <div className="prose prose-slate mb-4" dangerouslySetInnerHTML={{__html: richtext}}></div>
                                 <p className="text-md text-slate-800 font-medium ">${precio}</p>
                                 
-                                <AdStoreBtn product={product} imagen={imagen} nombre={nombre} descripcion={descripcion} precio={precio}/>
+                                <AdStoreBtn product={product} imagen={imagen} nombre={titulo} descripcion={descripcion} precio={precio}/>
                                 
                             </div>
                         </div>

@@ -12,7 +12,6 @@ export default async function PostsList({shortPost}) {
 
     let {data} = await getData()
     //const {titulo, imagen , contenido, url, publishedAt} = posts.attributes
-    console.log('resjson:', data)
 
     return (
         

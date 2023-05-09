@@ -12,7 +12,7 @@ export const metadata = {
 
 const inter = Inter({ subsets: ['latin'] })
 
-const barlow = Barlow({ subsets: ['latin'], weight:['300','400','500','700','900'], variable: '--font-barlow' })
+const barlow = Barlow({ subsets: ['latin'], weight:['300','400','500','600','700','900'], variable: '--font-barlow' })
 
 export default function RootLayout({ children }) {
   return (
@@ -24,7 +24,6 @@ export default function RootLayout({ children }) {
       <body className=' bg-slate-100'>
       <CarritoProvider>
         <Header />
-        
         {children}
         </CarritoProvider>
         </body>
