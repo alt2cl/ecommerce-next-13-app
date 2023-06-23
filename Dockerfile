@@ -5,7 +5,7 @@ COPY package.json .
 COPY . .
 RUN npm install -g npm@9.7.2
 ##RUN npm install 
-RUN NODE_ENV=development npm i
+RUN NODE_ENV=production npm i
 
 
 RUN npm run build
