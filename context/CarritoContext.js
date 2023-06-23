@@ -19,6 +19,13 @@ export const CarritoProvider = ({children}) => {
     const [carrito, setCarrito] = useState(carritoLS)
     const [color, setColor] = useState('red')
     const [counterProduct, setCounterProduct] = useState(0)
+    const [pedido, setPedido] = useState(
+      {
+        "userid": null,
+        "addressid": null,
+        "pedidoid": null
+      }
+    )
 
 
 
@@ -78,8 +85,19 @@ export const CarritoProvider = ({children}) => {
       window.localStorage.setItem('carrito', JSON.stringify( carrito ));
     }
 
+    const actualizarPedido = guitarra => {
+      const carritoActualizado = carrito.map( guitarraState => {
+        if(guitarraState.id === guitarra.id ) {
+          guitarraState.cantidad = parseInt( guitarra.cantidad )
+        } 
+        return guitarraState
+      })
+      setCarrito(carritoActualizado)
+      window.localStorage.setItem('carrito', JSON.stringify( carrito ));
+    }
+
     return (
-        <CarritoContext.Provider value={{paginaLista,color, setColor, carrito, setCarrito, agregarCarrito, eliminarProducto, actualizarCantidad, setCounterProduct, counterProduct}}>
+        <CarritoContext.Provider value={{paginaLista,color, setColor, carrito, setCarrito, agregarCarrito, eliminarProducto, actualizarCantidad, setCounterProduct, counterProduct, actualizarPedido}}>
             {children}
         </CarritoContext.Provider>
     )

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.map-container {
+  height: 300px;
+}
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -110,6 +114,10 @@ a {
   }
 } */
 
+.errormsg {
+  color: red;
+}
+
 [class*="heading"] {
   font-size: 4rem;
   text-align: center;
@@ -117,104 +125,98 @@ a {
   color: var(--primary);
   margin: 5rem 0;
 }
-[class*="lineclamp-3"]{
+[class*="lineclamp-3"] {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
 }
-[class*="lineclamp-4"]{
+[class*="lineclamp-4"] {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
 }
-[class*="lineclamp-5"]{
+[class*="lineclamp-5"] {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   overflow: hidden;
 }
-[class*="lineclamp-6"]{
+[class*="lineclamp-6"] {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
   overflow: hidden;
 }
-[class*="lineclamp-7"]{
+[class*="lineclamp-7"] {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 7;
   overflow: hidden;
 }
 
-
-[class*="btn"]{
+[class*="btn"] {
   background-color: #e99401;
   padding: 0.5rem 1rem;
   text-align: center;
   color: #262626;
   border-radius: 4px;
   min-width: 50px;
-  
 }
 
 .wrapper-carousel-metro {
   overflow: hidden;
   .wrap-control-carousel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    .control-carousel {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 1rem;
+      // margin-right: 120px;
 
-      .control-carousel {
-          display: flex;
-          // margin-right: 120px;
-
-          .controlbtn {
-              width: 30px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-          }
+      .controlbtn {
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-
+    }
   }
-
 }
-
 
 .results-list-carousel-container {
   display: flex;
   position: relative;
   transition: all ease 0.5s;
   .list-item-carousel {
-      min-width: 14rem;
-      position: relative;
-      a {
-          text-decoration: none;
+    min-width: 14rem;
+    position: relative;
+    a {
+      text-decoration: none;
 
-          .headline-text {
-              font-size: 1.5rem;
-              line-height: 2rem;
-              margin-bottom: 1rem;
-              color: #191919;
-          }
-          .description-text {
-              color: #373742;
-          }
+      .headline-text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-bottom: 1rem;
+        color: #191919;
       }
-      .linkmodal {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: linear-gradient(154deg, black 0%, transparent 30%);
-          padding: 1rem;
-          path {
-              fill: #fff!important;
-          }
+      .description-text {
+        color: #373742;
       }
+    }
+    .linkmodal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(154deg, black 0%, transparent 30%);
+      padding: 1rem;
+      path {
+        fill: #fff !important;
+      }
+    }
   }
-
 }
