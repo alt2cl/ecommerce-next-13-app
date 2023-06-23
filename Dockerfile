@@ -5,8 +5,9 @@ COPY package.json .
 COPY . .
 RUN npm install -g npm@9.7.2
 ##RUN npm install 
+RUN NODE_ENV=development npm i
 
 
-RUN npm build
+RUN npm run build
 ##EXPOSE 3000
 CMD ["npm", "start"]
