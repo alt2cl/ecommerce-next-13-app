@@ -2,10 +2,10 @@ FROM node:alpine as BUILD_IMAGE
 WORKDIR /app
 ##WORKDIR /usr/src/app
 ##COPY package.json .
-COPY package.json yarn.lock ./
+COPY package.json .
 ##COPY yarn.lock .
 COPY . .
-RUN npm install -g npm@9.7.2
+##RUN npm install -g npm@9.7.2
 RUN npm install 
 ##RUN NODE_ENV=production npm i
 
