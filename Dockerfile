@@ -12,7 +12,7 @@ RUN npm i --legacy-peer-deps
 #RUN NODE_ENV=production npm i
 
 
-RUN npm run build
+RUN npm build
 
 # remove dev dependencies
 #RUN npm prune --production
