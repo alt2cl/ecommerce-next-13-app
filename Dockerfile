@@ -1,50 +1,26 @@
-#FROM node:alpine as BUILD_IMAGE
-#WORKDIR /app
-##WORKDIR /usr/src/app
-##COPY package.json .
-##COPY package.json .
-#COPY package.json package-lock.json ./
-##COPY yarn.lock .
-#COPY . .
-#RUN npm install -g npm@9.7.2
-#RUN npm install 
-#RUN npm i --legacy-peer-deps
-#RUN NODE_ENV=production npm i
+# Establece la imagen base de Node.js con la versión 14
+FROM node:14
 
+# Establece el directorio de trabajo de la aplicación dentro del contenedor
+WORKDIR /app
 
-#RUN npm build
+# Borra todo el contenido del directorio de trabajo
+RUN rm -rf ./*
 
-# remove dev dependencies
-#RUN npm prune --production
-##EXPOSE 3000
-#CMD ["npm", "start"]
+# Copia el archivo package.json y package-lock.json al directorio de trabajo
+COPY package*.json ./
 
-# For npm
-
-
-
-
-# Dockerfile for production
-# Install dependencies only when needed
-FROM docker.io/library/node:18.15.0-alpine@sha256:47d97b93629d9461d64197773966cc49081cf4463b1b07de5a38b6bd5acfbe9d
-WORKDIR /
-COPY package.json package-lock.json ./
-
-# Instala las dependencias
+# Instala las dependencias de la aplicación
 RUN npm install
 
-#RUN npm cache clean --force
-#RUN rm -rf node_modules package-lock.json
-#RUN npm install
-
+# Copia el resto de los archivos de la aplicación al directorio de trabajo
 COPY . .
-COPY --from=deps /node_modules ./node_modules
+
+# Compila la aplicación Next.js para producción
 RUN npm run build
-# Production image, copy all the files and run next
-FROM node:18.15.0-alpine AS runner
-WORKDIR /app
-COPY --from=builder /.next ./.next
-COPY --from=builder /public ./public
-COPY --from=builder /package.json ./package.json
+
+# Expone el puerto 3000 para que la aplicación sea accesible desde fuera del contenedor
 EXPOSE 3000
-CMD ["yarn", "start"]
+
+# Define el comando para ejecutar la aplicación
+CMD ["npm", "start"]
