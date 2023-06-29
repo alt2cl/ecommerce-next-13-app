@@ -27,7 +27,7 @@
 # Dockerfile for production
 # Install dependencies only when needed
 FROM docker.io/library/node:18.15.0-alpine@sha256:47d97b93629d9461d64197773966cc49081cf4463b1b07de5a38b6bd5acfbe9d
-WORKDIR /app
+WORKDIR /
 COPY package.json package-lock.json ./
 
 # Instala las dependencias
@@ -38,13 +38,13 @@ RUN npm install
 #RUN npm install
 
 COPY . .
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /node_modules ./node_modules
 RUN npm run build
 # Production image, copy all the files and run next
 FROM node:18.15.0-alpine AS runner
 WORKDIR /app
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /.next ./.next
+COPY --from=builder /public ./public
+COPY --from=builder /package.json ./package.json
 EXPOSE 3000
 CMD ["yarn", "start"]
