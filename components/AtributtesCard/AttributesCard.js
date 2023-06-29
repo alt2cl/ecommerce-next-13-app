@@ -13,7 +13,7 @@ function AttributesCard({ data }) {
       />
       <div
         className={`grid grid-cols-2  gap-6 ${
-          data.attributes.columnas ? cantCol : "lg:grid-cols-3"
+          data.attributes.cols ? cantCol : "lg:grid-cols-3"
         }`}
       >
         {data.attributes.atributos.map((item) => {
