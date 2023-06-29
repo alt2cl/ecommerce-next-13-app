@@ -27,7 +27,7 @@
 # Install dependencies only when needed
 FROM node:18.15.0-alpine AS deps
 WORKDIR /app
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 RUN yarn install --frozen-lockfile
 # Rebuild the source code only when needed
 FROM node:18.15.0-alpine AS builder
