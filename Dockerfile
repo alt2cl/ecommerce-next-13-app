@@ -30,6 +30,8 @@ FROM node:18.15.0-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 
+RUN npx npm-check-updates -u
+
 RUN  npm cache clean --force
 RUN  rm -rf node_modules package-lock.json
 RUN  npm install
