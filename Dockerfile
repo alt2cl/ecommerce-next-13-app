@@ -5,7 +5,7 @@ FROM node:14
 WORKDIR /app
 
 # Borra todo el contenido del directorio de trabajo
-RUN rm -rf ./*
+#RUN rm -rf ./*
 
 # Copia el archivo package.json y package-lock.json al directorio de trabajo
 COPY package*.json ./
