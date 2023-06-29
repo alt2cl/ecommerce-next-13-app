@@ -26,7 +26,7 @@
 
 # Dockerfile for production
 # Install dependencies only when needed
-FROM node:18.15.0-alpine AS deps
+FROM node:19.5.0-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 
