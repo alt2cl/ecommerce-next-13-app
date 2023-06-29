@@ -32,9 +32,9 @@ COPY package.json package-lock.json ./
 
 RUN npx npm-check-updates -u
 
-RUN  npm cache clean --force
-RUN  rm -rf node_modules package-lock.json
-RUN  npm install
+#RUN npm cache clean --force
+#RUN rm -rf node_modules package-lock.json
+#RUN npm install
 
 # For yarn
 RUN yarn cache clean
@@ -50,7 +50,7 @@ FROM node:18.15.0-alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN npm run build
+RUN yarn build
 # Production image, copy all the files and run next
 FROM node:18.15.0-alpine AS runner
 WORKDIR /app
