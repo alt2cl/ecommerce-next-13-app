@@ -19,6 +19,7 @@
 ##EXPOSE 3000
 #CMD ["npm", "start"]
 
+# For npm
 
 
 
@@ -28,6 +29,19 @@
 FROM node:18.15.0-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
+
+RUN  npm cache clean --force
+RUN  rm -rf node_modules package-lock.json
+RUN  npm install
+
+# For yarn
+RUN yarn cache clean
+RUN rm -rf node_modules
+RUN yarn install
+
+
+
+
 RUN yarn install --frozen-lockfile
 # Rebuild the source code only when needed
 FROM node:18.15.0-alpine AS builder
