@@ -26,31 +26,20 @@
 
 # Dockerfile for production
 # Install dependencies only when needed
-FROM node:19.5.0-alpine AS deps
-WORKDIR /app
+FROM docker.io/library/node:18.15.0-alpine@sha256:47d97b93629d9461d64197773966cc49081cf4463b1b07de5a38b6bd5acfbe9d
+WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 
-RUN npx npm-check-updates -u
+# Instala las dependencias
+RUN npm install
 
 #RUN npm cache clean --force
 #RUN rm -rf node_modules package-lock.json
 #RUN npm install
 
-# For yarn
-RUN yarn cache clean
-RUN rm -rf node_modules
-RUN yarn install
-
-
-
-
-RUN yarn install --frozen-lockfile
-# Rebuild the source code only when needed
-FROM node:18.15.0-alpine AS builder
-WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN yarn build
+RUN npm run build
 # Production image, copy all the files and run next
 FROM node:18.15.0-alpine AS runner
 WORKDIR /app
