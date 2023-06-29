@@ -23,6 +23,7 @@
 //module.exports = nextConfig
 
 module.exports = {
+  output: "standalone",
   experimental: {
     appDir: true,
   },
