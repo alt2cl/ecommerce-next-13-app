@@ -1,5 +1,5 @@
 # Establece la imagen base de Node.js con la versión 14
-FROM node:14
+FROM node:18.15.0
 
 # Establece el directorio de trabajo de la aplicación dentro del contenedor
 WORKDIR /app
