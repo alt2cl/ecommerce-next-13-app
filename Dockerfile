@@ -10,11 +10,12 @@ WORKDIR /app
 # Copia el archivo package.json y package-lock.json al directorio de trabajo
 COPY package*.json ./
 
+# Copia el resto de los archivos de la aplicación al directorio de trabajo
+COPY . .
+
 # Instala las dependencias de la aplicación
 RUN npm install --legacy-peer-deps
 
-# Copia el resto de los archivos de la aplicación al directorio de trabajo
-COPY . .
 
 # Compila la aplicación Next.js para producción
 RUN npm run build
