@@ -10,7 +10,7 @@ export default async function Slider({ promise }) {
   const data = await promise;
   return (
     <Slide>
-      {data.map((slide) => {
+      {data?.map((slide) => {
         const { titulo, subtitulo, descripcion, imagen, enlace, layouts } =
           slide.attributes;
 
@@ -18,7 +18,7 @@ export default async function Slider({ promise }) {
           <div className="each-slide-effect" key={`slide-${slide.id}`}>
             <div
               style={{
-                backgroundImage: `url(${imagen.data.attributes.formats.medium.url})`,
+                backgroundImage: `url(${imagen.data?.attributes?.formats.medium.url})`,
               }}
             >
               <div

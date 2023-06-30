@@ -16,7 +16,7 @@ function AttributesCard({ data }) {
           data.attributes.cols ? cantCol : "lg:grid-cols-3"
         }`}
       >
-        {data.attributes.atributos.map((item) => {
+        {data.attributes?.Atributos?.map((item) => {
           return (
             <div
               className="flex flex-col gap-3 mb-5 lg:mb-16 drop-shadow-md px-4 py-4 rounded-lg bg-white items-center"

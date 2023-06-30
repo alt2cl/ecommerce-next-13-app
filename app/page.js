@@ -23,14 +23,14 @@ async function getListCategories() {
 
 async function getListProducts(slug) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=*&filters[categoria_destacadas][slug][$contains]=${slug}`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=*&filters[categorias_destacadas][slug][$contains]=${slug}`
   );
   return res.json();
 }
 
 async function getListAttributes() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/portada-atributos-destacados?populate=*`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/atributos-destacados?populate=*`
   );
   return res.json();
 }
@@ -42,13 +42,13 @@ export default async function Home() {
 
   //const [datakey, setDatakey] = useState([]);
 
-  //console.log("dataCategories:", dataCategories);
-
   const [dataSlider, dataCategories, dataAttributes] = await Promise.all([
     dSlider,
     dCategories,
     dAttributes,
   ]);
+
+  console.log("dataCategories:", dataCategories);
 
   async function getProductListCard(slug) {
     const { data } = await getListProducts(slug);

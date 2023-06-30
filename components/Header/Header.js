@@ -25,7 +25,11 @@ export default function Header(props) {
     setOpen(false);
   }
 
-  const datamenu = data?.data[0].attributes.menuitem;
+  //console.log("data menu:", data);
+
+  //return false;
+
+  const datamenu = data?.data[0].attributes.Enlace;
 
   return (
     <>
@@ -79,9 +83,12 @@ export default function Header(props) {
                   <nav
                     className={`w-80 lg:w-auto ml-auto flex flex-col lg:flex-row max-w-7xl items-right justify-between p-6 lg:px-8 gap-10 text-white`}
                   >
-                    {datamenu.map((itemMenu) => {
+                    {datamenu?.map((itemMenu) => {
                       return (
-                        <Link href={itemMenu.link} key={`menu-${itemMenu.id}`}>
+                        <Link
+                          href={itemMenu.enlace}
+                          key={`menu-${itemMenu.id}`}
+                        >
                           {itemMenu.titulo}
                         </Link>
                       );
