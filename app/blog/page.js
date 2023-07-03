@@ -2,7 +2,7 @@ import PostsList from "../../components/PostList/postsList";
 
 async function getData() {
   let res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?populate=imagen`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/articulos?populate=imagen`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");

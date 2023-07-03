@@ -11,10 +11,10 @@ export default async function ProductList({ shortPost, promise }) {
           titulo,
           descripcion,
           publishedAt,
-          url,
+          link: url,
           imagen,
           precio,
-          categorias,
+          categoria_categoria_productos: categorias,
         } = item;
 
         return (
@@ -23,7 +23,7 @@ export default async function ProductList({ shortPost, promise }) {
             className={"flex flex-col gap-3 mb-5 lg:mb-16"}
           >
             <div className="flex justify-center">
-              {imagen && imagen.data && (
+              {imagen && imagen.data.length > 0 && (
                 <Image
                   src={
                     imagen.data[0].attributes.formats.small
@@ -53,7 +53,7 @@ export default async function ProductList({ shortPost, promise }) {
               </p>
 
               <Link
-                href={`/tienda/${categorias?.data[0]?.attributes.titulo}/${url}`}
+                href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
                 className="rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white"
               >
                 Ir al producto...

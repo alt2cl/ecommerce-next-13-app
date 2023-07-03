@@ -10,6 +10,8 @@ WORKDIR /app
 # Copia el archivo package.json y package-lock.json al directorio de trabajo
 COPY package*.json ./
 
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+
 # Copia el resto de los archivos de la aplicación al directorio de trabajo
 COPY . .
 

@@ -17,7 +17,7 @@ export default async function PostsList({ shortPost, promise }) {
                 </h3>
               </Link>
               <p className="text-xs text-slate-400 mb-3">{publishedAt}</p>
-              {imagen && (
+              {imagen && imagen.data && (
                 <Link href={`/blog/${url}`} className="rounded">
                   <Image
                     src={
