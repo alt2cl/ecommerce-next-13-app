@@ -48,12 +48,10 @@ export default async function Home() {
     dAttributes,
   ]);
 
-  console.log("dataCategories:", dataCategories);
-
   async function getProductListCard(slug) {
     const { data } = await getListProducts(slug);
 
-    return <ProductList shortPost ladata={data} promise={data} />;
+    return <ProductList shortPost promise={data} />;
   }
 
   return (

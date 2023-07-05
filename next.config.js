@@ -23,7 +23,7 @@
 //module.exports = nextConfig
 
 module.exports = {
-  output: "standalone",
+  //output: "standalone",
   experimental: {
     appDir: true,
   },
@@ -34,14 +34,14 @@ module.exports = {
   env: {
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
   },
-  async rewrites() {
-    return [
-      {
-        source: "/api/clientes",
-        destination: `${process.env.NEXT_PUBLIC_STRAPI_URL}/clientes`,
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/api/clientes",
+  //       destination: `${process.env.NEXT_PUBLIC_STRAPI_URL}/clientes`,
+  //     },
+  //   ];
+  // },
   // compiler: {
   //   // see https://styled-components.com/docs/tooling#babel-plugin for more info on the options.
   //   styledComponents:
