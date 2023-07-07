@@ -5,20 +5,19 @@ import Slider from "@/components/Slider/Slider";
 import ProductList from "../components/ProductList/productList";
 import HeadSection from "@/components/HeadSection/HeadSection";
 import AttributesCard from "@/components/AtributtesCard/AttributesCard";
-//import useFetch from "./api/strapi/useFetch";
 
 async function getDataSlider() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/destacados-portadas?populate=imagen`,
-    { next: { revalidate: 30 } }
+    { next: { revalidate: 60 } }
   );
   return res.json();
 }
 
 async function getListCategories() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/categorias-destacadas`,
-    { next: { revalidate: 30 } }
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/categorias-destacadas?sort=order`,
+    { next: { revalidate: 60 } }
   );
   return res.json();
 }
@@ -31,9 +30,9 @@ async function getListProducts(slug) {
   return res.json();
 }
 
-async function getListAttributes() {
+async function getListAttributes(id) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/atributos-destacados?populate=*`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/atributos-destacados/${id}/?populate=*`,
     { next: { revalidate: 30 } }
   );
   return res.json();
@@ -58,10 +57,15 @@ export default async function Home() {
     return <ProductList shortPost promise={data} />;
   }
 
+  async function getAttrList(id) {
+    const { data } = await getListAttributes(id);
+    return <AttributesCard data={data} />;
+  }
+
   return (
     <main>
       <Suspense fallback={<p>Cargando slider...</p>}>
-        <Slider data={dataSlider} promise={dataSlider} />
+        <Slider promise={dataSlider} />
       </Suspense>
 
       <div className="container px-4 pt-9">
@@ -70,7 +74,8 @@ export default async function Home() {
             <section>
               {/* <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6"> */}
               <Suspense fallback={<p>Cargando atributos...</p>}>
-                <AttributesCard data={dataAttributes[0]} />
+                {/* <AttributesCard data={dataAttributes[0]} /> */}
+                {getAttrList(2)}
               </Suspense>
               {/* </div> */}
             </section>
@@ -94,7 +99,8 @@ export default async function Home() {
 
             <section>
               <Suspense fallback={<p>Cargando atributos...</p>}>
-                <AttributesCard data={dataAttributes[1]} />
+                {/* <AttributesCard data={dataAttributes[1]} /> */}
+                {getAttrList(1)}
               </Suspense>
             </section>
           </main>
