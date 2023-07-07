@@ -9,28 +9,32 @@ import AttributesCard from "@/components/AtributtesCard/AttributesCard";
 
 async function getDataSlider() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/destacados-portadas?populate=imagen`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/destacados-portadas?populate=imagen`,
+    { next: { revalidate: 30 } }
   );
   return res.json();
 }
 
 async function getListCategories() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/categorias-destacadas`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/categorias-destacadas`,
+    { next: { revalidate: 30 } }
   );
   return res.json();
 }
 
 async function getListProducts(slug) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=*&filters[categorias_destacadas][slug][$contains]=${slug}`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=*&filters[categorias_destacadas][slug][$contains]=${slug}`,
+    { next: { revalidate: 30 } }
   );
   return res.json();
 }
 
 async function getListAttributes() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/atributos-destacados?populate=*`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/atributos-destacados?populate=*`,
+    { next: { revalidate: 30 } }
   );
   return res.json();
 }
