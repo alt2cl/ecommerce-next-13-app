@@ -36,7 +36,7 @@ export default async function Footer() {
         data.map((item) => {
             if (item.sociallink == "Instagram") {
                 arraylinks.push(
-                    <li>
+                    <li key={'solcial-link-' + item.id}>
                         <Link
                             href={item.link}
                             rel="noreferrer"
