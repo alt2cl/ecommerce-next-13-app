@@ -12,7 +12,7 @@ function AttributesCard({ data }) {
         center
       />
       <div
-        className={`grid grid-cols-2  gap-6 ${
+        className={`grid grid-cols-1 gap-6 ${
           data.attributes.cols ? cantCol : "lg:grid-cols-3"
         }`}
       >
