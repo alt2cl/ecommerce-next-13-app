@@ -81,7 +81,7 @@ export default function Header(props) {
 
                 {datamenu && (
                   <ul
-                    className={`w-80 lg:w-auto ml-auto flex flex-col lg:flex-row max-w-7xl items-right justify-between p-6 lg:px-8 gap-10 text-white`}
+                    className={`w-80 lg:w-auto ml-auto flex flex-col lg:flex-row max-w-7xl items-right justify-between p-6 lg:px-8 gap-10 bg-black lg:bg-inherit text-white`}
                   >
                     {datamenu?.map((itemMenu) => {
                       return (
