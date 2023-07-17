@@ -36,12 +36,12 @@ export default async function Footer() {
         data.map((item) => {
             if (item.sociallink == "Instagram") {
                 arraylinks.push(
-                    <li key={'solcial-link-' + item.id} className="text-gray-300">
+                    <li key={'solcial-link-' + item.id} >
                         <Link
                             href={item.link}
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:text-gray-700/75"
+                            className="text-gray-100 transition hover:text-gray-700/75"
                         >
                             <span className="sr-only">Instagram</span>
                             <svg
@@ -69,7 +69,7 @@ export default async function Footer() {
                             href={item.link}
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:text-gray-700/75"
+                            className="text-gray-100 transition hover:text-gray-700/75"
                         >
                             <span className="sr-only">Facebook</span>
                             <svg
@@ -96,7 +96,7 @@ export default async function Footer() {
                             href={item.link}
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:text-gray-700/75"
+                            className="text-gray-100 transition hover:text-gray-700/75"
                         >
                             <span className="sr-only">Twitter</span>
                             <svg
@@ -124,7 +124,7 @@ export default async function Footer() {
                             href={item.link}
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:text-gray-700/75"
+                            className="text-gray-100 transition hover:text-gray-700/75"
                         >
                             <span className="sr-only">Linkedin</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -143,7 +143,7 @@ export default async function Footer() {
                             href={item.link}
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:text-gray-700/75"
+                            className="text-gray-100 transition hover:text-gray-700/75"
                         >
                             <span className="sr-only">Tiktok</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -214,7 +214,7 @@ export default async function Footer() {
 
                 <ul className="mt-12 flex justify-center gap-6 md:gap-8">
 
-                    <Suspense fallback={<p>Cargando atributos...</p>}>
+                    <Suspense fallback={<p>Cargando atributos...</p>} className="text-white">
                         {getrrss()}
                     </Suspense>
 
