@@ -68,8 +68,15 @@ export default async function Slider({ promise }) {
         }
       >
         {data?.map((slide) => {
-          const { titulo, subtitulo, descripcion, imagen, enlace, layouts } =
-            slide.attributes;
+          const {
+            titulo,
+            subtitulo,
+            descripcion,
+            imagen,
+            enlace,
+            layouts,
+            textoenlace,
+          } = slide.attributes;
 
           return (
             <div className="each-slide-effect" key={`slide-${slide.id}`}>
@@ -117,7 +124,7 @@ export default async function Slider({ promise }) {
                             className="rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white"
                             href={enlace}
                           >
-                            Conoce +
+                            {textoenlace}
                           </Link>
                         )}
                       </div>
