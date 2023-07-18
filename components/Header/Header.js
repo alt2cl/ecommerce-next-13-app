@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CarritoBtn from "../CarritoBtn";
+import SocialLinks from "@/components/SocialLinks/SocialLinks";
 
 export default function Header(props) {
   const [data, setData] = useState(null);
@@ -31,6 +32,11 @@ export default function Header(props) {
 
   const datamenu = data?.data[0].attributes.Enlace;
 
+  const logo = data?.data[0].attributes.imagenlogo?.data?.attributes.url;
+  const logowidth = data?.data[0].attributes.imagenlogo?.data?.attributes.width;
+  const logoheight =
+    data?.data[0].attributes.imagenlogo?.data?.attributes.height;
+
   return (
     <>
       <div
@@ -42,19 +48,20 @@ export default function Header(props) {
       >
         <div className="container cont mx-auto lg:py-1 lg:flex items-center">
           <div className="flex flex-row justify-between w-full">
-            <Link href="/" className="pl-4 flex justify-center">
-              <Image
-                className="p-6"
-                src={"/img/cafemas.png"}
-                width={248}
-                height={56}
-                alt="Logo"
-              />
+            <Link href="/" className="pl-4 grid content-center">
+              {logo && (
+                <Image
+                  src={logo}
+                  width={logowidth / 2.5}
+                  height={logoheight / 2.5}
+                  alt="Logo"
+                />
+              )}
             </Link>
             <div className="menues flex flex-row justify-center p-5 gap-4 ">
               <div
                 className={`${
-                  open ? "right-0 open" : "-right-full"
+                  open ? "right-0 open bg-black lg:bg-inherit" : "-right-full"
                 } lg:right-0 transition-all menu  z-30 top-0  fixed max-w-xs min-h-screen lg:max-w-none lg:static lg:min-h-0`}
               >
                 <div className="clsedbtn absolute top-4 right-4 block lg:hidden">
@@ -79,19 +86,25 @@ export default function Header(props) {
                   </button>
                 </div>
 
+                <div>
+                  <ul className="mt-7 mb-10 pl-7 flex gap-6 md:gap-8">
+                    <Suspense
+                      fallback={<p>Cargando Social Links...</p>}
+                      className="text-white"
+                    >
+                      <SocialLinks />
+                    </Suspense>
+                  </ul>
+                </div>
+
                 {datamenu && (
                   <ul
-                    className={`w-80 lg:w-auto ml-auto flex flex-col lg:flex-row max-w-7xl items-right justify-between p-6 lg:px-8 gap-10 bg-black lg:bg-inherit text-white`}
+                    className={`w-80 lg:w-auto ml-auto flex flex-col lg:flex-row max-w-7xl items-right justify-between p-4 lg:px-8 gap-10  text-white`}
                   >
                     {datamenu?.map((itemMenu) => {
                       return (
-                        <li>
-                          <Link
-                            href={itemMenu.enlace}
-                            key={`menu-${itemMenu.id}`}
-                          >
-                            {itemMenu.titulo}
-                          </Link>
+                        <li key={`main-menu-${itemMenu.id}`}>
+                          <Link href={itemMenu.enlace}>{itemMenu.titulo}</Link>
                         </li>
                       );
                     })}
