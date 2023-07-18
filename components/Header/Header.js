@@ -86,16 +86,18 @@ export default function Header(props) {
                   </button>
                 </div>
 
-                <div>
-                  <ul className="mt-7 mb-10 pl-7 flex gap-6 md:gap-8">
-                    <Suspense
-                      fallback={<p>Cargando Social Links...</p>}
-                      className="text-white"
-                    >
-                      <SocialLinks />
-                    </Suspense>
-                  </ul>
-                </div>
+                {open && (
+                  <div>
+                    <ul className="mt-7 mb-10 pl-7 flex gap-6 md:gap-8">
+                      <Suspense
+                        fallback={<p>Cargando Social Links...</p>}
+                        className="text-white"
+                      >
+                        <SocialLinks />
+                      </Suspense>
+                    </ul>
+                  </div>
+                )}
 
                 {datamenu && (
                   <ul
