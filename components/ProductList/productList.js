@@ -63,7 +63,7 @@ export default async function ProductList({ shortPost, promise }) {
                 </Link>
 
                 <Link
-                  href={`https://wa.me/+56974270756?text=Me interesa este producto: http://localhost:3000/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
+                  href={`https://wa.me/+56974270756?text=Me interesa este producto: https://ecommerce-next-13-app-production.up.railway.app/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
                   className="rounded-md text-center p-2 bg-green-500 hover:bg-slate-900 text-white"
                   target="_blank"
                 >
