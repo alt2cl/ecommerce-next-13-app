@@ -2,7 +2,7 @@ import HeadSection from "@/components/HeadSection/HeadSection";
 import Link from "next/link";
 
 function AttributesCard({ data }) {
-  const cantCol = "lg:grid-" + String(data.attributes.cols);
+  const cantCol = "lg:grid-" + String(data?.attributes.cols);
 
   return (
     <>
