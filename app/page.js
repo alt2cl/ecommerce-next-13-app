@@ -41,14 +41,14 @@ async function getListAttributes(id) {
 export default async function Home() {
   const { data: dSlider } = await getDataSlider();
   const { data: dCategories } = await getListCategories();
-  const { data: dAttributes } = await getListAttributes();
+  //const { data: dAttributes } = await getListAttributes();
 
   //const [datakey, setDatakey] = useState([]);
 
-  const [dataSlider, dataCategories, dataAttributes] = await Promise.all([
+  const [dataSlider, dataCategories] = await Promise.all([
     dSlider,
     dCategories,
-    dAttributes,
+    // dAttributes,
   ]);
 
   async function getProductListCard(slug) {
@@ -59,7 +59,11 @@ export default async function Home() {
 
   async function getAttrList(id) {
     const { data } = await getListAttributes(id);
-    return <AttributesCard data={data} />;
+    if (data) {
+      return <AttributesCard data={data} />;
+    } else {
+      return null;
+    }
   }
 
   return (
@@ -75,7 +79,7 @@ export default async function Home() {
               {/* <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6"> */}
               <Suspense fallback={<p>Cargando atributos...</p>}>
                 {/* <AttributesCard data={dataAttributes[0]} /> */}
-                {getAttrList(2)}
+                {getAttrList(1)}
               </Suspense>
               {/* </div> */}
             </section>
@@ -99,8 +103,7 @@ export default async function Home() {
 
             <section>
               <Suspense fallback={<p>Cargando atributos...</p>}>
-                {/* <AttributesCard data={dataAttributes[1]} /> */}
-                {getAttrList(1)}
+                {getAttrList(2) ? getAttrList(2) : null}
               </Suspense>
             </section>
           </main>
