@@ -1,27 +1,29 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+"use client";
 
-function useFetch(param) {
-  const [data, setData] = useState({ data: [] });
-  const [loading, setLoading] = useState(true);
+import { useState, useEffect } from "react";
+
+const useFetch = (url, params = null) => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(url, params);
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    axios
-      .get(process.env.NEXT_PUBLIC_STRAPI_URL + param)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("An error occurred. Awkward..");
-        setLoading(false);
-      });
-  }, [param]);
-  //console.log("valor data:", data);
-  //const exists = data.data.filter((item) => item.id === param).length > 0;
-  return { data, loading, error };
-}
+    fetchData();
+  }, []);
+
+  return { data, isLoading, error };
+};
 
 export default useFetch;

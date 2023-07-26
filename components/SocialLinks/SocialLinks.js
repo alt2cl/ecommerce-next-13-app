@@ -2,7 +2,7 @@ import Link from "next/link";
 
 async function fetchData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/main-menus/?populate=rrss`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=sociallinks`,
     { next: { revalidate: 120 } }
   );
   return res.json();
@@ -10,15 +10,20 @@ async function fetchData() {
 
 export default async function SocialLinks() {
   const rrsslinks = await fetchData();
-  const data = rrsslinks?.data[0].attributes.rrss;
+  const data = rrsslinks?.data[0].attributes.sociallinks;
+
+  console.log("data social:", data);
+
+  //return false;
+
   let arraylinks = [];
 
   data.map((item) => {
-    if (item.sociallink == "Instagram") {
+    if (item.red == "instagram") {
       arraylinks.push(
         <li key={"solcial-link-" + item.id}>
           <Link
-            href={item.link}
+            href={item.url}
             rel="noreferrer"
             target="_blank"
             className="text-gray-100 transition hover:text-gray-700/75"
@@ -39,11 +44,11 @@ export default async function SocialLinks() {
           </Link>
         </li>
       );
-    } else if (item.sociallink == "Facebook") {
+    } else if (item.red == "facebook") {
       arraylinks.push(
         <li>
           <Link
-            href={item.link}
+            href={item.url}
             rel="noreferrer"
             target="_blank"
             className="text-gray-100 transition hover:text-gray-700/75"
@@ -64,11 +69,11 @@ export default async function SocialLinks() {
           </Link>
         </li>
       );
-    } else if (item.sociallink == "Twitter") {
+    } else if (item.red == "twitter") {
       arraylinks.push(
         <li>
           <Link
-            href={item.link}
+            href={item.url}
             rel="noreferrer"
             target="_blank"
             className="text-gray-100 transition hover:text-gray-700/75"
@@ -88,11 +93,11 @@ export default async function SocialLinks() {
           </Link>
         </li>
       );
-    } else if (item.sociallink == "Linkedin") {
+    } else if (item.red == "linkedin") {
       arraylinks.push(
         <li>
           <Link
-            href={item.link}
+            href={item.url}
             rel="noreferrer"
             target="_blank"
             className="text-gray-100 transition hover:text-gray-700/75"
@@ -110,11 +115,11 @@ export default async function SocialLinks() {
           </Link>
         </li>
       );
-    } else if (item.sociallink == "Tiktok") {
+    } else if (item.red == "tiktok") {
       arraylinks.push(
         <li>
           <Link
-            href={item.link}
+            href={item.url}
             rel="noreferrer"
             target="_blank"
             className="text-gray-100 transition hover:text-gray-700/75"

@@ -13,7 +13,7 @@ export default async function ProductList({ shortPost, promise }) {
           descripcion,
           publishedAt,
           link: url,
-          imagen,
+          cover: imagen,
           precio,
           categoria_categoria_productos: categorias,
         } = item;
