@@ -9,6 +9,9 @@ import Link from "next/link";
 
 export default async function Slider({ promise }) {
   const data = await promise;
+
+  //console.log("data slidess:", data);
+
   return (
     <div className="slide-container">
       <Slide
@@ -69,31 +72,31 @@ export default async function Slider({ promise }) {
       >
         {data?.map((slide) => {
           const {
-            titulo,
-            subtitulo,
-            descripcion,
-            imagen,
-            enlace,
-            layouts,
-            textoenlace,
+            title,
+            subtitle,
+            description,
+            cover,
+            url,
+            layout,
+            titlebutton,
           } = slide.attributes;
 
           return (
             <div className="each-slide-effect" key={`slide-${slide.id}`}>
               <div
                 style={{
-                  backgroundImage: `url(${imagen.data?.attributes?.formats.medium.url})`,
+                  backgroundImage: `url(${cover.data?.attributes?.formats.medium.url})`,
                 }}
               >
                 <div
                   className="flex"
                   style={{
                     justifyContent:
-                      layouts == "izquierda"
+                      layout == "left"
                         ? "flex-start"
-                        : layouts == "derecha"
+                        : layout == "right"
                         ? "flex-end"
-                        : layouts == "centrado"
+                        : layout == "center"
                         ? "center"
                         : "flex-start",
                     backgroundColor: "rgba(19, 19, 20, 0.41)",
@@ -107,24 +110,24 @@ export default async function Slider({ promise }) {
                       className="flex"
                       style={{
                         justifyContent:
-                          layouts == "izquierda"
+                          layout == "left"
                             ? "flex-start"
-                            : layouts == "derecha"
+                            : layout == "right"
                             ? "flex-end"
-                            : layouts == "centrado"
+                            : layout == "center"
                             ? "center"
                             : "flex-start",
                       }}
                     >
                       <div>
-                        <h3 className="text-3xl text-gray-100">{titulo}</h3>
-                        <p className="text-gray-400 mb-7">{subtitulo}</p>
-                        {enlace && (
+                        <h3 className="text-3xl text-gray-100">{title}</h3>
+                        <p className="text-gray-400 mb-7">{subtitle}</p>
+                        {url && (
                           <Link
                             className="rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white"
-                            href={enlace}
+                            href={url}
                           >
-                            {textoenlace}
+                            {titlebutton}
                           </Link>
                         )}
                       </div>

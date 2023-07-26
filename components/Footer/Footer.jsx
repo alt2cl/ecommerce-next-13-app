@@ -8,21 +8,26 @@ import SocialLinks from "@/components/SocialLinks/SocialLinks";
 
 
 async function fetchData() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/main-menus/?populate=*`,
-        { next: { revalidate: 30 } })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
+    //,{ next: { revalidate: 0 } })
     return res.json()
 }
 
 
 export default async function Footer() {
 
+
     const data = await fetchData()
 
-    const datamenu = data?.data[0].attributes.Enlace;
+    console.log('data footel', data, process.env.NEXT_PUBLIC_STRAPI_URL)
 
-    const datadescripcion = data?.data[0].attributes.descripcion;
+    //return false
 
-    const logo = data?.data[0].attributes.imagenlogo?.data?.attributes.url;
+    const datamenu = data.data[0].attributes.items;
+
+    const datadescripcion = data.data[0].attributes.description;
+
+    const logo = data?.data[0].attributes.logo?.data?.attributes.url;
 
 
 
@@ -61,7 +66,7 @@ export default async function Footer() {
                         {datamenu?.map((itemMenu) => {
                             return (
                                 <Link
-                                    href={itemMenu.enlace}
+                                    href={itemMenu.url}
                                     key={`menu-${itemMenu.id}`}
                                     className="text-gray-300 transition hover:text-gray-300/75"
                                 >
@@ -76,9 +81,16 @@ export default async function Footer() {
 
                 <ul className="mt-12 flex justify-center gap-6 md:gap-8">
 
-                    <Suspense fallback={<p>Cargando atributos...</p>} className="text-white">
-                        <SocialLinks />
-                    </Suspense>
+                    {data.data[0].attributes.sociallinks &&
+
+                        <Suspense fallback={<p>Cargando atributos...</p>} className="text-white">
+
+                            <SocialLinks />
+                        </Suspense>
+
+                    }
+
+
 
                 </ul>
             </div>

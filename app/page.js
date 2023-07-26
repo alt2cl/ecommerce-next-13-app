@@ -5,18 +5,31 @@ import Slider from "@/components/Slider/Slider";
 import ProductList from "../components/ProductList/productList";
 import HeadSection from "@/components/HeadSection/HeadSection";
 import AttributesCard from "@/components/AtributtesCard/AttributesCard";
+import useFetch from "./api/strapi/useFetch";
 
 async function getDataSlider() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/destacados-portadas?populate=imagen`,
-    { next: { revalidate: 60 } }
-  );
-  return res.json();
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/sliders?populate=cover`,
+      { next: { revalidate: 60 } }
+    );
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        error: "Error fetching data",
+      },
+    };
+  }
 }
 
 async function getListCategories() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/categorias-destacadas?sort=order`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?sort=order`,
     { next: { revalidate: 60 } }
   );
   return res.json();
@@ -24,7 +37,7 @@ async function getListCategories() {
 
 async function getListProducts(slug) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=*&filters[categorias_destacadas][slug][$contains]=${slug}`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*&filters[featured-categories][slug][$contains]=${slug}`,
     { next: { revalidate: 30 } }
   );
   return res.json();
@@ -32,7 +45,7 @@ async function getListProducts(slug) {
 
 async function getListAttributes(id) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/atributos-destacados/${id}/?populate=*`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/${id}/?populate=*`,
     { next: { revalidate: 30 } }
   );
   return res.json();
@@ -40,6 +53,7 @@ async function getListAttributes(id) {
 
 export default async function Home() {
   const { data: dSlider } = await getDataSlider();
+  console.log("data slider parent:", dSlider);
   const { data: dCategories } = await getListCategories();
   //const { data: dAttributes } = await getListAttributes();
 
@@ -88,8 +102,8 @@ export default async function Home() {
               return (
                 <section key={`section-${categoria.id}`}>
                   <HeadSection
-                    titulo={categoria.attributes.titulo}
-                    subtitulo={categoria.attributes.subtitulo}
+                    titulo={categoria.attributes.title}
+                    subtitulo={categoria.attributes.subtitle}
                   />
 
                   <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6">

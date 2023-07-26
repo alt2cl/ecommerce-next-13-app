@@ -14,7 +14,7 @@ export default function Header(props) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/main-menus/?populate=*`)
+    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -30,12 +30,11 @@ export default function Header(props) {
 
   //return false;
 
-  const datamenu = data?.data[0].attributes.Enlace;
+  const datamenu = data ? data.data[0].attributes.items : null;
 
-  const logo = data?.data[0].attributes.imagenlogo?.data?.attributes.url;
-  const logowidth = data?.data[0].attributes.imagenlogo?.data?.attributes.width;
-  const logoheight =
-    data?.data[0].attributes.imagenlogo?.data?.attributes.height;
+  const logo = data?.data[0].attributes.logo?.data?.attributes.url;
+  const logowidth = data?.data[0].attributes.logo?.data?.attributes.width;
+  const logoheight = data?.data[0].attributes.logo?.data?.attributes.height;
 
   return (
     <>
@@ -106,7 +105,7 @@ export default function Header(props) {
                     {datamenu?.map((itemMenu) => {
                       return (
                         <li key={`main-menu-${itemMenu.id}`}>
-                          <Link href={itemMenu.enlace}>{itemMenu.titulo}</Link>
+                          <Link href={itemMenu.url}>{itemMenu.title}</Link>
                         </li>
                       );
                     })}

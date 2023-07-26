@@ -9,13 +9,13 @@ export default async function PostsList({ shortPost, promise }) {
       {data?.map((post) => {
         const item = post.attributes;
         const {
-          titulo,
-          subtitulo,
-          descripcion,
+          title: titulo,
+          subtitle: subtitulo,
+          description: descripcion,
           publishedAt,
-          link,
-          imagen,
-          contenido,
+          slug: link,
+          cover: imagen,
+          content: contenido,
         } = item;
 
         return (

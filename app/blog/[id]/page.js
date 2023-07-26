@@ -4,17 +4,19 @@ import markdownToHtml from "@/app/utils/markdownToHtml";
 
 const getPost = (id) => {
   return fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/articulos/?filters[link]=${id}&populate=imagen`,
-    { next: { revalidate: 60 } },
-    { cache: "no-store" }
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/posts/?filters[link]=${id}&populate=cover`,
+    { next: { revalidate: 60 } }
   ).then((res) => res.json());
 };
 
 export default async function PostPage({ params: { id } }) {
-  console.log("id post", id);
-
   const post = await getPost(id);
-  const { titulo, contenido, imagen, publishedAt } = post.data[0].attributes;
+  const {
+    title: titulo,
+    content: contenido,
+    cover: imagen,
+    publishedAt,
+  } = post.data[0].attributes;
 
   const richtext = await markdownToHtml(contenido);
 
