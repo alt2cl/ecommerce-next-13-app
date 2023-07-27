@@ -9,13 +9,13 @@ export default async function ProductList({ shortPost, promise }) {
       {data?.map((post) => {
         const item = post.attributes;
         const {
-          titulo,
-          descripcion,
+          title: titulo,
+          description: descripcion,
           publishedAt,
-          link: url,
+          slug: url,
           cover: imagen,
-          precio,
-          categoria_categoria_productos: categorias,
+          price: precio,
+          category_products: categorias,
         } = item;
 
         return (
