@@ -4,7 +4,7 @@ import Carousel from "@/components/Carousel";
 
 const getPost = (id) => {
   return fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?filters[link]=${id}&populate=*`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?filters[slug]=${id}&populate=*`,
     { cache: "no-store" }
   ).then((res) => res.json());
 };
@@ -13,10 +13,13 @@ export async function generateMetadata({ params: { slug } }) {
   const id = slug.slice(-1);
   const product = await getPost(id);
 
-  const { imagen, titulo, descripcion, precio, galeria } =
-    product.data[0].attributes;
-
-  console.log("imagennn:", imagen);
+  const {
+    cover: imagen,
+    title: titulo,
+    description: descripcion,
+    price: precio,
+    gallery: galeria,
+  } = product.data[0].attributes;
 
   return {
     title: titulo,
@@ -42,8 +45,13 @@ export default async function ProductoPage({ params: { slug } }) {
   const product = await getPost(id);
   //const product = await productData;
 
-  const { imagen, titulo, descripcion, precio, galeria } =
-    product.data[0].attributes;
+  const {
+    cover: imagen,
+    title: titulo,
+    description: descripcion,
+    price: precio,
+    gallery: galeria,
+  } = product.data[0].attributes;
 
   const richtext = await markdownToHtml(descripcion);
 

@@ -1,7 +1,6 @@
 import "./headsection.scss";
 
 export default function HeadSection({ titulo, subtitulo, center }) {
-  console.log("titulo y sub:", titulo, subtitulo);
   return (
     // <h1>Head section</h1>
     <div

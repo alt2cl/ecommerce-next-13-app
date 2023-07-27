@@ -5,7 +5,6 @@ import Slider from "@/components/Slider/Slider";
 import ProductList from "../components/ProductList/productList";
 import HeadSection from "@/components/HeadSection/HeadSection";
 import AttributesCard from "@/components/AtributtesCard/AttributesCard";
-import useFetch from "./api/strapi/useFetch";
 
 async function getDataSlider() {
   try {
@@ -53,7 +52,6 @@ async function getListAttributes(id) {
 
 export default async function Home() {
   const { data: dSlider } = await getDataSlider();
-  console.log("data slider parent:", dSlider);
   const { data: dCategories } = await getListCategories();
   //const { data: dAttributes } = await getListAttributes();
 

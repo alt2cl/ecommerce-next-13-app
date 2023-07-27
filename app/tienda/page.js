@@ -5,7 +5,7 @@ import ProductList from "../../components/ProductList/productList";
 
 async function fetchPosts() {
   let res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=*`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*`
   );
   return res.json();
 }

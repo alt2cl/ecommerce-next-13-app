@@ -10,8 +10,6 @@ import Link from "next/link";
 export default async function Slider({ promise }) {
   const data = await promise;
 
-  //console.log("data slidess:", data);
-
   return (
     <div className="slide-container">
       <Slide

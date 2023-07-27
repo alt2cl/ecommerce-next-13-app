@@ -16,39 +16,7 @@ export function useFetch(url) {
       .finally(() => setLoading(false));
   }
 
-  // function appendData(newData) {
-  //   console.log();
-  //   fetch(ruta),
-  //     {
-  //       method: "POST",
-  //       headers: headers,
-  //       body: JSON.stringify(newData),
-  //     }
-  //       .then((response) => {
-  //         if (response.status === 401) {
-  //           navigate("/login", {
-  //             state: {
-  //               previousUrl: location.pathname,
-  //             },
-  //           });
-  //         }
-
-  //         if (!response.ok) {
-  //           throw response.status;
-  //         }
-
-  //         return response.json();
-  //       })
-  //       .then((d) => {
-  //         console.log("in the then...", d);
-  //       })
-  //       .catch((e) => {
-  //         setErrorStatus(e);
-  //       });
-  // }
-
   function handlePost(newData) {
-    console.log("newData", newData);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(newData);
@@ -67,7 +35,6 @@ export function useFetch(url) {
   }
 
   function handleCheckBymail(mailData) {
-    console.log("mailData", mailData);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(mailData);
