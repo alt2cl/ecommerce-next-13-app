@@ -12,8 +12,6 @@ export default async function SocialLinks() {
   const rrsslinks = await fetchData();
   const data = rrsslinks?.data[0].attributes.sociallinks;
 
-  console.log("data social:", data);
-
   //return false;
 
   let arraylinks = [];

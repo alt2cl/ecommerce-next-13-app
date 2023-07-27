@@ -3,7 +3,6 @@ import Link from "next/link";
 
 export default async function PostsList({ shortPost, promise }) {
   const data = await promise;
-  console.log("data postlis:", data);
   return (
     <>
       {data?.map((post) => {

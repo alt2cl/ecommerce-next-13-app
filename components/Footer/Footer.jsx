@@ -19,7 +19,6 @@ export default async function Footer() {
 
     const data = await fetchData()
 
-    console.log('data footel', data, process.env.NEXT_PUBLIC_STRAPI_URL)
 
     //return false
 

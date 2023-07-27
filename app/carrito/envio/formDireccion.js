@@ -15,8 +15,6 @@ function formDireccion({ dataUser, inputMailUser }) {
     `/clientes?populate=direccions&filters[mail][$eq]=${inputMailUser}`
   );
 
-  console.log("dataUser from direction", dataUser);
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
