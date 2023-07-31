@@ -99,7 +99,7 @@ export default function CarritoPage(props) {
                         </div>
                       </div>
                       <button
-                        className="bg-yellow-400 text-center p-3 col-span-1 absolute right-0 rounded"
+                        className="bg-primary-400 text-center p-3 col-span-1 absolute right-0 rounded"
                         type="button"
                         onClick={() => eliminarProducto(producto.id)}
                       >
@@ -119,7 +119,7 @@ export default function CarritoPage(props) {
 
               <Link
                 href={"/carrito/envio"}
-                className="rounded text-center bg-yellow-400 p-2 block w-full"
+                className="rounded text-center bg-primary-400 p-2 block w-full"
               >
                 Continuar compra
               </Link>

@@ -28,7 +28,7 @@ function AttributesCard({ data }) {
               {item.url && item.titlebutton && (
                 <Link
                   href={item.url}
-                  className="rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white"
+                  className="rounded-md text-center p-2 bg-primary-500 hover:bg-slate-900 text-white"
                 >
                   {item.titlebutton}
                 </Link>

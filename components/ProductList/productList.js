@@ -57,7 +57,7 @@ export default async function ProductList({ shortPost, promise }) {
               <div className="flex justify-between">
                 <Link
                   href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
-                  className="grow mr-3 rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white"
+                  className="grow mr-3 rounded-md text-center p-2 bg-primary-500 hover:bg-slate-900 text-white"
                 >
                   Ver +
                 </Link>

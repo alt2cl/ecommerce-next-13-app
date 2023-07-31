@@ -1,4 +1,5 @@
 import { CarritoProvider } from "@/context/CarritoContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import Head from "next/head";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -26,10 +27,13 @@ export default function RootLayout({ children }) {
         <title>Guitars</title>
       </Head>
       <body className=" bg-slate-100">
-        <CarritoProvider>
-          <Header />
-          {children}
-        </CarritoProvider>
+        <ThemeProvider>
+          <CarritoProvider>
+            <Header />
+            {children}
+          </CarritoProvider>
+        </ThemeProvider>
+
         <Footer />
       </body>
     </html>

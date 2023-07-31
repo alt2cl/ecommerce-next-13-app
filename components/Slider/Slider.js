@@ -122,7 +122,7 @@ export default async function Slider({ promise }) {
                         <p className="text-gray-400 mb-7">{subtitle}</p>
                         {url && (
                           <Link
-                            className="rounded-md text-center p-2 bg-orange-500 hover:bg-slate-900 text-white"
+                            className="rounded-md text-center p-2 bg-primary-500 hover:bg-slate-900 text-white"
                             href={url}
                           >
                             {titlebutton}

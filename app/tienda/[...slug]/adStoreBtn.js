@@ -59,7 +59,7 @@ function AdStoreBtn({ product, imagen, nombre, precio }) {
         <input
           type="submit"
           value="Agregar al carrito"
-          className="block w-full p-3 text-center bg-orange-600 hover:bg-slate-900 text-white rounded"
+          className="block w-full p-3 text-center bg-primary-500 hover:bg-slate-900 text-white rounded"
         />
       </form>
     </div>
