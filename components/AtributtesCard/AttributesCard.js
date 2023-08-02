@@ -4,6 +4,8 @@ import Link from "next/link";
 function AttributesCard({ data }) {
   const cantCol = "lg:grid-" + String(data?.attributes.cols);
 
+  console.log("date dentro>>", data.attributes.cols);
+
   return (
     <>
       <HeadSection

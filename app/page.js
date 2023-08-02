@@ -5,6 +5,7 @@ import Slider from "@/components/Slider/Slider";
 import ProductList from "../components/ProductList/productList";
 import HeadSection from "@/components/HeadSection/HeadSection";
 import AttributesCard from "@/components/AtributtesCard/AttributesCard";
+//import useFetch from "./api/strapi/useFetch";
 
 async function getDataSlider() {
   try {
@@ -28,7 +29,7 @@ async function getDataSlider() {
 
 async function getListCategories() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?sort=order`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?populate=?sort=order`,
     { next: { revalidate: 60 } }
   );
   return res.json();
@@ -42,9 +43,9 @@ async function getListProducts(slug) {
   return res.json();
 }
 
-async function getListAttributes(id) {
+async function getListAttributes() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/${id}/?populate=*`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&sort=order`,
     { next: { revalidate: 30 } }
   );
   return res.json();
@@ -69,10 +70,10 @@ export default async function Home() {
     return <ProductList shortPost promise={data} />;
   }
 
-  async function getAttrList(id) {
-    const { data } = await getListAttributes(id);
-    if (data) {
-      return <AttributesCard data={data} />;
+  async function getAttrList(pos) {
+    const { data } = await getListAttributes();
+    if (data && data[pos]) {
+      return <AttributesCard data={data[pos]} />;
     } else {
       return null;
     }
@@ -91,7 +92,7 @@ export default async function Home() {
               {/* <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6"> */}
               <Suspense fallback={<p>Cargando atributos...</p>}>
                 {/* <AttributesCard data={dataAttributes[0]} /> */}
-                {getAttrList(1)}
+                {getAttrList(0)}
               </Suspense>
               {/* </div> */}
             </section>
@@ -113,11 +114,29 @@ export default async function Home() {
               );
             })}
 
-            <section>
-              <Suspense fallback={<p>Cargando atributos...</p>}>
-                {getAttrList(2) ? getAttrList(2) : null}
-              </Suspense>
-            </section>
+            {getAttrList(1) ? (
+              <section>
+                <Suspense fallback={<p>Cargando atributos...</p>}>
+                  {getAttrList(1)}
+                </Suspense>
+              </section>
+            ) : null}
+
+            {getAttrList(2) ? (
+              <section>
+                <Suspense fallback={<p>Cargando atributos...</p>}>
+                  {getAttrList(2)}
+                </Suspense>
+              </section>
+            ) : null}
+
+            {getAttrList(3) ? (
+              <section>
+                <Suspense fallback={<p>Cargando atributos...</p>}>
+                  {getAttrList(3)}
+                </Suspense>
+              </section>
+            ) : null}
           </main>
         </div>
       </div>
