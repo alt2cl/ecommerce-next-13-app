@@ -1,4 +1,6 @@
+import ProductList from "@/components/ProductList/productList";
 import PostsList from "../../components/PostList/postsList";
+import ThumbList from "@/components/ThumbList/ThumbList";
 
 async function getData() {
   let res = await fetch(
@@ -10,8 +12,22 @@ async function getData() {
   return res.json();
 }
 
+async function getDataSidebar() {
+  let res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-sidebars/?populate=products.category_products&populate=products.cover`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
 export default async function BlogPage() {
   const { data } = await getData();
+
+  const { data: datasidebar } = await getDataSidebar();
+  //console.log("datasidebar_", datasidebar[0].attributes.products);
+
   return (
     <div className="container px-4 pt-9">
       <div className="grid lg:grid-cols-12 lg:gap-12">
@@ -20,7 +36,16 @@ export default async function BlogPage() {
             <PostsList shortPost data={data} promise={data} />
           </section>
         </main>
-        <aside className=" block col-span-12 lg:col-span-4">aside</aside>
+        <aside className=" block col-span-12 lg:col-span-4">
+          {datasidebar?.map((item) => {
+            return (
+              <ThumbList
+                headtext={item.attributes.title}
+                promise={item.attributes.products.data}
+              />
+            );
+          })}
+        </aside>
       </div>
     </div>
   );

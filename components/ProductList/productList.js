@@ -4,6 +4,10 @@ import Link from "next/link";
 export default async function ProductList({ shortPost, promise }) {
   const data = await promise;
 
+  console.log("data awaite_:", data);
+
+  //return false;
+
   return (
     <>
       {data?.map((post) => {
