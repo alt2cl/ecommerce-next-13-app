@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es" className={barlow.className}>
       <Head>
-        <title>Guitars</title>
+        <title>Café +</title>
       </Head>
       <body className=" bg-slate-100">
         <ThemeProvider>
