@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import dayjs from "dayjs";
+import "dayjs/locale/es";
 
 export default async function PostsList({ shortPost, promise }) {
   const data = await promise;
@@ -17,6 +19,10 @@ export default async function PostsList({ shortPost, promise }) {
           content: contenido,
         } = item;
 
+        const formattedDate = dayjs(publishedAt)
+          .locale("es")
+          .format("D [de] MMMM YYYY");
+
         return (
           <article key={`post-${post.id}`} className="mb-10">
             <div>
@@ -25,7 +31,7 @@ export default async function PostsList({ shortPost, promise }) {
                   {titulo}
                 </h3>
               </Link>
-              <p className="text-xs text-slate-400 mb-3">{publishedAt}</p>
+              <p className="text-xs text-slate-400 mb-3">{formattedDate}</p>
               {imagen.data ? (
                 <Link href={`/blog/${link}`} className="rounded">
                   <Image

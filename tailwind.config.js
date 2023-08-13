@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        barlow: ["var(--font-barlow)"],
+      },
       fontSize: {
         header: "2.25rem",
         sub: "1.25rem",
@@ -51,10 +54,6 @@ module.exports = {
     },
     container: {
       center: true,
-    },
-    fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
     },
   },
   plugins: [require("@tailwindcss/typography")],
