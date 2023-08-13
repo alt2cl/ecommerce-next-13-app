@@ -1,11 +1,13 @@
 //import PostsList from "../postsList";
 import Image from "next/image";
 import markdownToHtml from "@/app/utils/markdownToHtml";
+import dayjs from "dayjs";
+import "dayjs/locale/es";
 import ThumbList from "@/components/ThumbList/ThumbList";
 
 const getPost = (id) => {
   return fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/posts/?filters[link]=${id}&populate=cover`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/posts/?filters[slug]=${id}&populate=cover`,
     { next: { revalidate: 60 } }
   ).then((res) => res.json());
 };
@@ -22,8 +24,6 @@ async function getDataSidebar() {
 
 export default async function PostPage({ params: { id } }) {
   const post = await getPost(id);
-  const { data: datasidebar } = await getDataSidebar();
-
   const {
     title: titulo,
     content: contenido,
@@ -31,7 +31,12 @@ export default async function PostPage({ params: { id } }) {
     publishedAt,
   } = post.data[0].attributes;
 
+  const { data: datasidebar } = await getDataSidebar();
+
   const richtext = await markdownToHtml(contenido);
+  const formattedDate = dayjs(publishedAt)
+    .locale("es")
+    .format("D [de] MMMM YYYY");
 
   return (
     <div className="container px-4 pt-9">
@@ -41,10 +46,14 @@ export default async function PostPage({ params: { id } }) {
             <h2 className="title text-4xl text-slate-900 font-semibold mb-5">
               {titulo}
             </h2>
-            <p className="text-xs text-slate-400 mb-4">{publishedAt}</p>
+            <p className="text-xs text-slate-400 mb-4">{formattedDate}</p>
 
             <Image
-              src={imagen.data.attributes.url}
+              src={
+                imagen.data.attributes.formats.medium.url
+                  ? imagen.data.attributes.formats.medium.url
+                  : imagen.data.attributes.url
+              }
               alt={`Imagen ${titulo}`}
               width={800}
               height={450}
@@ -62,7 +71,6 @@ export default async function PostPage({ params: { id } }) {
           </article>
         </main>
         <aside className=" block col-span-12 lg:col-span-4">
-          {/* <PostsList shortPost={true} /> */}
           {datasidebar?.map((item) => {
             return (
               <ThumbList

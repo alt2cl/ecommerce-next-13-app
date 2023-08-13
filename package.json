@@ -19,6 +19,7 @@
     "@react-google-maps/api": "^2.18.1",
     "@ubilabs/google-maps-react-hooks": "*",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
     "eslint": "8.35.0",
     "eslint-config-next": "^12.0.4",
     "eslint-config-react-app": "^6.0.0",
