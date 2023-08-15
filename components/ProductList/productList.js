@@ -1,10 +1,17 @@
-import Image from "next/image";
+"use client";
+//import Image from "next/image";
+import React from "react";
 import Link from "next/link";
+//import CloudinaryImage from "@/components/ImageCrop/ImageCrop";
+//import { Image, Transformation } from "cloudinary-react";
+//import { CldImage } from "next-cloudinary";
+import { AdvancedImage } from "@cloudinary/react";
+import cl from "@/components/Cloudinary/cloudinaryConfig";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
 export default async function ProductList({ shortPost, promise }) {
   const data = await promise;
-
-  console.log("data awaite_:", data);
 
   //return false;
 
@@ -29,17 +36,30 @@ export default async function ProductList({ shortPost, promise }) {
           >
             <div className="flex justify-center">
               {imagen.data ? (
-                <Image
-                  src={
-                    imagen.data.attributes.formats.small
-                      ? imagen.data.attributes.formats.small.url
-                      : imagen.data.attributes.url
-                  }
-                  alt={`imagen de ${titulo}`}
-                  width={imagen.data.attributes.width}
-                  height={imagen.data.attributes.height}
-                  className={"rounded-xl"}
-                ></Image>
+                <>
+                  <AdvancedImage
+                    cldImg={cl
+                      .image(imagen.data.attributes.hash)
+                      .resize(
+                        fill().width(300).height(300).gravity(autoGravity())
+                      )}
+                    className={"rounded-md"}
+                  />
+
+                  {/* <CldImage
+                    src={
+                      imagen.data.attributes.formats.small
+                        ? imagen.data.attributes.formats.small.url
+                        : imagen.data.attributes.url
+                    }
+                    alt={`imagen de ${titulo}`}
+                    width={"600"}
+                    height={"600"}
+                    crop={"fill"}
+                    sizes="100vw"
+                    className={"rounded-xl"}
+                  /> */}
+                </>
               ) : (
                 "sin imagen"
               )}

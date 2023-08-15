@@ -1,11 +1,12 @@
 import { Suspense } from "react";
-import ProductList from "../../components/ProductList/productList";
+import ProductList from "@/components/ProductList/productList";
 
 // `${process.env.NEXT_PUBLIC_STRAPI_URL}/productos?populate=imagen&populate[0]=categoria_categoria_productos`
 
 async function fetchPosts() {
   let res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*`,
+    { next: { revalidate: 30 } }
   );
   return res.json();
 }
