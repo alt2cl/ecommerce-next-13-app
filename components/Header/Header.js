@@ -17,32 +17,21 @@ export default function Header(props) {
   const values = useTheme();
   //console.log("values:", values.dataTheme?.data.attributes);
 
+  //fecth data a esta url `${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*` y guardarla en data en data
+
   useEffect(() => {
-    setLoading(true);
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
       .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(true);
-      });
-
-    // fetch(
-    //   `${process.env.NEXT_PUBLIC_STRAPI_URL}/configtheme/?populate=logosite`
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setDataConfig(data);
-    //     setLoading(true);
-    //   });
+      .then(
+        (data) => {
+          setData(data);
+        } /*, setLoading(false)*/
+      );
   }, []);
 
   function closed() {
     setOpen(false);
   }
-
-  //console.log("data menu:", data);
-
-  //return false;
 
   const datamenu = data ? data.data[0].attributes.items : null;
 
@@ -55,7 +44,7 @@ export default function Header(props) {
   return (
     <>
       <div
-        className="sticky top-0 z-30 lg:min-h-[88px]"
+        className="sticky top-0 z-30 lg:min-h-[88px] py-4 lg:py-1"
         style={{
           backgroundColor: values.dataTheme?.data.attributes.bgmenu
             ? values.dataTheme?.data.attributes.bgmenu

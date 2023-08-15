@@ -20,10 +20,10 @@ export default async function Home() {
         style={{ backgroundColor: "#f3b23f" }}
       >
         <div className="grid lg:grid-cols-12">
-          <div className="col-span-5">
+          <div className="col-span-6 lg:col-span-5">
             <Image src={imagen1} />
           </div>
-          <div className="col-span-7">
+          <div className="col-span-6 lg:col-span-7">
             <Image src={imagen2} />
           </div>
         </div>
