@@ -1,6 +1,11 @@
-import Image from "next/image";
+"use client";
+//import Image from "next/image";
 import Link from "next/link";
 import HeadSection from "@/components/HeadSection/HeadSection";
+import { AdvancedImage } from "@cloudinary/react";
+import cl from "@/components/Cloudinary/cloudinaryConfig";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
 export default async function ProductList({ promise, headtext }) {
   const data = await promise;
@@ -29,27 +34,35 @@ export default async function ProductList({ promise, headtext }) {
             key={`product-${post.id}`}
             href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
             className={
-              "flex gap-3 mb-5 lg:mb-5 bg-white transition hover:shadow-xl p-2 rounded-xl"
+              "max-w-xs rounded overflow-hidden shadow-lg m-4 flex gap-3 p-3 bg-white"
             }
           >
-            <div className="flex justify-center max-w-[120px] lg:max-w-[160px] sm:block sm:basis-40">
+            <div className="w-1/3">
               {imagen.data ? (
-                <Image
-                  src={
-                    imagen.data.attributes.formats.small
-                      ? imagen.data.attributes.formats.small.url
-                      : imagen.data.attributes.url
-                  }
-                  alt={`imagen de ${titulo}`}
-                  width={imagen.data.attributes.width}
-                  height={imagen.data.attributes.height}
-                  className={"rounded-xl"}
-                ></Image>
+                <AdvancedImage
+                  cldImg={cl
+                    .image(imagen.data.attributes.hash)
+                    .resize(
+                      fill().width(350).height(350).gravity(autoGravity())
+                    )}
+                  className={"rounded-md"}
+                />
               ) : (
+                // <Image
+                //   src={
+                //     imagen.data.attributes.formats.small
+                //       ? imagen.data.attributes.formats.small.url
+                //       : imagen.data.attributes.url
+                //   }
+                //   alt={`imagen de ${titulo}`}
+                //   width={imagen.data.attributes.width}
+                //   height={imagen.data.attributes.height}
+                //   className={"rounded-xl"}
+                // ></Image>
                 "sin imagen"
               )}
             </div>
-            <div className="flex flex-col col-span-4">
+            <div className="w-2/3 flex flex-col col-span-8">
               <h3 className="text-md mb-3 font-semibold text-slate-900">
                 {titulo}
               </h3>
