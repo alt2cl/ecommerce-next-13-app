@@ -2,13 +2,13 @@
 
 import React from "react";
 import { Slide } from "react-slideshow-image";
-import { Fade } from "react-slideshow-image";
+//import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./Slider.scss";
 import Link from "next/link";
 
-export default async function Slider({ promise }) {
-  const data = await promise;
+export default function Slider({ promise }) {
+  const data = promise;
 
   return (
     <div className="slide-container">
