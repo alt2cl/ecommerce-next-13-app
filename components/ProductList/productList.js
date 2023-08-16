@@ -10,8 +10,8 @@ import cl from "@/components/Cloudinary/cloudinaryConfig";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
-export default async function ProductList({ shortPost, promise }) {
-  const data = await promise;
+export default function ProductList({ shortPost, promise }) {
+  const data = promise;
 
   //return false;
 

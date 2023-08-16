@@ -1,5 +1,5 @@
-import ProductList from "@/components/ProductList/productList";
-import PostsList from "../../components/PostList/postsList";
+//import ProductList from "@/components/ProductList/productList";
+import PostsList from "@/components/PostList/postsList";
 import ThumbList from "@/components/ThumbList/ThumbList";
 
 async function getData() {

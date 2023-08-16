@@ -7,10 +7,10 @@ import cl from "@/components/Cloudinary/cloudinaryConfig";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
-export default async function ProductList({ promise, headtext }) {
-  const data = await promise;
+export default function ProductList({ promise, headtext }) {
+  const data = promise;
 
-  console.log("data awaite_:", data);
+  //console.log("data awaite_:", data);
 
   //return false;
 

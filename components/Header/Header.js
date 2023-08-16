@@ -60,6 +60,7 @@ export default function Header(props) {
                 <img
                   src={logo}
                   width={180}
+                  height={42}
                   alt={values.dataTheme?.data.attributes.titlesite}
                 />
               )}
