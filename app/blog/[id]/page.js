@@ -26,6 +26,8 @@ export default async function PostPage({ params: { id } }) {
   const post = await getPost(id);
   const {
     title: titulo,
+    subtitle,
+    description,
     content: contenido,
     cover: imagen,
     publishedAt,
@@ -39,13 +41,17 @@ export default async function PostPage({ params: { id } }) {
     .format("D [de] MMMM YYYY");
 
   return (
-    <div className="container px-4 pt-9">
+    <div className="container px-4 pt-12">
       <div className="grid lg:grid-cols-12 lg:gap-12">
         <main className="col-span-12 lg:col-span-8 mb-8">
           <article>
             <h2 className="title text-4xl text-slate-900 font-semibold mb-5">
               {titulo}
             </h2>
+            {subtitle && <h3 className="text-3xl mb-5">{subtitle}</h3>}
+
+            {description && <h4 className="text-1xl mb-5">{description}</h4>}
+
             <p className="text-xs text-slate-400 mb-4">{formattedDate}</p>
 
             <Image
@@ -55,7 +61,7 @@ export default async function PostPage({ params: { id } }) {
                   : imagen.data.attributes.url
               }
               alt={`Imagen ${titulo}`}
-              width={800}
+              width={1200}
               height={450}
               className="mb-3 rounded"
             />
