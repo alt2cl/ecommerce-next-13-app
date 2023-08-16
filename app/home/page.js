@@ -88,7 +88,7 @@ export default async function Home() {
       <div className="container px-4 pt-9">
         <div className="grid lg:grid-cols-12 lg:gap-12">
           <main className="col-span-12">
-            <section>
+            <section className="mb-8">
               {/* <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6"> */}
               <Suspense fallback={<p>Cargando atributos...</p>}>
                 {/* <AttributesCard data={dataAttributes[0]} /> */}
@@ -99,7 +99,7 @@ export default async function Home() {
 
             {dataCategories.map((categoria) => {
               return (
-                <section key={`section-${categoria.id}`}>
+                <section key={`section-${categoria.id}`} className="mb-8">
                   <HeadSection
                     titulo={categoria.attributes.title}
                     subtitulo={categoria.attributes.subtitle}
@@ -115,7 +115,7 @@ export default async function Home() {
             })}
 
             {getAttrList(1) ? (
-              <section>
+              <section className="mb-8">
                 <Suspense fallback={<p>Cargando atributos...</p>}>
                   {getAttrList(1)}
                 </Suspense>
@@ -123,7 +123,7 @@ export default async function Home() {
             ) : null}
 
             {getAttrList(2) ? (
-              <section>
+              <section className="mb-8">
                 <Suspense fallback={<p>Cargando atributos...</p>}>
                   {getAttrList(2)}
                 </Suspense>
@@ -131,7 +131,7 @@ export default async function Home() {
             ) : null}
 
             {getAttrList(3) ? (
-              <section>
+              <section className="mb-8">
                 <Suspense fallback={<p>Cargando atributos...</p>}>
                   {getAttrList(3)}
                 </Suspense>
