@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense, useContext } from "react";
-import Image from "next/image";
+//import Image from "next/image";
 import Link from "next/link";
 import CarritoBtn from "../CarritoBtn";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
@@ -57,10 +57,9 @@ export default function Header(props) {
           <div className="flex flex-row justify-between w-full">
             <Link href="/" className="pl-4 grid content-center">
               {logo && (
-                <Image
+                <img
                   src={logo}
-                  width={logowidth / 2.5}
-                  height={logoheight / 2.5}
+                  width={180}
                   alt={values.dataTheme?.data.attributes.titlesite}
                 />
               )}
