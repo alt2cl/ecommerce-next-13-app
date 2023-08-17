@@ -6,6 +6,7 @@ import ProductList from "@/components/ProductList/productList";
 import HeadSection from "@/components/HeadSection/HeadSection";
 import AttributesCard from "@/components/AtributtesCard/AttributesCard";
 //import useFetch from "./api/strapi/useFetch";
+//import SsrCarousel from "@/components/SsrCarousel/SsrCarousel";
 
 async function getDataSlider() {
   try {
@@ -56,8 +57,6 @@ export default async function Home() {
   const { data: dCategories } = await getListCategories();
   //const { data: dAttributes } = await getListAttributes();
 
-  //const [datakey, setDatakey] = useState([]);
-
   const [dataSlider, dataCategories] = await Promise.all([
     dSlider,
     dCategories,
@@ -81,6 +80,8 @@ export default async function Home() {
 
   return (
     <main>
+      {/* <SsrCarousel promise={dataSlider} /> */}
+
       <Suspense fallback={<p>Cargando slider...</p>}>
         <Slider promise={dataSlider} />
       </Suspense>
@@ -89,12 +90,9 @@ export default async function Home() {
         <div className="grid lg:grid-cols-12 lg:gap-12">
           <main className="col-span-12">
             <section className="mb-8">
-              {/* <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6"> */}
               <Suspense fallback={<p>Cargando atributos...</p>}>
-                {/* <AttributesCard data={dataAttributes[0]} /> */}
                 {getAttrList(0)}
               </Suspense>
-              {/* </div> */}
             </section>
 
             {dataCategories.map((categoria) => {
