@@ -12,12 +12,8 @@ export default function Header(props) {
   const [dataConfig, setDataConfig] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  //const [data, setData] = useState(null);
 
   const values = useTheme();
-  //console.log("values:", values.dataTheme?.data.attributes);
-
-  //fecth data a esta url `${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*` y guardarla en data en data
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
