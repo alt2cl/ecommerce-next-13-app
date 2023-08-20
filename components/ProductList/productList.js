@@ -1,10 +1,7 @@
 "use client";
-//import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-//import CloudinaryImage from "@/components/ImageCrop/ImageCrop";
-//import { Image, Transformation } from "cloudinary-react";
-//import { CldImage } from "next-cloudinary";
+
 import { AdvancedImage } from "@cloudinary/react";
 import cl from "@/components/Cloudinary/cloudinaryConfig";
 import { fill } from "@cloudinary/url-gen/actions/resize";
@@ -45,20 +42,6 @@ export default function ProductList({ shortPost, promise }) {
                       )}
                     className={"rounded-md"}
                   />
-
-                  {/* <CldImage
-                    src={
-                      imagen.data.attributes.formats.small
-                        ? imagen.data.attributes.formats.small.url
-                        : imagen.data.attributes.url
-                    }
-                    alt={`imagen de ${titulo}`}
-                    width={"600"}
-                    height={"600"}
-                    crop={"fill"}
-                    sizes="100vw"
-                    className={"rounded-xl"}
-                  /> */}
                 </>
               ) : (
                 "sin imagen"
