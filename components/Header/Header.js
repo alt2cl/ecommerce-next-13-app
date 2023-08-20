@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense, useContext } from "react";
-//import Image from "next/image";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import CarritoBtn from "../CarritoBtn";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
@@ -12,12 +11,8 @@ export default function Header(props) {
   const [dataConfig, setDataConfig] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  //const [data, setData] = useState(null);
 
   const values = useTheme();
-  //console.log("values:", values.dataTheme?.data.attributes);
-
-  //fecth data a esta url `${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*` y guardarla en data en data
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
@@ -128,6 +123,7 @@ export default function Header(props) {
               <CarritoBtn />
 
               <div className="hamburger lg:hidden flex items-center">
+                <p>i</p>
                 <button className="text-white" onClick={() => setOpen(true)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

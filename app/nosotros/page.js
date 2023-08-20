@@ -6,7 +6,7 @@ import markdownToHtml from "@/app/utils/markdownToHtml";
 async function fetchNosotros() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/companies?populate=contentblock.cover`,
-    { next: { revalidate: 30 } }
+    { next: { revalidate: 300 } }
   );
   return res.json();
 }
