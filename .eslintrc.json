@@ -1,8 +1,13 @@
+// {
+//   "root": true,
+//   "extends": ["next", "next/core-web-vitals", "plugin:@next/next/recommended"],
+//   "plugins": ["@next/next"],
+//   "rules": {
+//     // Agrega cualquier regla personalizada aquí si es necesario
+//   }
+// }
+
+
 {
-  "root": true,
-  "extends": ["next", "next/core-web-vitals", "plugin:@next/next/recommended"],
-  "plugins": ["@next/next"],
-  "rules": {
-    // Agrega cualquier regla personalizada aquí si es necesario
-  }
+  "extends": ["next/babel","next/core-web-vitals"]
 }
