@@ -11,7 +11,6 @@ export default function Header(props) {
   const [dataConfig, setDataConfig] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  //const [data, setData] = useState(null);
 
   const values = useTheme();
 
