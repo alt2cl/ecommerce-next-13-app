@@ -47,7 +47,7 @@ async function getListProducts(slug) {
 
 async function getListAttributes() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&sort=order`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&sort=order&populate=atribute.cover`
     //,{ next: { revalidate: 300 } }
   );
   return res.json();

@@ -21,9 +21,19 @@ function AttributesCard({ data }) {
         {data.attributes?.atribute?.map((item) => {
           return (
             <div
-              className="flex flex-col gap-3 mb-5 lg:mb-16 drop-shadow-md px-4 py-4 rounded-lg bg-white items-center"
+              className={`flex flex-col gap-3 mb-5 lg:mb-16 drop-shadow-md px-4 py-4 rounded-lg bg-white items-center ${
+                item.cover.data?.attributes ? "mt-20" : null
+              }`}
               key={`att-${item.id}`}
             >
+              {item.cover && item.cover.data && item.cover.data.attributes && (
+                <img
+                  className="-mt-20 max-w-[50%]"
+                  src={item.cover.data.attributes.url}
+                  alt={item.title}
+                />
+              )}
+
               <h3 className="uppercase text-xl">{item.title}</h3>
               <h5 className="text-lg">{item.subtitle}</h5>
               <p className="text-gray-600">{item.description}</p>
