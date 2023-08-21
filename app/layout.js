@@ -5,9 +5,11 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { Barlow } from "next/font/google";
 import "./globals.scss";
+
 import { openGraphData } from "@/utils/shared-metadata";
 
 export const metadata = {
+  metadataBase: new URL("https://cafemas.cl"),
   title: "Café más",
   description: "Café de especialidad tostado en Chile, atrévete a probarlo! ",
   keywords:
@@ -15,6 +17,8 @@ export const metadata = {
   openGraph: {
     ...openGraphData,
   },
+  locale: "es_CL",
+  type: "website",
 };
 
 //const inter = Inter({ subsets: ['latin'] })
