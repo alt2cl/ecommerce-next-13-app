@@ -1,4 +1,4 @@
-"use client";
+//"use client";
 
 import { Suspense } from "react";
 import Slider from "@/components/Slider/Slider";
@@ -12,7 +12,7 @@ async function getDataSlider() {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/sliders?populate=cover`,
-      { next: { revalidate: 60 } }
+      { next: { revalidate: 600 } }
     );
     if (!res.ok) {
       throw new Error("Network response was not ok");
