@@ -11,8 +11,8 @@ import AttributesCard from "@/components/AtributtesCard/AttributesCard";
 async function getDataSlider() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/sliders?populate=cover`,
-      { next: { revalidate: 600 } }
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/sliders?populate=cover`
+      //,{ next: { revalidate: 600 } }
     );
     if (!res.ok) {
       throw new Error("Network response was not ok");
@@ -30,24 +30,24 @@ async function getDataSlider() {
 
 async function getListCategories() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?populate=?sort=order`,
-    { next: { revalidate: 60 } }
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?populate=?sort=order`
+    //,{ next: { revalidate: 600 } }
   );
   return res.json();
 }
 
 async function getListProducts(slug) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*&filters[featured_categories][slug][$contains]=${slug}`,
-    { next: { revalidate: 30 } }
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*&filters[featured_categories][slug][$contains]=${slug}`
+    //,{ next: { revalidate: 300 } }
   );
   return res.json();
 }
 
 async function getListAttributes() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&sort=order`,
-    { next: { revalidate: 30 } }
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&sort=order`
+    //,{ next: { revalidate: 300 } }
   );
   return res.json();
 }
