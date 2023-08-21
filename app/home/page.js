@@ -7,6 +7,7 @@ import HeadSection from "@/components/HeadSection/HeadSection";
 import AttributesCard from "@/components/AtributtesCard/AttributesCard";
 //import useFetch from "./api/strapi/useFetch";
 //import SsrCarousel from "@/components/SsrCarousel/SsrCarousel";
+//importar componente metadata de nextjs
 
 async function getDataSlider() {
   try {
