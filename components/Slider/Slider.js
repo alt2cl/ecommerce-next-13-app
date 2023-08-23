@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Slide } from "react-slideshow-image";
-//import { Fade } from "react-slideshow-image";
+//import { Slide } from "react-slideshow-image";
+import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./Slider.scss";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function Slider({ promise }) {
 
   return (
     <div className="slide-container">
-      <Slide
+      <Fade
         nextArrow={
           <button
             style={{
@@ -118,11 +118,20 @@ export default function Slider({ promise }) {
                       }}
                     >
                       <div>
-                        <h3 className="text-3xl text-gray-100">{title}</h3>
-                        <p className="text-gray-400 mb-7">{subtitle}</p>
+                        <Link href={url}>
+                          <h3 className="text-4xl lg:text-5xl font-semibold text-gray-100 mb-2">
+                            {title}
+                          </h3>
+                          <p className="text-gray-200 mb-7 text-2xl">
+                            {subtitle}
+                          </p>
+                          {description ? (
+                            <p className="text-gray-200 mb-7">{description}</p>
+                          ) : null}
+                        </Link>
                         {url && (
                           <Link
-                            className="rounded-md text-center p-2 bg-primary-500 hover:bg-slate-900 text-white"
+                            className="rounded-md text-center font-medium px-4 py-2 bg-primary-500 hover:bg-zinc-800 text-white"
                             href={url}
                           >
                             {titlebutton}
@@ -136,7 +145,7 @@ export default function Slider({ promise }) {
             </div>
           );
         })}
-      </Slide>
+      </Fade>
     </div>
   );
 }

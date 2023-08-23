@@ -25,7 +25,7 @@ export default function Header(props) {
   }, []);
 
   function closed() {
-    setOpen(false);
+    setOpen(!open);
   }
 
   const datamenu = data ? data.data[0].attributes.items : null;
@@ -63,12 +63,14 @@ export default function Header(props) {
             <div className="menues flex flex-row justify-center p-3 gap-4 ">
               <div
                 className={`${
-                  open ? "right-0 open bg-black lg:bg-inherit" : "-right-full"
+                  open
+                    ? "right-0 open bg-zinc-900 lg:bg-inherit"
+                    : "-right-full"
                 } lg:right-0 transition-all menu  z-30 top-0  fixed max-w-xs min-h-screen lg:max-w-none lg:static lg:min-h-0`}
               >
                 <div className="clsedbtn absolute top-4 right-4 block lg:hidden">
                   <button
-                    className="closed text-white"
+                    className="closed text-white font-semibold py-1"
                     onClick={() => closed()}
                   >
                     <svg
@@ -113,7 +115,9 @@ export default function Header(props) {
                     {datamenu?.map((itemMenu) => {
                       return (
                         <li key={`main-menu-${itemMenu.id}`}>
-                          <Link href={itemMenu.url}>{itemMenu.title}</Link>
+                          <Link href={itemMenu.url} onClick={() => closed()}>
+                            {itemMenu.title}
+                          </Link>
                         </li>
                       );
                     })}
@@ -123,7 +127,6 @@ export default function Header(props) {
               <CarritoBtn />
 
               <div className="hamburger lg:hidden flex items-center">
-                <p>i</p>
                 <button className="text-white" onClick={() => setOpen(true)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
