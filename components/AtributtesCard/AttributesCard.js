@@ -21,7 +21,7 @@ function AttributesCard({ data }) {
         {data.attributes?.atribute?.map((item) => {
           return (
             <div
-              className={`flex flex-col gap-3 mb-5 lg:mb-16 drop-shadow-md px-4 py-4 rounded-lg bg-white items-center ${
+              className={`flex flex-col gap-3 mb-5 lg:mb-16 drop-shadow-md px-4 py-4 rounded-lg bg-white items-center text-center ${
                 item.cover.data?.attributes ? "mt-20" : null
               }`}
               key={`att-${item.id}`}
@@ -34,9 +34,9 @@ function AttributesCard({ data }) {
                 />
               )}
 
-              <h3 className="uppercase text-xl">{item.title}</h3>
-              <h5 className="text-lg">{item.subtitle}</h5>
-              <p className="text-gray-600">{item.description}</p>
+              <h3 className="uppercase text-xl text-center">{item.title}</h3>
+              <h5 className="text-lg text-center">{item.subtitle}</h5>
+              <p className="text-gray-600 text-center">{item.description}</p>
               {item.url && item.titlebutton && (
                 <Link
                   href={item.url}
