@@ -6,6 +6,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import cl from "@/components/Cloudinary/cloudinaryConfig";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
+import SplitNumber from "@/components/SplitNumber/SplitNumber";
 
 export default function ProductList({ shortPost, promise }) {
   const data = promise;
@@ -24,14 +25,18 @@ export default function ProductList({ shortPost, promise }) {
           cover: imagen,
           price: precio,
           category_products: categorias,
+          oldprice,
+          offer,
         } = item;
+
+        console.log("valores item:", item);
 
         return (
           <div
             key={`product-${post.id}`}
             className={"flex flex-col gap-3 mb-5 lg:mb-16"}
           >
-            <div className="flex justify-center">
+            <div className="flex justify-center relative overflow-hidden">
               {imagen.data ? (
                 <>
                   <AdvancedImage
@@ -46,6 +51,11 @@ export default function ProductList({ shortPost, promise }) {
               ) : (
                 "sin imagen"
               )}
+              {offer ? (
+                <div className="bg-red-500 absolute top-3 -right-10 rotate-45 text-white px-10">
+                  Oferta
+                </div>
+              ) : null}
             </div>
             <div className="flex flex-col col-span-4">
               <h3 className="text-md mb-3 font-semibold text-slate-900">
@@ -58,8 +68,14 @@ export default function ProductList({ shortPost, promise }) {
               >
                 {descripcion}
               </p>
+              {oldprice ? (
+                <p className="line-through text-slate-400 text-sm">
+                  ${SplitNumber(oldprice)}
+                </p>
+              ) : null}
+
               <p className="text-md text-slate-800 font-medium mb-6">
-                ${precio}
+                ${SplitNumber(precio)} CLP
               </p>
               <div className="flex justify-between">
                 <Link
