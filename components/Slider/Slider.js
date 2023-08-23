@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Slide } from "react-slideshow-image";
+//import { Slide } from "react-slideshow-image";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./Slider.scss";
@@ -119,16 +119,19 @@ export default function Slider({ promise }) {
                     >
                       <div>
                         <Link href={url}>
-                          <h3 className="text-5xl font-semibold text-gray-100 mb-2">
+                          <h3 className="text-4xl lg:text-5xl font-semibold text-gray-100 mb-2">
                             {title}
                           </h3>
-                          <p className="text-gray-300 mb-7 text-2xl">
+                          <p className="text-gray-200 mb-7 text-2xl">
                             {subtitle}
                           </p>
+                          {description ? (
+                            <p className="text-gray-200 mb-7">{description}</p>
+                          ) : null}
                         </Link>
                         {url && (
                           <Link
-                            className="rounded-md text-center font-medium px-4 py-2 bg-primary-500 hover:bg-slate-900 text-white"
+                            className="rounded-md text-center font-medium px-4 py-2 bg-primary-500 hover:bg-zinc-800 text-white"
                             href={url}
                           >
                             {titlebutton}

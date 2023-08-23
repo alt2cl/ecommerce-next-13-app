@@ -29,8 +29,6 @@ export default function ProductList({ shortPost, promise }) {
           offer,
         } = item;
 
-        console.log("valores item:", item);
-
         return (
           <div
             key={`product-${post.id}`}
@@ -43,7 +41,7 @@ export default function ProductList({ shortPost, promise }) {
                     cldImg={cl
                       .image(imagen.data.attributes.hash)
                       .resize(
-                        fill().width(400).height(400).gravity(autoGravity())
+                        fill().width(300).height(300).gravity(autoGravity())
                       )}
                     className={"rounded-md"}
                   />
@@ -80,7 +78,7 @@ export default function ProductList({ shortPost, promise }) {
               <div className="flex justify-between">
                 <Link
                   href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
-                  className="grow mr-3 rounded-md text-center p-2 bg-primary-500 hover:bg-slate-900 text-white"
+                  className="grow mr-3 rounded-md text-center p-2 bg-primary-500 hover:bg-zinc-900 text-white"
                 >
                   Ver +
                 </Link>
