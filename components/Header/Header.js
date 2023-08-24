@@ -25,7 +25,7 @@ export default function Header(props) {
   }, []);
 
   function closed() {
-    setOpen(!open);
+    setOpen(false);
   }
 
   const datamenu = data ? data.data[0].attributes.items : null;
@@ -93,10 +93,7 @@ export default function Header(props) {
                 {open && (
                   <div>
                     <ul className="mt-7 mb-10 pl-7 flex gap-6 md:gap-8">
-                      <Suspense
-                        fallback={<p>Cargando Social Links...</p>}
-                        className="text-white"
-                      >
+                      <Suspense className="text-white">
                         <SocialLinks />
                       </Suspense>
                     </ul>
