@@ -5,30 +5,22 @@ import Link from "next/link";
 import CarritoBtn from "../CarritoBtn";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { useTheme } from "@/context/ThemeContext";
+import Menu from "@/components/Header/Menu";
+import BurgerBtn from "@/components/Header/BurgerBtn";
 
 export default function Header(props) {
-  const [data, setData] = useState(null);
-  const [dataConfig, setDataConfig] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  // const [data, setData] = useState(null);
+  // const [dataConfig, setDataConfig] = useState(null);
+  // const [isLoading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const values = useTheme();
-
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          setData(data);
-        } /*, setLoading(false)*/
-      );
-  }, []);
 
   function closed() {
     setOpen(false);
   }
 
-  const datamenu = data ? data.data[0].attributes.items : null;
+  //const datamenu = data ? data.data[0].attributes.items : null;
 
   const logo = values.dataTheme?.data.attributes.logosite?.data?.attributes.url;
   const logowidth =
@@ -100,47 +92,11 @@ export default function Header(props) {
                   </div>
                 )}
 
-                {datamenu && (
-                  <ul
-                    className={`w-80 lg:w-auto ml-auto flex flex-col lg:flex-row max-w-7xl items-right justify-between p-4 lg:px-8 gap-10  text-white`}
-                    style={{
-                      color: values.dataTheme?.data.attributes.fontcolor
-                        ? values.dataTheme?.data.attributes.fontcolor
-                        : null,
-                    }}
-                  >
-                    {datamenu?.map((itemMenu) => {
-                      return (
-                        <li key={`main-menu-${itemMenu.id}`}>
-                          <Link href={itemMenu.url} onClick={() => closed()}>
-                            {itemMenu.title}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
+                <Menu closedMenu={closed} />
               </div>
               <CarritoBtn />
 
-              <div className="hamburger lg:hidden flex items-center">
-                <button className="text-white" onClick={() => setOpen(true)}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="white"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                    />
-                  </svg>
-                </button>
-              </div>
+              <BurgerBtn handleClose={() => setOpen(true)} />
             </div>
           </div>
         </div>

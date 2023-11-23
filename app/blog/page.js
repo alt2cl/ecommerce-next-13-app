@@ -4,7 +4,7 @@ import ThumbList from "@/components/ThumbList/ThumbList";
 
 async function getData() {
   let res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?populate=cover`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?populate=cover&sort=rank:asc`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
