@@ -1,6 +1,10 @@
+/**
+ * @type {import('next').NextConfig}
+ */
+
 const dev = process.env.NODE_ENV !== "production";
 
-module.exports = {
+const nextConfig = {
   output: "standalone",
   reactStrictMode: dev,
   // experimental: {
@@ -21,3 +25,5 @@ module.exports = {
       process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
   },
 };
+
+module.exports = nextConfig;
