@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
@@ -11,11 +11,18 @@ const ContactForm = () => {
     formState: { errors },
   } = useForm();
 
+  const captcharef = useRef(null);
+
   const [recaptchaValue, setRecaptchaValue] = useState(null);
+
+  const onChangeRecaptcha = (value) => {
+    //console.log("cambio en recaptcha", value);
+    setRecaptchaValue(value);
+  };
 
   const onSubmit = async (data) => {
     if (!recaptchaValue) {
-      console.log("data on submit", data);
+      //console.log("data on submit", data);
       alert("Por favor, confirma que no eres un robot.");
       return;
     }
@@ -40,8 +47,6 @@ const ContactForm = () => {
   };
 
   const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_KEY;
-
-  console.log("ReCAPTCHA site key:", recaptchaSiteKey);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -73,8 +78,9 @@ const ContactForm = () => {
 
       <div>
         <ReCAPTCHA
+          ref={captcharef}
           sitekey={recaptchaSiteKey}
-          onChange={(value) => setRecaptchaValue(value)}
+          onChange={onChangeRecaptcha}
         />
       </div>
 
