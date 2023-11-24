@@ -39,6 +39,10 @@ const ContactForm = () => {
     }
   };
 
+  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_KEY;
+
+  console.log("ReCAPTCHA site key:", recaptchaSiteKey);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -69,7 +73,7 @@ const ContactForm = () => {
 
       <div>
         <ReCAPTCHA
-          sitekey={process.env.RECAPTCHA_SITE_KEY}
+          sitekey={recaptchaSiteKey}
           onChange={(value) => setRecaptchaValue(value)}
         />
       </div>
