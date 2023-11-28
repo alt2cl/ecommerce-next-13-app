@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 
-const ContactForm = () => {
+const ContactForm = (sitekey) => {
   const {
     register,
     handleSubmit,

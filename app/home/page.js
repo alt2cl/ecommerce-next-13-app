@@ -139,7 +139,7 @@ export default async function Home() {
             ) : null}
             <section>
               <Suspense fallback={<p>Cargando contacto</p>}>
-                <ContactForm />
+                <ContactForm sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY} />
               </Suspense>
             </section>
           </main>
