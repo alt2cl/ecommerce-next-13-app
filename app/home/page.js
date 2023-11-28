@@ -137,11 +137,11 @@ export default async function Home() {
                 </Suspense>
               </section>
             ) : null}
-            <section>
+            {/* <section>
               <Suspense fallback={<p>Cargando contacto</p>}>
                 <ContactForm sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY} />
               </Suspense>
-            </section>
+            </section> */}
           </main>
         </div>
       </div>
