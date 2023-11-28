@@ -5,11 +5,7 @@
 const dev = process.env.NODE_ENV !== "production";
 
 const nextConfig = {
-  output: "standalone",
   reactStrictMode: dev,
-  // experimental: {
-  //   appDir: true,
-  // },
   images: {
     formats: ["image/avif", "image/webp"],
     domains: ["res.cloudinary.com"],
