@@ -32,9 +32,11 @@ const ContactForm = (sitekey) => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/contacts`,
         {
-          name: data.name,
-          email: data.email,
-          message: data.message,
+          data: {
+            name: data.name,
+            email: data.email,
+            message: data.message,
+          },
         }
       );
 
