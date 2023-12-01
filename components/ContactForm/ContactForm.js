@@ -30,7 +30,7 @@ const ContactForm = (sitekey) => {
     // Aquí puedes enviar `data` a tu backend
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/contacts`,
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/contacts`,
         {
           data: {
             name: data.name,
@@ -54,33 +54,59 @@ const ContactForm = (sitekey) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Nombre</label>
+      <div className="mb-4">
+        <label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          for="grid-first-name"
+        >
+          Nombre
+        </label>
         <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white"
           type="text"
           {...register("name", { required: "Este campo es obligatorio" })}
         />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && (
+          <p className="text-red-500 text-xs italic">{errors.name.message}</p>
+        )}
       </div>
 
-      <div>
-        <label>Email</label>
+      <div className="mb-4">
+        <label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          for="grid-first-name"
+        >
+          Email
+        </label>
         <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white"
           type="email"
           {...register("email", { required: "Este campo es obligatorio" })}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && (
+          <p className="text-red-500 text-xs italic">{errors.email.message}</p>
+        )}
       </div>
 
-      <div>
-        <label>Mensaje</label>
+      <div className="mb-4">
+        <label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          for="grid-first-name"
+        >
+          Mensaje
+        </label>
         <textarea
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white"
           {...register("message", { required: "Este campo es obligatorio" })}
         ></textarea>
-        {errors.message && <p>{errors.message.message}</p>}
+        {errors.message && (
+          <p className="text-red-500 text-xs italic">
+            {errors.message.message}
+          </p>
+        )}
       </div>
 
-      <div>
+      <div className="mb-4">
         <ReCAPTCHA
           ref={captcharef}
           sitekey={recaptchaSiteKey}
@@ -88,7 +114,12 @@ const ContactForm = (sitekey) => {
         />
       </div>
 
-      <button type="submit">Enviar</button>
+      <button
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Enviar
+      </button>
     </form>
   );
 };
