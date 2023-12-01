@@ -54,17 +54,19 @@ export default async function PostPage({ params: { id } }) {
 
             <p className="text-xs text-slate-400 mb-4">{formattedDate}</p>
 
-            <Image
-              src={
-                imagen.data.attributes.formats.medium.url
-                  ? imagen.data.attributes.formats.medium.url
-                  : imagen.data.attributes.url
-              }
-              alt={`Imagen ${titulo}`}
-              width={1200}
-              height={450}
-              className="mb-3 rounded"
-            />
+            {imagen.data && (
+              <Image
+                src={
+                  imagen.data.attributes.formats.medium.url
+                    ? imagen.data.attributes.formats.medium.url
+                    : imagen.data.attributes.url
+                }
+                alt={`Imagen ${titulo}`}
+                width={1200}
+                height={450}
+                className="mb-3 rounded"
+              />
+            )}
 
             <div className="text-slate-700 text-md">
               {richtext && (

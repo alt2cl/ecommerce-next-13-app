@@ -57,7 +57,7 @@ const ContactForm = (sitekey) => {
       <div className="mb-4">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          for="grid-first-name"
+          htmlFor="grid-first-name"
         >
           Nombre
         </label>
@@ -74,7 +74,7 @@ const ContactForm = (sitekey) => {
       <div className="mb-4">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          for="grid-first-name"
+          htmlFor="grid-first-name"
         >
           Email
         </label>
@@ -91,7 +91,7 @@ const ContactForm = (sitekey) => {
       <div className="mb-4">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          for="grid-first-name"
+          htmlFor="grid-first-name"
         >
           Mensaje
         </label>
@@ -116,7 +116,7 @@ const ContactForm = (sitekey) => {
 
       <button
         type="submit"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Enviar
       </button>

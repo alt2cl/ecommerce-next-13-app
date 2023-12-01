@@ -13,7 +13,7 @@ import SocialLinks from "@/components/SocialLinks/SocialLinks";
 async function fetchData() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
     //,{ next: { revalidate: 0 } })
-    console.log('la res:', res)
+    //console.log('la res:', res)
     return res.json()
 }
 
@@ -23,7 +23,7 @@ export default async function Footer() {
 
     const data = await fetchData()
 
-    console.log('data de footer: ', data.data[0].attributes)
+    //console.log('data de footer: ', data.data[0].attributes)
 
 
     //return false
@@ -39,7 +39,7 @@ export default async function Footer() {
 
     const logo = data?.data[0].attributes.logo?.data?.attributes.url;
 
-    console.log('datamenu2: ', datamenu2)
+    //console.log('datamenu2: ', datamenu2)
 
 
     return (
