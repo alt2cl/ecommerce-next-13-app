@@ -1,10 +1,13 @@
 //"use client";
 
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import Slider from "@/components/Slider/Slider";
-import ProductList from "@/components/ProductList/productList";
+//import ProductList from "@/components/ProductList/productList";
 import HeadSection from "@/components/HeadSection/HeadSection";
 import AttributesCard from "@/components/AtributtesCard/AttributesCard";
+const ContactForm = lazy(() => import("@/components/ContactForm/ContactForm"));
+const ProductList = lazy(() => import("@/components/ProductList/productList"));
+//import ContactForm from "@/components/ContactForm/ContactForm";
 //import useFetch from "./api/strapi/useFetch";
 //import SsrCarousel from "@/components/SsrCarousel/SsrCarousel";
 //importar componente metadata de nextjs
@@ -12,7 +15,7 @@ import AttributesCard from "@/components/AtributtesCard/AttributesCard";
 async function getDataSlider() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/sliders?populate=cover`
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/sliders?populate=cover&sort=rank:asc`
       //,{ next: { revalidate: 600 } }
     );
     if (!res.ok) {
@@ -31,7 +34,7 @@ async function getDataSlider() {
 
 async function getListCategories() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?populate=?sort=order`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?sort=rank:asc`
     //,{ next: { revalidate: 600 } }
   );
   return res.json();
@@ -47,7 +50,7 @@ async function getListProducts(slug) {
 
 async function getListAttributes() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&sort=order&populate=atribute.cover`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&populate=atribute.cover&sort=rank:asc`
     //,{ next: { revalidate: 300 } }
   );
   return res.json();
@@ -83,9 +86,7 @@ export default async function Home() {
     <main>
       {/* <SsrCarousel promise={dataSlider} /> */}
 
-      <Suspense fallback={<p>Cargando slider...</p>}>
-        <Slider promise={dataSlider} />
-      </Suspense>
+      <Slider promise={dataSlider} />
 
       <div className="container px-4 pt-9">
         <div className="grid lg:grid-cols-12 lg:gap-12">
@@ -136,6 +137,11 @@ export default async function Home() {
                 </Suspense>
               </section>
             ) : null}
+            {/* <section>
+              <Suspense fallback={<p>Cargando contacto</p>}>
+                <ContactForm sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY} />
+              </Suspense>
+            </section> */}
           </main>
         </div>
       </div>
