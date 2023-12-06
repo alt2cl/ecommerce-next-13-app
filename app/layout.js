@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
       <body className=" bg-slate-100">
         <ThemeProvider>
           <CarritoProvider>
-            {/* <Header /> */}
+            <Header />
             {children}
           </CarritoProvider>
         </ThemeProvider>
