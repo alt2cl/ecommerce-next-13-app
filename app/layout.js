@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
           </CarritoProvider>
         </ThemeProvider>
 
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
