@@ -1,23 +1,31 @@
-# Establece la imagen base de Node.js con la versión 14
+# Establece la imagen base de Node.js con la versión 18.15.0
 FROM node:18.15.0
 
 # Establece el directorio de trabajo de la aplicación dentro del contenedor
 WORKDIR /app
 
-# Borra todo el contenido del directorio de trabajo
-#RUN rm -rf ./*
-
 # Copia el archivo package.json y package-lock.json al directorio de trabajo
 COPY package*.json ./
-
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-
-# Copia el resto de los archivos de la aplicación al directorio de trabajo
-COPY . .
 
 # Instala las dependencias de la aplicación
 RUN npm install --legacy-peer-deps
 
+# Copia el resto de los archivos de la aplicación al directorio de trabajo
+COPY . .
+
+# Argumentos de construcción para variables de entorno
+ARG NEXT_PUBLIC_STRAPI_URL
+ARG NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+ARG NEXT_PUBLIC_CLOUDINARY_API_KEY
+ARG NEXT_PUBLIC_CLOUDINARY_API_SECRET
+ARG NEXT_PUBLIC_RECAPTCHA_KEY
+
+# Asigna argumentos de construcción a variables de entorno
+ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
+ENV NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=$NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+ENV NEXT_PUBLIC_CLOUDINARY_API_KEY=$NEXT_PUBLIC_CLOUDINARY_API_KEY
+ENV NEXT_PUBLIC_CLOUDINARY_API_SECRET=$NEXT_PUBLIC_CLOUDINARY_API_SECRET
+ENV NEXT_PUBLIC_RECAPTCHA_KEY=$NEXT_PUBLIC_RECAPTCHA_KEY
 
 # Compila la aplicación Next.js para producción
 RUN npm run build
