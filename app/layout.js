@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
         <title>Café +</title>
       </Head>
       {/* Script de Google Tag Manager */}
-      <Script
+      {/* <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-R0DE61DHD4"
         strategy="afterInteractive" // Cargar después de que la página se haya vuelto interactiva
         async
@@ -52,11 +52,11 @@ export default function RootLayout({ children }) {
           gtag('js', new Date());
           gtag('config', 'G-R0DE61DHD4');
         `}
-      </Script>
+      </Script> */}
       <body className=" bg-slate-100">
         <ThemeProvider>
           <CarritoProvider>
-            <Header />
+            {/* <Header /> */}
             {children}
           </CarritoProvider>
         </ThemeProvider>
