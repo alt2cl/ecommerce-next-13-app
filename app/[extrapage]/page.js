@@ -11,7 +11,6 @@ const getPost = (extrapage) => {
 };
 
 export default async function PostPage({ params: { extrapage } }) {
-  console.log("el value de extra page", extrapage);
   const data = await getPost(extrapage);
 
   const post = data.data.length > 0 ? data.data[0].attributes : null;
@@ -31,8 +30,6 @@ export default async function PostPage({ params: { extrapage } }) {
     const formattedDate = dayjs(publishedAt)
       .locale("es")
       .format("D [de] MMMM YYYY");
-
-    console.log("la imagen:", imagen);
 
     return (
       <div className="container px-4 pt-12 pb-20">
