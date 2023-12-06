@@ -92,7 +92,7 @@ export default function Header(props) {
                   </div>
                 )}
 
-                <Menu closedMenu={closed} />
+                {/* <Menu closedMenu={closed} /> */}
               </div>
               <CarritoBtn />
 
