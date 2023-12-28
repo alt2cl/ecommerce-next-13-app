@@ -1,22 +1,33 @@
 import Image from "next/image";
-import markdownToHtml from "@/app/utils/markdownToHtml";
+import markdownToHtml from "@/src/utils/markdownToHtml";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
+import { fetchStrapiData } from "@/src/lib/api";
 
-const getPost = (extrapage) => {
-  return fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pages/?filters[slug]=${extrapage}&populate=cover`
-    //   { next: { revalidate: 60 } }
-  ).then((res) => res.json());
-};
+// const getPost = (dinamicpage) => {
+//   return fetch(
+//     `${process.env.NEXT_PUBLIC_STRAPI_URL}/pages/?filters[slug]=${dinamicpage}&populate=cover`
+//     //   { next: { revalidate: 60 } }
+//   ).then((res) => res.json());
+// };
 
-export default async function PostPage({ params: { extrapage } }) {
-  console.log("el value de extra page", extrapage);
-  const data = await getPost(extrapage);
+export default async function PostPage({ params: { dinamicpage } }) {
+  //console.log("el value de extra page", dinamicpage);
+  //const data = await getPost(dinamicpage);
 
-  const post = data.data.length > 0 ? data.data[0].attributes : null;
+  const { data } = await fetchStrapiData(
+    `pages/?filters[slug]=${dinamicpage}&populate=cover`
+  );
 
-  if (post) {
+  console.log("////////////////////dinamicpage ", data);
+
+  // if (!data) {
+  //   return <h3>Sin datos</h3>;
+  // }
+
+  const post = data?.data.length > 0 ? data?.data[0].attributes : null;
+
+  if (data && post) {
     const {
       titlesection,
       titlepage: titulo,

@@ -3,13 +3,15 @@ import React from "react";
 import Link from "next/link";
 
 import { AdvancedImage } from "@cloudinary/react";
-import cl from "@/components/Cloudinary/cloudinaryConfig";
+import cl from "@/src/components/Cloudinary/cloudinaryConfig";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import SplitNumber from "@/components/SplitNumber/SplitNumber";
+import SplitNumber from "@/src/components/SplitNumber/SplitNumber";
 
 export default function ProductList({ shortPost, promise }) {
-  const data = promise;
+  const { data } = promise;
+
+  console.log("data product list:", data);
 
   //return false;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useCarritoContext } from "@/context/CarritoContext";
+import { useCarritoContext } from "@/src/context/CarritoContext";
 import ContainerDiv from "./presentational/containerDiv";
 import Card from "./presentational/card";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useCarritoContext } from "@/context/CarritoContext";
+import { useCarritoContext } from "@/src/context/CarritoContext";
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";

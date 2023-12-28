@@ -1,9 +1,9 @@
 "use client";
 //import Image from "next/image";
 import Link from "next/link";
-import HeadSection from "@/components/HeadSection/HeadSection";
+import HeadSection from "@/src/components/HeadSection/HeadSection";
 import { AdvancedImage } from "@cloudinary/react";
-import cl from "@/components/Cloudinary/cloudinaryConfig";
+import cl from "@/src/components/Cloudinary/cloudinaryConfig";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 

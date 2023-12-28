@@ -8,7 +8,7 @@ import "./Slider.scss";
 import Link from "next/link";
 
 export default function Slider({ promise }) {
-  const data = promise;
+  const { data } = promise;
 
   return (
     <div className="slide-container">

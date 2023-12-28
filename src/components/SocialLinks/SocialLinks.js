@@ -1,16 +1,28 @@
 import Link from "next/link";
+import { fetchStrapiData } from "@/src/lib/api";
 
-async function fetchData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=sociallinks`,
-    { next: { revalidate: 120 } }
-  );
-  return res.json();
-}
+// async function fetchData() {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=sociallinks`,
+//     { next: { revalidate: 120 } }
+//   );
+//   return res.json();
+// }
 
 export default async function SocialLinks({ onclosed }) {
-  const rrsslinks = await fetchData();
-  const data = rrsslinks?.data[0].attributes.sociallinks;
+  //const rrsslinks = await fetchData();
+
+  const { data: rrsslinks } = await fetchStrapiData(
+    `menus/?populate=sociallinks`
+  );
+
+  //console.log("////////////////////////rrsslinks ", rrsslinks);
+
+  if (!rrsslinks) {
+    return false;
+  }
+
+  const data = rrsslinks.data[0].attributes.sociallinks;
 
   //return false;
 

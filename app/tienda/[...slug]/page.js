@@ -1,17 +1,14 @@
 import AdStoreBtn from "./adStoreBtn";
-import markdownToHtml from "@/app/utils/markdownToHtml";
-import Carousel from "@/components/Carousel";
-
-const getPost = (id) => {
-  return fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?filters[slug]=${id}&populate=*`,
-    { cache: "no-store" }
-  ).then((res) => res.json());
-};
+import markdownToHtml from "@/src/utils/markdownToHtml";
+import Carousel from "@/src/components/Carousel";
+import { fetchStrapiData } from "@/src/lib/api";
 
 export async function generateMetadata({ params: { slug } }) {
   const id = slug.slice(-1);
-  const product = await getPost(id);
+  //const product = await getPost(id);
+  const { data: product } = await fetchStrapiData(
+    `products?filters[slug]=${id}&populate=*`
+  );
 
   const {
     cover: imagen,
@@ -21,6 +18,8 @@ export async function generateMetadata({ params: { slug } }) {
     gallery: galeria,
   } = product.data[0].attributes;
 
+  console.log("la imagen open grapgh", imagen);
+
   return {
     title: titulo,
     description: descripcion,
@@ -29,9 +28,9 @@ export async function generateMetadata({ params: { slug } }) {
       description: descripcion,
       images: [
         {
-          url: imagen.data.attributes.url,
-          width: imagen.data.attributes.width,
-          height: imagen.data.attributes.height,
+          url: imagen?.data.attributes.url,
+          width: imagen?.data.attributes.width,
+          height: imagen?.data.attributes.height,
           alt: titulo,
         },
       ],
@@ -42,8 +41,11 @@ export async function generateMetadata({ params: { slug } }) {
 export default async function ProductoPage({ params: { slug } }) {
   const id = slug.slice(-1);
 
-  const product = await getPost(id);
-  //const product = await productData;
+  //const product = await getPost(id);
+
+  const { data: product } = await fetchStrapiData(
+    `products?filters[slug]=${id}&populate=*`
+  );
 
   const {
     cover: imagen,
@@ -63,7 +65,7 @@ export default async function ProductoPage({ params: { slug } }) {
             <section className="section">
               <div className="grid grid-cols-7 gap-6">
                 <div className="flex justify-center col-span-7 lg:col-span-3">
-                  {galeria.data && (
+                  {galeria?.data && (
                     <Carousel
                       arrayImage={galeria.data}
                       passId={`carousel${id}`}

@@ -2,42 +2,32 @@ import { Suspense } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
-import HeadSection from "@/components/HeadSection/HeadSection";
+import HeadSection from "@/src/components/HeadSection/HeadSection";
+import { fetchStrapiData } from "@/src/lib/api";
+import SocialLinks from "@/src/components/SocialLinks/SocialLinks";
 
 
-import SocialLinks from "@/components/SocialLinks/SocialLinks";
-
-
-
-
-async function fetchData() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/menus/?populate=*`)
-    //,{ next: { revalidate: 0 } })
-    //console.log('la res:', res)
-    return res.json()
-}
 
 
 export default async function Footer() {
 
 
-    const data = await fetchData()
+    const { data } = await fetchStrapiData(
+        `menus/?populate=*`
+    );
 
-    //console.log('data de footer: ', data.data[0].attributes)
+    console.log('(((((((((data footer)))))))))))', data.data[0])
 
+    const datamenu = data ? data.data[0].attributes.items : null;
 
-    //return false
-
-    const datamenu = data ? data?.data[0].attributes.items : null;
-
-    const datamenu2 = data ? data?.data[1]?.attributes.items : null;
-    const datamenu3 = data ? data?.data[2]?.attributes.items : null;
+    const datamenu2 = data ? data.data[1]?.attributes.items : null;
+    const datamenu3 = data ? data.data[2]?.attributes.items : null;
 
     const datadescripcion = data.data[0]?.attributes.description;
     const datadescripcion2 = data.data[1]?.attributes.description;
     const datadescripcion3 = data.data[2]?.attributes.description;
 
-    const logo = data?.data[0].attributes.logo?.data?.attributes.url;
+    const logo = data.data[0].attributes.logo?.data?.attributes.url;
 
     //console.log('datamenu2: ', datamenu2)
 

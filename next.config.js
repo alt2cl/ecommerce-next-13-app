@@ -11,9 +11,7 @@ const nextConfig = {
     domains: ["res.cloudinary.com"],
   },
   env: {
-    NEXT_PUBLIC_STRAPI_URL: dev
-      ? "http://127.0.0.1:1337/api"
-      : process.env.NEXT_PUBLIC_STRAPI_URL,
+    NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
       process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     NEXT_PUBLIC_CLOUDINARY_API_KEY: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,

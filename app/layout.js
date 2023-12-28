@@ -1,12 +1,12 @@
-import { CarritoProvider } from "@/context/CarritoContext";
-import { ThemeProvider } from "@/context/ThemeContext";
+import { CarritoProvider } from "@/src/context/CarritoContext";
+import { ThemeProvider } from "@/src/context/ThemeContext";
 import Head from "next/head";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import Header from "@/src/components/Header/Header";
+import Footer from "@/src/components/Footer/Footer";
 import { Barlow } from "next/font/google";
 import "./globals.scss";
 
-import { openGraphData } from "@/utils/shared-metadata";
+import { openGraphData } from "@/src/utils/shared-metadata";
 
 export const metadata = {
   metadataBase: new URL("https://cafemas.cl"),
@@ -40,10 +40,10 @@ export default function RootLayout({ children }) {
           <CarritoProvider>
             <Header />
             {children}
+
+            <Footer />
           </CarritoProvider>
         </ThemeProvider>
-
-        <Footer />
       </body>
     </html>
   );
