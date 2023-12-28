@@ -9,20 +9,20 @@ import { fetchStrapiData } from "@/src/lib/api";
 //   return res.json();
 // }
 
-export default async function SocialLinks({ onclosed }) {
+export default async function SocialLinks({ data }) {
   //const rrsslinks = await fetchData();
 
-  const { data: rrsslinks } = await fetchStrapiData(
-    `menus/?populate=sociallinks`
-  );
+  // const { data: rrsslinks } = await fetchStrapiData(
+  //   `menus/?populate=sociallinks`
+  // );
 
   //console.log("////////////////////////rrsslinks ", rrsslinks);
 
-  if (!rrsslinks) {
+  if (!data) {
     return false;
   }
 
-  const data = rrsslinks.data[0].attributes.sociallinks;
+  //const data = rrsslinks.data[0].attributes.sociallinks;
 
   //return false;
 

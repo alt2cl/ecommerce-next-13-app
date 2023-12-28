@@ -13,23 +13,20 @@ export default async function Footer() {
 
 
     const { data } = await fetchStrapiData(
-        `menus/?populate=*`
+        `menus/?populate=*&sort=rank:asc`
     );
 
-    console.log('(((((((((data footer)))))))))))', data.data[0])
 
-    const datamenu = data ? data.data[0].attributes.items : null;
 
-    const datamenu2 = data ? data.data[1]?.attributes.items : null;
-    const datamenu3 = data ? data.data[2]?.attributes.items : null;
 
-    const datadescripcion = data.data[0]?.attributes.description;
-    const datadescripcion2 = data.data[1]?.attributes.description;
-    const datadescripcion3 = data.data[2]?.attributes.description;
 
-    const logo = data.data[0].attributes.logo?.data?.attributes.url;
+    console.log('data.data : ', data.data);
 
-    //console.log('datamenu2: ', datamenu2)
+    // const dataContacto = data.data.find(item => item.attributes.title === 'contacto') || null
+    // const dataNosotros = data.data.find(item => item.attributes.title === 'nosotros') || null
+
+
+
 
 
     return (
@@ -39,152 +36,77 @@ export default async function Footer() {
         }}>
             <div className="container px-4 pt-12 pb-10">
                 <div className="flex-column lg:flex">
-                    <div className="w-full lg:w-1/4  px-5 pb-10">
-                        <div className="flex-col justify-center text-teal-600 pr-5">
-                            {
-                                logo &&
-                                <Image
+
+                    {data?.data.map((item) => {
+
+                        return (
+                            <div className="w-full lg:w-1/4 px-5 pb-10">
+                                {item.attributes.logo.data?.attributes.url ? <Image
                                     className=" max-w-sm mb-6"
-                                    src={logo}
+                                    src={item.attributes.logo.data?.attributes.url}
                                     width={248}
                                     height={56}
                                     alt="Logo"
-                                />
-                            }
-                            <p className=" mt-4  leading-relaxed text-gray-300">
-                                {
-                                    datadescripcion && datadescripcion
+                                /> : <HeadSection
+                                    titulo={item.attributes.title}
+                                    fontStyle={"uppercase text-white "}
+                                />}
+
+                                {item.attributes.description && <p className=" mt-4  leading-relaxed text-gray-300">
+                                    {
+                                        item.attributes.description
+                                    }
+                                </p>}
+
+                                {item.attributes.sociallinks &&
+                                    <ul className="mt-6 flex gap-6 md:gap-8 mb-7">
+                                        {item.attributes.sociallinks &&
+                                            <Suspense fallback={<p>Cargando social links...</p>} className="text-white">
+                                                <SocialLinks data={item.attributes.sociallinks} />
+                                            </Suspense>
+                                        }
+                                    </ul>
                                 }
-                            </p>
-                        </div>
-                        <ul className="mt-6 flex gap-6 md:gap-8">
-                            {data.data[0].attributes.sociallinks &&
-                                <Suspense fallback={<p>Cargando atributos...</p>} className="text-white">
-                                    <SocialLinks />
-                                </Suspense>
-                            }
-                        </ul>
-                    </div>
-                    <div className="w-full lg:w-1/4 px-5 pb-10">
-                        <HeadSection
-                            titulo={'Secciones'}
-                            color={'text-white'}
-                        />
-                        {datamenu && (
-                            <nav className="flex flex-wrap ">
-                                {datamenu.map((itemMenu) => {
-                                    if (itemMenu.url && itemMenu.title) {
-                                        return (
-                                            <div className="w-full mb-5" key={itemMenu.id}>
-                                                <Link
-                                                    href={itemMenu.url}
-                                                    key={`menu-${itemMenu.id}`}
-                                                    className=" text-gray-300 transition hover:text-white mb-5"
-                                                >
-                                                    <span className="text-yellow-300 pr-3">
-                                                        +
-                                                    </span>
-                                                    {itemMenu.title}
-                                                </Link>
-                                            </div>
-                                        );
 
-                                    }
 
-                                })}
-                            </nav>
-                        )}
-                    </div>
-                    <div className="w-full lg:w-1/4 px-5 pb-10">
-                        <HeadSection
-                            titulo={'Sobre nosotros'}
-                            color={'text-white'}
-                        />
-                        {
-                            datadescripcion2 && (
-                                <p className="text-gray-300">
-                                    {datadescripcion2}
-                                </p>
-                            )
-                        }
-                        {datamenu2 && (
-                            <nav className="flex flex-wrap ">
-                                {datamenu2.map((itemMenu) => {
-                                    if (itemMenu.url && itemMenu.title) {
-                                        return (
-                                            <div className="w-full mb-5" key={itemMenu.id}>
-                                                <Link
-                                                    href={itemMenu.url}
-                                                    key={`menu-${itemMenu.id}`}
-                                                    className="w-full text-gray-300 transition hover:text-white mb-5"
-                                                >
-                                                    <span className="text-yellow-300 pr-3">
-                                                        +
-                                                    </span>
-                                                    {itemMenu.title}
-                                                </Link>
-                                            </div>
-                                        );
 
-                                    }
+                                {item.attributes.items && (
+                                    <nav className="flex flex-wrap ">
+                                        {item.attributes.items.map((itemMenu) => {
+                                            if (itemMenu.url && itemMenu.title) {
+                                                return (
+                                                    <div className="w-full mb-5" key={itemMenu.id}>
+                                                        <Link
+                                                            href={itemMenu.url}
+                                                            key={`menu-${itemMenu.id}`}
+                                                            className=" text-gray-300 transition hover:text-white mb-5"
+                                                        >
+                                                            <span className="text-yellow-300 pr-3">
+                                                                +
+                                                            </span>
+                                                            {itemMenu.title}
+                                                        </Link>
+                                                    </div>
+                                                );
 
-                                })}
-                            </nav>
-                        )}
-                    </div>
-                    <div className="w-full lg:w-1/4 px-5 pb-10">
-                        <HeadSection
-                            titulo={'Contacto'}
-                            color={'text-white'}
-                        />
-                        {
-                            datadescripcion3 && (
-                                <p className="text-gray-300 mb-7">
-                                    {datadescripcion3}
-                                </p>
-                            )
-                        }
+                                            }
 
-                        {datamenu3 && (
-                            <nav className="flex flex-wrap ">
-                                {datamenu3.map((itemMenu) => {
-                                    if (itemMenu.title && !itemMenu.url) {
-                                        return (
-                                            <div className="w-full" key={itemMenu.id}>
-                                                <p className="text-gray-300 mb-3">
-                                                    <span className="text-yellow-300 pr-3">
-                                                        +
-                                                    </span>
-                                                    {itemMenu.title}
-                                                </p>
-                                            </div>
+                                        })}
+                                    </nav>
+                                )}
+                            </div>
+                        )
 
-                                        );
-                                    }
+                    })}
 
-                                    if (itemMenu.url) {
-                                        return (
-                                            <div className="w-full" key={itemMenu.id}>
-                                                <Link
-                                                    href={itemMenu.url}
-                                                    key={`menu-${itemMenu.id}`}
-                                                    className="w-full text-gray-300 transition hover:text-white mb-3"
 
-                                                >
-                                                    <span className="text-yellow-300 pr-3">
-                                                        +
-                                                    </span>
-                                                    {itemMenu.title}
-                                                </Link>
-                                            </div>
-                                        );
 
-                                    }
 
-                                })}
-                            </nav>
-                        )}
-                    </div>
+
+
+
+
+
 
 
 

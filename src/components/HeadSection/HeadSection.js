@@ -7,12 +7,22 @@ const playfair = Playfair_Display({
   weight: ["400"],
 });
 
-export default function HeadSection({ titulo, subtitulo, center, color }) {
+export default function HeadSection({
+  titulo,
+  subtitulo,
+  center,
+  color,
+  fontStyle,
+}) {
   return (
     <div
       className={`wrapHeadSection flex flex-col ${center && "items-center"} `}
     >
-      <h2 className={`headSection ${playfair.className} ${color && color}`}>
+      <h2
+        className={`headSection ${playfair.className} ${
+          color && color
+        } ${fontStyle}`}
+      >
         {titulo}
       </h2>
       {subtitulo && <p>{subtitulo}</p>}
