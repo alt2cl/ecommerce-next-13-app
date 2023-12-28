@@ -22,7 +22,7 @@ export function middleware(request) {
     !pathname.startsWith("/_next") &&
     !pathname.startsWith("/api")
   ) {
-    url.pathname = `/pages/${pathname}`;
+    url.pathname = `/app/${pathname}`;
     return NextResponse.rewrite(url);
   }
 

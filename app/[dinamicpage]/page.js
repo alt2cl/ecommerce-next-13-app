@@ -4,13 +4,6 @@ import dayjs from "dayjs";
 import "dayjs/locale/es";
 import { fetchStrapiData } from "@/src/lib/api";
 
-// const getPost = (dinamicpage) => {
-//   return fetch(
-//     `${process.env.NEXT_PUBLIC_STRAPI_URL}/pages/?filters[slug]=${dinamicpage}&populate=cover`
-//     //   { next: { revalidate: 60 } }
-//   ).then((res) => res.json());
-// };
-
 export default async function PostPage({ params: { dinamicpage } }) {
   //console.log("el value de extra page", dinamicpage);
   //const data = await getPost(dinamicpage);
