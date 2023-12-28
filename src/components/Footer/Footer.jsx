@@ -39,63 +39,68 @@ export default async function Footer() {
 
                     {data?.data.map((item) => {
 
-                        return (
-                            <div className="w-full lg:w-1/4 px-5 pb-10">
-                                {item.attributes.logo.data?.attributes.url ? <Image
-                                    className=" max-w-sm mb-6"
-                                    src={item.attributes.logo.data?.attributes.url}
-                                    width={248}
-                                    height={56}
-                                    alt="Logo"
-                                /> : <HeadSection
-                                    titulo={item.attributes.title}
-                                    fontStyle={"uppercase text-white "}
-                                />}
+                        if (item.attributes.title != "top") {
+                            return (
+                                <div className="w-full lg:w-1/4 px-5 pb-10">
+                                    {item.attributes.logo.data?.attributes.url ? <Image
+                                        className=" max-w-sm mb-6"
+                                        src={item.attributes.logo.data?.attributes.url}
+                                        width={248}
+                                        height={56}
+                                        alt="Logo"
+                                    /> : <HeadSection
+                                        titulo={item.attributes.title}
+                                        fontStyle={"uppercase text-white "}
+                                    />}
 
-                                {item.attributes.description && <p className=" mt-4  leading-relaxed text-gray-300">
-                                    {
-                                        item.attributes.description
-                                    }
-                                </p>}
-
-                                {item.attributes.sociallinks &&
-                                    <ul className="mt-6 flex gap-6 md:gap-8 mb-7">
-                                        {item.attributes.sociallinks &&
-                                            <Suspense fallback={<p>Cargando social links...</p>} className="text-white">
-                                                <SocialLinks data={item.attributes.sociallinks} />
-                                            </Suspense>
+                                    {item.attributes.description && <p className=" mt-4  leading-relaxed text-gray-300">
+                                        {
+                                            item.attributes.description
                                         }
-                                    </ul>
-                                }
+                                    </p>}
 
-
-
-                                {item.attributes.items && (
-                                    <nav className="flex flex-wrap ">
-                                        {item.attributes.items.map((itemMenu) => {
-                                            if (itemMenu.url && itemMenu.title) {
-                                                return (
-                                                    <div className="w-full mb-5" key={itemMenu.id}>
-                                                        <Link
-                                                            href={itemMenu.url}
-                                                            key={`menu-${itemMenu.id}`}
-                                                            className=" text-gray-300 transition hover:text-white mb-5"
-                                                        >
-                                                            <span className="text-yellow-300 pr-3">
-                                                                +
-                                                            </span>
-                                                            {itemMenu.title}
-                                                        </Link>
-                                                    </div>
-                                                );
-
+                                    {item.attributes.sociallinks &&
+                                        <ul className="mt-6 flex gap-6 md:gap-8 mb-7">
+                                            {item.attributes.sociallinks &&
+                                                <Suspense fallback={<p>Cargando social links...</p>} className="text-white">
+                                                    <SocialLinks data={item.attributes.sociallinks} />
+                                                </Suspense>
                                             }
+                                        </ul>
+                                    }
 
-                                        })}
-                                    </nav>
-                                )}
-                            </div>
-                        )
+
+
+                                    {item.attributes.items && (
+                                        <nav className="flex flex-wrap ">
+                                            {item.attributes.items.map((itemMenu) => {
+                                                if (itemMenu.url && itemMenu.title) {
+                                                    return (
+                                                        <div className="w-full mb-5" key={itemMenu.id}>
+                                                            <Link
+                                                                href={itemMenu.url}
+                                                                key={`menu-${itemMenu.id}`}
+                                                                className=" text-gray-300 transition hover:text-white mb-5"
+                                                            >
+                                                                <span className="text-yellow-300 pr-3">
+                                                                    +
+                                                                </span>
+                                                                {itemMenu.title}
+                                                            </Link>
+                                                        </div>
+                                                    );
+
+                                                }
+
+                                            })}
+                                        </nav>
+                                    )}
+                                </div>
+                            )
+
+                        }
+
+
 
                     })}
 
