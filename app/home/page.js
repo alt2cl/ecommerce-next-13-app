@@ -1,92 +1,52 @@
 //"use client";
 
 import { Suspense, lazy } from "react";
-import Slider from "@/components/Slider/Slider";
+import Slider from "@/src/components/Slider/Slider";
 //import ProductList from "@/components/ProductList/productList";
-import HeadSection from "@/components/HeadSection/HeadSection";
-import AttributesCard from "@/components/AtributtesCard/AttributesCard";
-const ContactForm = lazy(() => import("@/components/ContactForm/ContactForm"));
-const ProductList = lazy(() => import("@/components/ProductList/productList"));
-//import ContactForm from "@/components/ContactForm/ContactForm";
-//import useFetch from "./api/strapi/useFetch";
-//import SsrCarousel from "@/components/SsrCarousel/SsrCarousel";
-//importar componente metadata de nextjs
+import HeadSection from "@/src/components/HeadSection/HeadSection";
+import AttributesCard from "@/src/components/AtributtesCard/AttributesCard";
+import { fetchStrapiData } from "@/src/lib/api";
 
-async function getDataSlider() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/sliders?populate=cover&sort=rank:asc`
-      //,{ next: { revalidate: 600 } }
-    );
-    if (!res.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return res.json();
-  } catch (error) {
-    console.error(error);
-    return {
-      props: {
-        error: "Error fetching data",
-      },
-    };
-  }
-}
-
-async function getListCategories() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-categories/?sort=rank:asc`
-    //,{ next: { revalidate: 600 } }
-  );
-  return res.json();
-}
-
-async function getListProducts(slug) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*&filters[featured_categories][slug][$contains]=${slug}`
-    //,{ next: { revalidate: 300 } }
-  );
-  return res.json();
-}
-
-async function getListAttributes() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-attributes/?populate=atribute&populate=atribute.cover&sort=rank:asc`
-    //,{ next: { revalidate: 300 } }
-  );
-  return res.json();
-}
+const ProductList = lazy(() =>
+  import("@/src/components/ProductList/productList")
+);
 
 export default async function Home() {
-  const { data: dSlider } = await getDataSlider();
-  const { data: dCategories } = await getListCategories();
-  //const { data: dAttributes } = await getListAttributes();
+  //const { data: dSlider } = await getDataSlider();
+  const { data: dSlider } = await fetchStrapiData(
+    `sliders?populate=cover&sort=rank:asc`
+  );
 
-  const [dataSlider, dataCategories] = await Promise.all([
-    dSlider,
-    dCategories,
-    // dAttributes,
-  ]);
+  const { data: dCategories } = await fetchStrapiData(
+    `featured-categories/?sort=rank:asc`
+  );
 
+  //en esta funcion el prop "slug" es un resultado de un map desde un fetch anterior
   async function getProductListCard(slug) {
-    const { data } = await getListProducts(slug);
-
+    // const { data } = await getListProducts(slug);
+    const { data } = await fetchStrapiData(
+      `products?populate=*&filters[featured_categories][slug][$contains]=${slug}`
+    );
     return <ProductList shortPost promise={data} />;
   }
 
   async function getAttrList(pos) {
-    const { data } = await getListAttributes();
-    if (data && data[pos]) {
-      return <AttributesCard data={data[pos]} />;
-    } else {
-      return null;
+    const { data, error, loading } = await fetchStrapiData(
+      "featured-attributes/?populate=atribute&populate=atribute.cover&sort=rank:asc"
+    );
+
+    if (data?.data[pos]) {
+      return <AttributesCard data={data.data[pos]} />;
+    }
+
+    if (error) {
+      console.log("error fetch getAttrList: "), error;
     }
   }
 
   return (
     <main>
-      {/* <SsrCarousel promise={dataSlider} /> */}
-
-      <Slider promise={dataSlider} />
+      {dSlider && <Slider promise={dSlider} />}
 
       <div className="container px-4 pt-9">
         <div className="grid lg:grid-cols-12 lg:gap-12">
@@ -97,7 +57,7 @@ export default async function Home() {
               </Suspense>
             </section>
 
-            {dataCategories.map((categoria) => {
+            {dCategories.data.map((categoria) => {
               return (
                 <section key={`section-${categoria.id}`} className="mb-8">
                   <HeadSection
@@ -137,11 +97,6 @@ export default async function Home() {
                 </Suspense>
               </section>
             ) : null}
-            {/* <section>
-              <Suspense fallback={<p>Cargando contacto</p>}>
-                <ContactForm sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY} />
-              </Suspense>
-            </section> */}
           </main>
         </div>
       </div>

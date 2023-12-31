@@ -1,29 +1,24 @@
 //import PostsList from "../postsList";
 import Image from "next/image";
-import markdownToHtml from "@/app/utils/markdownToHtml";
+import markdownToHtml from "@/src/utils/markdownToHtml";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
-import ThumbList from "@/components/ThumbList/ThumbList";
-
-const getPost = (id) => {
-  return fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/posts/?filters[slug]=${id}&populate=cover`,
-    { next: { revalidate: 60 } }
-  ).then((res) => res.json());
-};
-
-async function getDataSidebar() {
-  let res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/featured-sidebars/?populate=products.category_products&populate=products.cover`
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
+import ThumbList from "@/src/components/ThumbList/ThumbList";
+import { fetchStrapiData } from "@/src/lib/api";
 
 export default async function PostPage({ params: { id } }) {
-  const post = await getPost(id);
+  //const post = await getPost(id);
+
+  const { data: post } = await fetchStrapiData(
+    `posts/?filters[slug]=${id}&populate=cover`
+  );
+
+  const { data: datasidebar } = await fetchStrapiData(
+    `featured-sidebars/?populate=products.category_products&populate=products.cover`
+  );
+
+  //return false;
+
   const {
     title: titulo,
     subtitle,
@@ -33,7 +28,7 @@ export default async function PostPage({ params: { id } }) {
     publishedAt,
   } = post.data[0].attributes;
 
-  const { data: datasidebar } = await getDataSidebar();
+  // const { data: datasidebar } = await getDataSidebar();
 
   const richtext = await markdownToHtml(contenido);
   const formattedDate = dayjs(publishedAt)
@@ -79,11 +74,12 @@ export default async function PostPage({ params: { id } }) {
           </article>
         </main>
         <aside className=" block col-span-12 lg:col-span-4">
-          {datasidebar?.map((item) => {
+          {datasidebar?.data.map((item) => {
             return (
               <ThumbList
                 headtext={item.attributes.title}
                 promise={item.attributes.products.data}
+                key={item.id}
               />
             );
           })}

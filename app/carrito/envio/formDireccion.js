@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
-import { handlePost } from "./../../api/strapi/api";
-import useUpdate from "../../api/strapi/useUpdate";
+import { handlePost } from "@/app/api/strapi/api";
+import useUpdate from "@/app/api/strapi/useUpdate";
 
-import { Map } from "./../../utils/map";
+import { Map } from "@/src/utils/map";
 
 function formDireccion({ dataUser, inputMailUser }) {
   const {
@@ -36,8 +36,6 @@ function formDireccion({ dataUser, inputMailUser }) {
 
   const handleSubmitDireccion = (e) => {
     e.preventDefault();
-
-    console.log("success:", success, direccion);
 
     handlePost(direccion, "direccions");
   };

@@ -1,21 +1,16 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import markdownToHtml from "@/app/utils/markdownToHtml";
-
-async function fetchNosotros() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/companies?populate=contentblock.cover&sort=rank:asc`
-    // { next: { revalidate: 300 } }
-  );
-  return res.json();
-}
+import markdownToHtml from "@/src/utils/markdownToHtml";
+import { fetchStrapiData } from "@/src/lib/api";
 
 export default async function NosotrosPage() {
-  const { data } = await fetchNosotros();
+  const { data } = await fetchStrapiData(
+    "companies?populate=contentblock.cover&sort=rank:asc"
+  );
 
   const secciones = await Promise.all(
-    data.map((content, i) => {
+    data.data.map((content, i) => {
       let bgcolor = content.attributes.background;
       return (
         <section
@@ -42,8 +37,8 @@ export default async function NosotrosPage() {
                 className="grid grid-cols-1 lg:grid-cols-5 gap-10"
                 key={"block" + i}
               >
-                <div className="col-span-2">
-                  {item.cover?.data && (
+                {item.cover.data && (
+                  <div className="col-span-2">
                     <Image
                       src={
                         item.cover?.data.attributes.formats?.medium
@@ -55,9 +50,9 @@ export default async function NosotrosPage() {
                       alt={item.title}
                       className="rounded"
                     ></Image>
-                  )}
-                </div>
-                <div className="col-span-3">
+                  </div>
+                )}
+                <div className={item.cover?.data ? "col-span-3" : "col-span-5"}>
                   <h2 className="font-semibold text-slate-900 mb-2 text-2xl">
                     {item.title}
                   </h2>
@@ -68,9 +63,11 @@ export default async function NosotrosPage() {
                     className=" mb-7"
                     dangerouslySetInnerHTML={{ __html: richtext }}
                   ></div>
-                  <Link className="btn" href={`/${item.url}`}>
-                    {item.titlebutton}
-                  </Link>
+                  {item.titlebutton && (
+                    <Link className="btn" href={`/${item.url}`}>
+                      {item.titlebutton}
+                    </Link>
+                  )}
                 </div>
               </div>
             );
@@ -83,7 +80,11 @@ export default async function NosotrosPage() {
   return (
     <div className="container px-4 pt-9">
       <main className="mb-8">
-        <Suspense fallback={<p>Cargando atributos...</p>}>{secciones}</Suspense>
+        {data.data && (
+          <Suspense fallback={<p>Cargando atributos...</p>}>
+            {secciones}
+          </Suspense>
+        )}
       </main>
     </div>
   );

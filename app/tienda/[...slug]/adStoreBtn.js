@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useCarritoContext } from "@/context/CarritoContext";
+import { useCarritoContext } from "@/src/context/CarritoContext";
 
 function AdStoreBtn({ product, imagen, nombre, precio }) {
   const { agregarCarrito, setCounterProduct, counterProduct } =

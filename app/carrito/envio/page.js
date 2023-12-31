@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useCarritoContext } from "@/context/CarritoContext";
+import { useCarritoContext } from "@/src/context/CarritoContext";
 import ContainerDiv from "./presentational/containerDiv";
 import Card from "./presentational/card";
 
@@ -45,10 +45,6 @@ export default function Envio(props) {
   // );
 
   //const { handlePost } = useFetch(`/clientes`);
-
-  useEffect(() => {
-    console.log("useEFFECT::::::::::", dataUser);
-  });
 
   // const fetchData = fetchDataFromApi(`/clientes?populate=direccions&filters[mail][$eq]=${inputMailUser}`)
 
@@ -116,7 +112,6 @@ export default function Envio(props) {
       };
       post(reqBody, "/clientes");
     } else {
-      console.log("data lenght !=0", data.data);
       setShowFormDatos(true);
     }
     //setShowBtnAddAddress(false);

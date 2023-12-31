@@ -1,4 +1,4 @@
-import HeadSection from "@/components/HeadSection/HeadSection";
+import HeadSection from "@/src/components/HeadSection/HeadSection";
 import Link from "next/link";
 
 function AttributesCard({ data }) {
