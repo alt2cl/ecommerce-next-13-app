@@ -10,21 +10,9 @@ import { fetchStrapiData } from "@/src/lib/api";
 // }
 
 export default async function SocialLinks({ data }) {
-  //const rrsslinks = await fetchData();
-
-  // const { data: rrsslinks } = await fetchStrapiData(
-  //   `menus/?populate=sociallinks`
-  // );
-
-  //console.log("////////////////////////rrsslinks ", rrsslinks);
-
   if (!data) {
     return false;
   }
-
-  //const data = rrsslinks.data[0].attributes.sociallinks;
-
-  //return false;
 
   let arraylinks = [];
 

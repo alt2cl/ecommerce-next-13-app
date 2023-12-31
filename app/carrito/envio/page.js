@@ -46,10 +46,6 @@ export default function Envio(props) {
 
   //const { handlePost } = useFetch(`/clientes`);
 
-  useEffect(() => {
-    console.log("useEFFECT::::::::::", dataUser);
-  });
-
   // const fetchData = fetchDataFromApi(`/clientes?populate=direccions&filters[mail][$eq]=${inputMailUser}`)
 
   // const validateDateUser = (data, inputMailUser) => {
@@ -116,7 +112,6 @@ export default function Envio(props) {
       };
       post(reqBody, "/clientes");
     } else {
-      console.log("data lenght !=0", data.data);
       setShowFormDatos(true);
     }
     //setShowBtnAddAddress(false);

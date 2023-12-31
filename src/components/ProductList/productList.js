@@ -11,10 +11,6 @@ import SplitNumber from "@/src/components/SplitNumber/SplitNumber";
 export default function ProductList({ shortPost, promise }) {
   const { data } = promise;
 
-  console.log("data product list:", data);
-
-  //return false;
-
   return (
     <>
       {data?.map((post) => {

@@ -37,8 +37,6 @@ function formDireccion({ dataUser, inputMailUser }) {
   const handleSubmitDireccion = (e) => {
     e.preventDefault();
 
-    console.log("success:", success, direccion);
-
     handlePost(direccion, "direccions");
   };
 

@@ -19,16 +19,6 @@ export default async function Footer() {
 
 
 
-
-    console.log('data.data : ', data.data);
-
-    // const dataContacto = data.data.find(item => item.attributes.title === 'contacto') || null
-    // const dataNosotros = data.data.find(item => item.attributes.title === 'nosotros') || null
-
-
-
-
-
     return (
         <footer className="bg-gray-100" style={{
             backgroundColor: '#222',

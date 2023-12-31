@@ -1,31 +1,17 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import CarritoBtn from "../CarritoBtn";
-import SocialLinks from "@/src/components/SocialLinks/SocialLinks";
-import { useTheme } from "@/src/context/ThemeContext";
+import CarritoBtn from "@/src/components/Header/CarritoBtn";
+
 import Menu from "@/src/components/Header/Menu";
 import BurgerBtn from "@/src/components/Header/BurgerBtn";
 import Image from "next/image";
+import SocialLinks from "@/src/components/SocialLinks/SocialLinks";
 
 import logo from "@/public/img/cafemas.png";
+import { fetchStrapiData } from "@/src/lib/api";
 
 export default async function Header(props) {
-  // const [data, setData] = useState(null);
-  // const [dataConfig, setDataConfig] = useState(null);
-  // const [isLoading, setLoading] = useState(false);
-  // const [open, setOpen] = useState(false);
-  const open = false;
-  const closed = true;
-
-  //const values = useTheme();
-
-  //const datamenu = data ? data.data[0].attributes.items : null;
-
-  // const logo = values.dataTheme?.data.attributes.logosite?.data?.attributes.url;
-  // const logowidth =
-  //   values.dataTheme?.data.attributes.logosite?.data?.attributes.width;
-  // const logoheight =
-  //   values.dataTheme?.data.attributes.logosite?.data?.attributes.height;
+  const { data } = await fetchStrapiData(`menus/?populate=sociallinks`);
 
   return (
     <>
@@ -39,56 +25,23 @@ export default async function Header(props) {
       >
         <div className="container cont mx-auto lg:py-1 lg:flex items-center">
           <div className="flex flex-row justify-between w-full">
-            <Link href="/" className="pl-4 grid content-center lg:pt-3">
+            <Link href="/" className="pl-4 grid content-center lg:pt-0">
               <Image src={logo} width={170} height={70} alt={"Cafe Más"} />
             </Link>
             <div className="menues flex flex-row justify-center p-3 gap-4 ">
-              <div
-                className={`
-                ${
-                  open
-                    ? "right-0 open bg-zinc-900 lg:bg-inherit"
-                    : "-right-full"
-                } 
-                lg:right-0 transition-all menu  z-30 top-0  fixed max-w-xs min-h-screen lg:max-w-none lg:static lg:min-h-0`}
-              >
-                <div className="clsedbtn absolute top-4 right-4 block lg:hidden">
-                  <button
-                    className="closed text-white font-semibold py-1"
-                    // onClick={() => closed()}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="white"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                {open && (
-                  <div>
-                    <ul className="mt-7 mb-10 pl-7 flex gap-6 md:gap-8">
-                      <Suspense className="text-white">
-                        <SocialLinks />
-                      </Suspense>
-                    </ul>
-                  </div>
-                )}
-
-                <Menu closedMenu={closed} />
+              <div className="hidden lg:flex">
+                <Menu />
               </div>
-              {/* <CarritoBtn /> */}
+              <CarritoBtn />
 
-              {/* <BurgerBtn handleClose={() => setOpen(true)} /> */}
+              <div className="relative">
+                <BurgerBtn
+                  menu={<Menu />}
+                  dataSocial={
+                    <SocialLinks data={data.data[0].attributes.sociallinks} />
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>

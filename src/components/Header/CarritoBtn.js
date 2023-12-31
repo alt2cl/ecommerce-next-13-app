@@ -1,3 +1,5 @@
+"use client";
+
 import { useCarritoContext } from "@/src/context/CarritoContext";
 import Link from "next/link";
 import Image from "next/image";

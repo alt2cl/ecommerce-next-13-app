@@ -5,18 +5,9 @@ import "dayjs/locale/es";
 import { fetchStrapiData } from "@/src/lib/api";
 
 export default async function PostPage({ params: { dinamicpage } }) {
-  //console.log("el value de extra page", dinamicpage);
-  //const data = await getPost(dinamicpage);
-
   const { data } = await fetchStrapiData(
     `pages/?filters[slug]=${dinamicpage}&populate=cover`
   );
-
-  console.log("////////////////////dinamicpage ", data);
-
-  // if (!data) {
-  //   return <h3>Sin datos</h3>;
-  // }
 
   const post = data?.data.length > 0 ? data?.data[0].attributes : null;
 
@@ -35,8 +26,6 @@ export default async function PostPage({ params: { dinamicpage } }) {
     const formattedDate = dayjs(publishedAt)
       .locale("es")
       .format("D [de] MMMM YYYY");
-
-    console.log("la imagen:", imagen);
 
     return (
       <div className="container px-4 pt-12 pb-20">

@@ -24,8 +24,6 @@ export default async function Menu({ closedMenu }) {
   //   `${process.env.NEXT_PUBLIC_STRAPI_URL}/menus?filters[title][$eq]=top&populate=*`
   // );
 
-  console.log("datamenuesss: ", datamenutop.data[0].attributes.items);
-
   const arraymenues = datamenutop.data[0].attributes.items;
 
   // useEffect(() => {

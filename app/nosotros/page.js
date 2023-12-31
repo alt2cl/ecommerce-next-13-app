@@ -9,8 +9,6 @@ export default async function NosotrosPage() {
     "companies?populate=contentblock.cover&sort=rank:asc"
   );
 
-  console.log("data", data);
-
   const secciones = await Promise.all(
     data.data.map((content, i) => {
       let bgcolor = content.attributes.background;
@@ -34,7 +32,6 @@ export default async function NosotrosPage() {
 
           {content.attributes.contentblock.map(async (item, i) => {
             const richtext = await markdownToHtml(item.content);
-            console.log("la imagen:", item.cover.data?.attributes);
             return await (
               <div
                 className="grid grid-cols-1 lg:grid-cols-5 gap-10"
