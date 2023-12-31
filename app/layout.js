@@ -4,6 +4,7 @@ import Head from "next/head";
 import Header from "@/src/components/Header/Header";
 import Footer from "@/src/components/Footer/Footer";
 import { Barlow } from "next/font/google";
+import Script from "next/script";
 import "./globals.scss";
 
 import { openGraphData } from "@/src/utils/shared-metadata";
@@ -35,6 +36,23 @@ export default function RootLayout({ children }) {
       <Head>
         <title>Café +</title>
       </Head>
+      {/* Script de Google Tag Manager */}
+      {/* <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-R0DE61DHD4"
+        strategy="afterInteractive" // Cargar después de que la página se haya vuelto interactiva
+        async
+      />
+      <Script
+        id="google-analytics" // Un ID para identificar el script
+        strategy="afterInteractive"
+      >
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-R0DE61DHD4');
+        `}
+      </Script> */}
       <body className=" bg-slate-100">
         <ThemeProvider>
           <CarritoProvider>
