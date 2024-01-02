@@ -46,6 +46,8 @@ export default function ProductList({ promise, headtext }) {
                       fill().width(350).height(350).gravity(autoGravity())
                     )}
                   alt={titulo}
+                  width={350}
+                  height={350}
                   className={"rounded-md"}
                 />
               ) : (

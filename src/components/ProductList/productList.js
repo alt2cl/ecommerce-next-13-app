@@ -42,6 +42,8 @@ export default function ProductList({ shortPost, promise }) {
                         fill().width(400).height(400).gravity(autoGravity())
                       )}
                     className={"rounded-md"}
+                    width={400}
+                    height={400}
                     alt={titulo}
                   />
                 </>
