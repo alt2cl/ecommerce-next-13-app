@@ -42,6 +42,7 @@ export default async function PostsList({ shortPost, promise }) {
                     alt={`imagen de articulo ${titulo}`}
                     width={600}
                     height={400}
+                    loading="lazy"
                     className="mb-3 rounded"
                   ></Image>
                 </Link>

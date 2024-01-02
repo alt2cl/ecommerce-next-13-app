@@ -40,6 +40,7 @@ export default async function Footer() {
                                         )}
                                         width={248}
                                         height={56}
+                                        loading="lazy"
                                         alt="Logo"
                                     /> : <HeadSection
                                         titulo={item.attributes.title}

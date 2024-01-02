@@ -32,6 +32,7 @@ function Carousel({ arrayImage, passId, widthImg, heightImg }) {
         alt="img"
         width={400}
         height={400}
+        loading="lazy"
         className={"rounded-xl"}
       />
     </div>
