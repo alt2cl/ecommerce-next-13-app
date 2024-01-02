@@ -15,6 +15,8 @@ export default function CarritoPage(props) {
   const [total, setTotal] = useState(0);
   const [cantProductos, setCantProductos] = useState(0);
 
+  console.log("carrito context", carrito);
+
   const preferenceObject = {
     title: "Producto de prueba",
     category: "categoria del producto",

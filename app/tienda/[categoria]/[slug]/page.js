@@ -1,10 +1,18 @@
 import AdStoreBtn from "./adStoreBtn";
+import AdWhatsAppBtn from "./adWhatsAppBtn";
 import markdownToHtml from "@/src/utils/markdownToHtml";
+import ThumbList from "@/src/components/ThumbList/ThumbList";
+
 import Carousel from "@/src/components/Carousel";
 import { fetchStrapiData } from "@/src/lib/api";
 
 export async function generateMetadata({ params: { slug } }) {
-  const id = slug.slice(-1);
+  const id = slug;
+
+  console.log("slug", slug);
+
+  return false;
+
   //const product = await getPost(id);
   const { data: product } = await fetchStrapiData(
     `products?filters[slug]=${id}&populate=*`
@@ -22,8 +30,6 @@ export async function generateMetadata({ params: { slug } }) {
     "upload/",
     "upload/c_fill,h_800,w_600/"
   );
-
-  console.log("la imagen open grapgh", cutImagen);
 
   return {
     title: titulo,
@@ -44,12 +50,18 @@ export async function generateMetadata({ params: { slug } }) {
 }
 
 export default async function ProductoPage({ params: { slug } }) {
-  const id = slug.slice(-1);
+  const id = slug;
+
+  //const categoria = slug.slice(0, 1)[0];
 
   //const product = await getPost(id);
 
   const { data: product } = await fetchStrapiData(
     `products?filters[slug]=${id}&populate=*`
+  );
+
+  const { data: datasidebar } = await fetchStrapiData(
+    `products?populate=category_products&populate=cover&filters[category_products][slug][$contains]=cafe`
   );
 
   const {
@@ -92,18 +104,35 @@ export default async function ProductoPage({ params: { slug } }) {
                     ${precio}
                   </p>
 
-                  <AdStoreBtn
+                  <AdWhatsAppBtn
                     product={product}
                     imagen={imagen}
                     nombre={titulo}
                     descripcion={descripcion}
                     precio={precio}
                   />
+
+                  {/* <AdStoreBtn
+                    product={product}
+                    imagen={imagen}
+                    nombre={titulo}
+                    descripcion={descripcion}
+                    precio={precio}
+                  /> */}
                 </div>
               </div>
             </section>
           </main>
-          <aside className="  block col-span-12 lg:col-span-4">aside</aside>
+          <aside className="  block col-span-12 lg:col-span-4">
+            {datasidebar && (
+              <ThumbList
+                headtext={"Titulo"}
+                promise={datasidebar?.data}
+                hidedescription
+                itemtoshow={3}
+              />
+            )}
+          </aside>
         </div>
       </div>
     </>

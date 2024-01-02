@@ -1,19 +1,19 @@
-"use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
-import { AdvancedImage } from "@cloudinary/react";
-import cl from "@/src/components/Cloudinary/cloudinaryConfig";
-import { fill } from "@cloudinary/url-gen/actions/resize";
-import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 import SplitNumber from "@/src/components/SplitNumber/SplitNumber";
+import { fetchStrapiData } from "@/src/lib/api";
 
-export default function ProductList({ shortPost, promise }) {
-  const { data } = promise;
+export default async function ProductList({ shortPost, filter, categoria }) {
+  const { data, isLoading } = await fetchStrapiData(
+    `products?populate=*&filters[${filter}][slug][$contains]=${categoria}`
+  );
 
+  //return false;
   return (
     <>
-      {data?.map((post) => {
+      {data.data.map((post) => {
         const item = post.attributes;
         const {
           title: titulo,
@@ -33,23 +33,23 @@ export default function ProductList({ shortPost, promise }) {
             className={"flex flex-col gap-3 mb-5 lg:mb-16"}
           >
             <div className="flex justify-center relative overflow-hidden">
-              {imagen.data ? (
-                <>
-                  <AdvancedImage
-                    cldImg={cl
-                      .image(imagen.data.attributes.hash)
-                      .resize(
-                        fill().width(400).height(400).gravity(autoGravity())
-                      )}
-                    className={"rounded-md"}
-                    width={400}
-                    height={400}
-                    alt={titulo}
+              {imagen.data?.attributes && (
+                <Link
+                  href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
+                  alt={"Ver producto:" + titulo}
+                >
+                  <Image
+                    src={imagen.data?.attributes.url.replace(
+                      "upload/",
+                      "upload/c_fill,h_500,w_600/"
+                    )}
+                    alt={`Imagen ${titulo}`}
+                    width={600}
+                    height={500}
                   />
-                </>
-              ) : (
-                "sin imagen"
+                </Link>
               )}
+
               {offer ? (
                 <div className="bg-red-500 absolute top-3 -right-10 rotate-45 text-white px-10">
                   Oferta
@@ -57,9 +57,14 @@ export default function ProductList({ shortPost, promise }) {
               ) : null}
             </div>
             <div className="flex flex-col col-span-4">
-              <h3 className="text-md mb-3 font-semibold text-slate-900">
-                {titulo}
-              </h3>
+              <Link
+                href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
+                alt={"Ver producto:" + titulo}
+              >
+                <h3 className="text-md mb-3 font-semibold text-slate-900">
+                  {titulo}
+                </h3>
+              </Link>
               <p
                 className={`${
                   shortPost ? "lineclamp-4 mb-5" : "mb-5"
@@ -86,7 +91,7 @@ export default function ProductList({ shortPost, promise }) {
                 </Link>
 
                 <Link
-                  href={`https://wa.me/+56974270756?text=Me interesa este producto: https://ecommerce-next-13-app-production.up.railway.app/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
+                  href={`https://wa.me/+56974270756?text=Me interesa este producto: https://cafemas.cl/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
                   className="rounded-md text-center p-2 bg-green-500 hover:bg-slate-900 text-white"
                   target="_blank"
                   alt={"Abrir en Wjatsapp:" + titulo}

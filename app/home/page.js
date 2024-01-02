@@ -21,15 +21,6 @@ export default async function Home() {
     `featured-categories/?sort=rank:asc`
   );
 
-  //en esta funcion el prop "slug" es un resultado de un map desde un fetch anterior
-  async function getProductListCard(slug) {
-    // const { data } = await getListProducts(slug);
-    const { data } = await fetchStrapiData(
-      `products?populate=*&filters[featured_categories][slug][$contains]=${slug}`
-    );
-    return <ProductList shortPost promise={data} />;
-  }
-
   async function getAttrList(pos) {
     const { data, error, loading } = await fetchStrapiData(
       "featured-attributes/?populate=atribute&populate=atribute.cover&sort=rank:asc"
@@ -67,7 +58,11 @@ export default async function Home() {
 
                   <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6">
                     <Suspense fallback={<p>Cargando productos...</p>}>
-                      {getProductListCard(categoria.attributes.slug)}
+                      <ProductList
+                        shortPost
+                        filter={"featured_categories"}
+                        categoria={categoria.attributes.slug}
+                      />
                     </Suspense>
                   </div>
                 </section>
