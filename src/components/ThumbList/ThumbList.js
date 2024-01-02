@@ -45,6 +45,7 @@ export default function ProductList({ promise, headtext }) {
                     .resize(
                       fill().width(350).height(350).gravity(autoGravity())
                     )}
+                  alt={titulo}
                   className={"rounded-md"}
                 />
               ) : (
