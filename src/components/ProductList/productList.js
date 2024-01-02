@@ -79,6 +79,7 @@ export default function ProductList({ shortPost, promise }) {
               <div className="flex justify-between">
                 <Link
                   href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
+                  alt={"Ver producto:" + titulo}
                   className="grow mr-3 rounded-md text-center p-2 bg-primary-500 hover:bg-zinc-900 text-white"
                 >
                   Ver +
@@ -88,6 +89,7 @@ export default function ProductList({ shortPost, promise }) {
                   href={`https://wa.me/+56974270756?text=Me interesa este producto: https://ecommerce-next-13-app-production.up.railway.app/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
                   className="rounded-md text-center p-2 bg-green-500 hover:bg-slate-900 text-white"
                   target="_blank"
+                  alt={"Abrir en Wjatsapp:" + titulo}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
