@@ -1,5 +1,6 @@
 import HeadSection from "@/src/components/HeadSection/HeadSection";
 import Link from "next/link";
+import Image from "next/image";
 
 function AttributesCard({ data }) {
   const cantCol = "lg:grid-" + String(data?.attributes.cols);
@@ -25,9 +26,15 @@ function AttributesCard({ data }) {
               key={`att-${item.id}`}
             >
               {item.cover && item.cover.data && item.cover.data.attributes && (
-                <img
+                <Image
                   className="-mt-20 max-w-[50%]"
-                  src={item.cover.data.attributes.url}
+                  src={item.cover.data.attributes.url.replace(
+                    "upload/",
+                    "upload/c_fill,h_400,w_400/"
+                  )}
+                  width={400}
+                  height={400}
+                  loading="lazy"
                   alt={item.title}
                 />
               )}
@@ -35,14 +42,15 @@ function AttributesCard({ data }) {
               <h3 className="uppercase font-semibold text-xl text-center">
                 {item.title}
               </h3>
-              <h5 className="text-lg text-center">{item.subtitle}</h5>
+              <h4 className="text-lg text-center">{item.subtitle}</h4>
               <p className="text-gray-600 text-center mb-3">
                 {item.description}
               </p>
               {item.url && item.titlebutton && (
                 <Link
                   href={item.url}
-                  className="rounded-md text-center px-4 py-2 font-medium bg-primary-500 hover:bg-slate-900 text-white"
+                  alt={item.title}
+                  className="rounded-md text-center px-4 py-2 font-medium bg-primary-600 hover:bg-slate-900 text-white"
                 >
                   {item.titlebutton}
                 </Link>

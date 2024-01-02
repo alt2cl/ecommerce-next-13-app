@@ -83,7 +83,10 @@ export default function Slider({ promise }) {
             <div className="each-slide-effect" key={`slide-${slide.id}`}>
               <div
                 style={{
-                  backgroundImage: `url(${cover.data?.attributes?.formats.medium.url})`,
+                  backgroundImage: `url(${cover.data?.attributes?.url.replace(
+                    "upload/",
+                    "upload/c_fill,h_600,w_1200/"
+                  )})`,
                 }}
               >
                 <div
@@ -131,7 +134,7 @@ export default function Slider({ promise }) {
                         </Link>
                         {url && (
                           <Link
-                            className="rounded-md text-center font-medium px-4 py-2 bg-primary-500 hover:bg-zinc-800 text-white"
+                            className="rounded-md text-center font-medium px-4 py-2 bg-primary-600 hover:bg-zinc-800 text-white"
                             href={url}
                           >
                             {titlebutton}

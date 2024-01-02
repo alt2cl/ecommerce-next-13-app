@@ -34,9 +34,13 @@ export default async function Footer() {
                                 <div className="w-full lg:w-1/4 px-5 pb-10">
                                     {item.attributes.logo.data?.attributes.url ? <Image
                                         className=" max-w-sm mb-6"
-                                        src={item.attributes.logo.data?.attributes.url}
+                                        src={item.attributes.logo.data?.attributes.url.replace(
+                                            "upload/",
+                                            "upload/c_fill,h_112,w_496/"
+                                        )}
                                         width={248}
                                         height={56}
+                                        loading="lazy"
                                         alt="Logo"
                                     /> : <HeadSection
                                         titulo={item.attributes.title}

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 //import PostsList from "../postsList";
 import Image from "next/image";
 import markdownToHtml from "@/src/utils/markdownToHtml";
@@ -39,39 +40,40 @@ export default async function PostPage({ params: { id } }) {
     <div className="container px-4 pt-12">
       <div className="grid lg:grid-cols-12 lg:gap-12">
         <main className="col-span-12 lg:col-span-8 mb-8">
-          <article>
-            <h2 className="title text-4xl text-slate-900 font-semibold mb-5">
-              {titulo}
-            </h2>
-            {subtitle && <h3 className="text-3xl mb-5">{subtitle}</h3>}
+          <Suspense fallback={<p>Cargando artículo...</p>}>
+            <article>
+              <h2 className="title text-4xl text-slate-900 font-semibold mb-5">
+                {titulo}
+              </h2>
+              {subtitle && <h3 className="text-3xl mb-5">{subtitle}</h3>}
 
-            {description && <h4 className="text-1xl mb-5">{description}</h4>}
+              {description && <h4 className="text-1xl mb-5">{description}</h4>}
 
-            <p className="text-xs text-slate-400 mb-4">{formattedDate}</p>
+              <p className="text-xs text-slate-400 mb-4">{formattedDate}</p>
 
-            {imagen.data && (
-              <Image
-                src={
-                  imagen.data.attributes.formats.medium.url
-                    ? imagen.data.attributes.formats.medium.url
-                    : imagen.data.attributes.url
-                }
-                alt={`Imagen ${titulo}`}
-                width={1200}
-                height={450}
-                className="mb-3 rounded"
-              />
-            )}
-
-            <div className="text-slate-700 text-md">
-              {richtext && (
-                <div
-                  className="prose prose-slate"
-                  dangerouslySetInnerHTML={{ __html: richtext }}
-                ></div>
+              {imagen.data && (
+                <Image
+                  src={imagen.data.attributes.url.replace(
+                    "upload/",
+                    "upload/c_fill,h_500,w_1000/"
+                  )}
+                  alt={`Imagen ${titulo}`}
+                  width={1000}
+                  height={500}
+                  className="mb-3 rounded"
+                />
               )}
-            </div>
-          </article>
+
+              <div className="text-slate-700 text-md">
+                {richtext && (
+                  <div
+                    className="prose prose-slate"
+                    dangerouslySetInnerHTML={{ __html: richtext }}
+                  ></div>
+                )}
+              </div>
+            </article>
+          </Suspense>
         </main>
         <aside className=" block col-span-12 lg:col-span-4">
           {datasidebar?.data.map((item) => {

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-function Carousel({ arrayImage, passId }) {
+function Carousel({ arrayImage, passId, widthImg, heightImg }) {
   let widthCarousel = 1500;
 
   const idCarousel = "carousel-product";
@@ -25,10 +25,14 @@ function Carousel({ arrayImage, passId }) {
       key={img.attributes.url}
     >
       <Image
-        src={img.attributes.url}
+        src={img.attributes.url.replace(
+          "upload/",
+          "upload/c_fill,h_400,w_400/"
+        )}
         alt="img"
-        width={img.attributes.width}
-        height={img.attributes.height}
+        width={400}
+        height={400}
+        loading="lazy"
         className={"rounded-xl"}
       />
     </div>
