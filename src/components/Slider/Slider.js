@@ -134,7 +134,7 @@ export default function Slider({ promise }) {
                         </Link>
                         {url && (
                           <Link
-                            className="rounded-md text-center font-medium px-4 py-2 bg-primary-500 hover:bg-zinc-800 text-white"
+                            className="rounded-md text-center font-medium px-4 py-2 bg-primary-600 hover:bg-zinc-800 text-white"
                             href={url}
                           >
                             {titlebutton}

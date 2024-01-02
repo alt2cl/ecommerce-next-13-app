@@ -42,7 +42,7 @@ function AttributesCard({ data }) {
               <h3 className="uppercase font-semibold text-xl text-center">
                 {item.title}
               </h3>
-              <h5 className="text-lg text-center">{item.subtitle}</h5>
+              <h4 className="text-lg text-center">{item.subtitle}</h4>
               <p className="text-gray-600 text-center mb-3">
                 {item.description}
               </p>
@@ -50,7 +50,7 @@ function AttributesCard({ data }) {
                 <Link
                   href={item.url}
                   alt={item.title}
-                  className="rounded-md text-center px-4 py-2 font-medium bg-primary-500 hover:bg-slate-900 text-white"
+                  className="rounded-md text-center px-4 py-2 font-medium bg-primary-600 hover:bg-slate-900 text-white"
                 >
                   {item.titlebutton}
                 </Link>
