@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { fetchStrapiData } from "@/src/lib/api";
 
 // async function fetchData() {
 //   const res = await fetch(

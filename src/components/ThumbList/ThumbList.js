@@ -7,7 +7,13 @@ import cl from "@/src/components/Cloudinary/cloudinaryConfig";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
-export default function ProductList({ promise, headtext }) {
+export default function ProductList({
+  promise,
+  headtext,
+  hidedescription,
+  itemtoshow,
+  truncate,
+}) {
   const data = promise;
 
   //console.log("data awaite_:", data);
@@ -15,9 +21,9 @@ export default function ProductList({ promise, headtext }) {
   //return false;
 
   return (
-    <>
-      <HeadSection titulo={headtext} />
-      {data?.map((post) => {
+    <div className="mb-10">
+      <HeadSection titulo={headtext} icon />
+      {data.slice(0, itemtoshow).map((post) => {
         const item = post.attributes;
         const {
           title: titulo,
@@ -51,17 +57,6 @@ export default function ProductList({ promise, headtext }) {
                   className={"rounded-md"}
                 />
               ) : (
-                // <Image
-                //   src={
-                //     imagen.data.attributes.formats.small
-                //       ? imagen.data.attributes.formats.small.url
-                //       : imagen.data.attributes.url
-                //   }
-                //   alt={`imagen de ${titulo}`}
-                //   width={imagen.data.attributes.width}
-                //   height={imagen.data.attributes.height}
-                //   className={"rounded-xl"}
-                // ></Image>
                 "sin imagen"
               )}
             </div>
@@ -69,7 +64,15 @@ export default function ProductList({ promise, headtext }) {
               <h3 className="text-md mb-3 font-semibold text-slate-900">
                 {titulo}
               </h3>
-              <p className={` text-slate-500 text-sm `}>{descripcion}</p>
+              {!hidedescription && (
+                <p
+                  className={` text-slate-500 text-sm  ${
+                    truncate && "line-clamp-3"
+                  } `}
+                >
+                  {descripcion}
+                </p>
+              )}
               <p className="text-md text-slate-800 font-medium mb-6">
                 ${precio}
               </p>
@@ -77,6 +80,6 @@ export default function ProductList({ promise, headtext }) {
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 //import ProductList from "@/components/ProductList/productList";
+import HeadSection from "@/src/components/HeadSection/HeadSection";
 import PostsList from "@/src/components/PostList/postsList";
 import ThumbList from "@/src/components/ThumbList/ThumbList";
 import { fetchStrapiData } from "@/src/lib/api";
@@ -57,6 +58,7 @@ export default async function BlogPage() {
                 <ThumbList
                   headtext={item.attributes.title}
                   promise={item.attributes.products.data}
+                  truncate
                 />
               );
             })}
