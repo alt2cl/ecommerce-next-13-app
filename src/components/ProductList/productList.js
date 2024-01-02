@@ -39,7 +39,7 @@ export default function ProductList({ shortPost, promise }) {
                     cldImg={cl
                       .image(imagen.data.attributes.hash)
                       .resize(
-                        fill().width(300).height(300).gravity(autoGravity())
+                        fill().width(400).height(400).gravity(autoGravity())
                       )}
                     className={"rounded-md"}
                   />

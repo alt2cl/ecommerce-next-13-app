@@ -1,5 +1,6 @@
 import HeadSection from "@/src/components/HeadSection/HeadSection";
 import Link from "next/link";
+import Image from "next/image";
 
 function AttributesCard({ data }) {
   const cantCol = "lg:grid-" + String(data?.attributes.cols);
@@ -25,9 +26,14 @@ function AttributesCard({ data }) {
               key={`att-${item.id}`}
             >
               {item.cover && item.cover.data && item.cover.data.attributes && (
-                <img
+                <Image
                   className="-mt-20 max-w-[50%]"
-                  src={item.cover.data.attributes.url}
+                  src={item.cover.data.attributes.url.replace(
+                    "upload/",
+                    "upload/c_fill,h_400,w_400/"
+                  )}
+                  width={400}
+                  height={400}
                   alt={item.title}
                 />
               )}

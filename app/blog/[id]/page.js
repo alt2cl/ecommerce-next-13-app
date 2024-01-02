@@ -51,14 +51,13 @@ export default async function PostPage({ params: { id } }) {
 
             {imagen.data && (
               <Image
-                src={
-                  imagen.data.attributes.formats.medium.url
-                    ? imagen.data.attributes.formats.medium.url
-                    : imagen.data.attributes.url
-                }
+                src={imagen.data.attributes.url.replace(
+                  "upload/",
+                  "upload/c_fill,h_500,w_1000/"
+                )}
                 alt={`Imagen ${titulo}`}
-                width={1200}
-                height={450}
+                width={1000}
+                height={500}
                 className="mb-3 rounded"
               />
             )}

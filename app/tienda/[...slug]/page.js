@@ -18,7 +18,12 @@ export async function generateMetadata({ params: { slug } }) {
     gallery: galeria,
   } = product.data[0].attributes;
 
-  console.log("la imagen open grapgh", imagen);
+  const cutImagen = imagen?.data.attributes.url.replace(
+    "upload/",
+    "upload/c_fill,h_800,w_600/"
+  );
+
+  console.log("la imagen open grapgh", cutImagen);
 
   return {
     title: titulo,
@@ -28,9 +33,9 @@ export async function generateMetadata({ params: { slug } }) {
       description: descripcion,
       images: [
         {
-          url: imagen?.data.attributes.url,
-          width: imagen?.data.attributes.width,
-          height: imagen?.data.attributes.height,
+          url: cutImagen,
+          width: 800,
+          height: 600,
           alt: titulo,
         },
       ],
@@ -68,6 +73,8 @@ export default async function ProductoPage({ params: { slug } }) {
                   {galeria?.data && (
                     <Carousel
                       arrayImage={galeria.data}
+                      width={400}
+                      height={400}
                       passId={`carousel${id}`}
                     />
                   )}

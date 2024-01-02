@@ -83,7 +83,10 @@ export default function Slider({ promise }) {
             <div className="each-slide-effect" key={`slide-${slide.id}`}>
               <div
                 style={{
-                  backgroundImage: `url(${cover.data?.attributes?.formats.medium.url})`,
+                  backgroundImage: `url(${cover.data?.attributes?.url.replace(
+                    "upload/",
+                    "upload/c_fill,h_600,w_1200/"
+                  )})`,
                 }}
               >
                 <div

@@ -35,14 +35,13 @@ export default async function PostsList({ shortPost, promise }) {
               {imagen.data ? (
                 <Link href={`/blog/${link}`} className="rounded">
                   <Image
-                    src={
-                      imagen.data.attributes.formats != null
-                        ? imagen.data.attributes.formats.medium.url
-                        : imagen.data.attributes.url
-                    }
+                    src={imagen.data?.attributes?.url.replace(
+                      "upload/",
+                      "upload/c_fill,h_400,w_600/"
+                    )}
                     alt={`imagen de articulo ${titulo}`}
-                    width={imagen.data.attributes.width}
-                    height={imagen.data.attributes.height}
+                    width={600}
+                    height={400}
                     className="mb-3 rounded"
                   ></Image>
                 </Link>
