@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   background-size: cover;
-  height: 380px;
+  height: 400px;
   background-position: center;
   width: 100vw;
   background-color: rgb(27, 29, 29);
@@ -18,4 +18,12 @@
 
 .wrapSliderText {
   padding: 3rem;
+}
+
+.react-slideshow-container {
+  height: 400px;
+}
+
+.react-slideshow-fadezoom-wrapper {
+  height: 400px;
 }

@@ -1,7 +1,7 @@
 //"use client";
 
 import { Suspense, lazy } from "react";
-import Slider from "@/src/components/Slider/Slider";
+import Slider from "@/src/components/Slider/SliderImg";
 //import ProductList from "@/components/ProductList/productList";
 import HeadSection from "@/src/components/HeadSection/HeadSection";
 import AttributesCard from "@/src/components/AtributtesCard/AttributesCard";
@@ -37,7 +37,15 @@ export default async function Home() {
 
   return (
     <main>
-      {dSlider && <Slider promise={dSlider} />}
+      <Suspense
+        fallback={
+          <div style={{ height: 400, backgroundColor: "#333", width: "100%" }}>
+            Cargando slider...
+          </div>
+        }
+      >
+        <Slider data={dSlider} />
+      </Suspense>
 
       <div className="container px-4 pt-9">
         <div className="grid lg:grid-cols-12 lg:gap-12">
