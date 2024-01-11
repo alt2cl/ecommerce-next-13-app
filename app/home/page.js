@@ -7,6 +7,7 @@ import Destacado1 from "@/src/components/Destacado1/Destcado1";
 import HeadSection from "@/src/components/HeadSection/HeadSection";
 import AttributesCard from "@/src/components/AtributtesCard/AttributesCard";
 import { fetchStrapiData } from "@/src/lib/api";
+import BannerBlock from "@/src/components/BannerBlock/BannerBlock";
 
 const ProductList = lazy(() =>
   import("@/src/components/ProductList/productList")
@@ -89,6 +90,8 @@ export default async function Home() {
                 </Suspense>
               </section>
             ) : null}
+
+            <BannerBlock />
 
             {getAttrList(2) ? (
               <section className="mb-8">
