@@ -12,7 +12,7 @@ export default async function Destacado1() {
 
   const datafirst = data.data[0].attributes;
 
-  console.log("data primer slide", datafirst);
+  //  console.log("data primer slide", datafirst);
 
   return (
     <div className="container px-4 pt-9">
