@@ -1,11 +1,13 @@
 //"use client";
 
 import { Suspense, lazy } from "react";
-import Slider from "@/src/components/Slider/Slider";
+import Slider from "@/src/components/Slider/SliderImg";
+import Destacado1 from "@/src/components/Destacado1/Destcado1";
 //import ProductList from "@/components/ProductList/productList";
 import HeadSection from "@/src/components/HeadSection/HeadSection";
 import AttributesCard from "@/src/components/AtributtesCard/AttributesCard";
 import { fetchStrapiData } from "@/src/lib/api";
+import BannerBlock from "@/src/components/BannerBlock/BannerBlock";
 
 const ProductList = lazy(() =>
   import("@/src/components/ProductList/productList")
@@ -37,7 +39,19 @@ export default async function Home() {
 
   return (
     <main>
-      {dSlider && <Slider promise={dSlider} />}
+      <Suspense>
+        <Destacado1 />
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <div style={{ height: 400, backgroundColor: "#333", width: "100%" }}>
+            Cargando slider...
+          </div>
+        }
+      >
+        <Slider data={dSlider} />
+      </Suspense>
 
       <div className="container px-4 pt-9">
         <div className="grid lg:grid-cols-12 lg:gap-12">
@@ -76,6 +90,8 @@ export default async function Home() {
                 </Suspense>
               </section>
             ) : null}
+
+            <BannerBlock />
 
             {getAttrList(2) ? (
               <section className="mb-8">

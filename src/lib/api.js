@@ -6,8 +6,9 @@ export const fetchStrapiData = async (url) => {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${url}`
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${url}`,
       // ,{ cache: "no-store" }
+      { next: { revalidate: 600 } }
     );
 
     if (!response.ok) {
