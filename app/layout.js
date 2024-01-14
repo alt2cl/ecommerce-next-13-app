@@ -4,7 +4,7 @@ import Head from "next/head";
 import Header from "@/src/components/Header/Header";
 import Footer from "@/src/components/Footer/Footer";
 import { Barlow } from "next/font/google";
-import Script from "next/script";
+//import Script from "next/script";
 import "./globals.scss";
 
 import { openGraphData } from "@/src/utils/shared-metadata";
@@ -58,7 +58,6 @@ export default function RootLayout({ children }) {
           <CarritoProvider>
             <Header />
             {children}
-
             <Footer />
           </CarritoProvider>
         </ThemeProvider>

@@ -3,6 +3,7 @@ import markdownToHtml from "@/src/utils/markdownToHtml";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 import { fetchStrapiData } from "@/src/lib/api";
+import { notFound } from "next/navigation";
 
 export default async function PostPage({ params: { dinamicpage } }) {
   const { data } = await fetchStrapiData(
@@ -10,6 +11,10 @@ export default async function PostPage({ params: { dinamicpage } }) {
   );
 
   const post = data?.data.length > 0 ? data?.data[0].attributes : null;
+
+  if (!post) {
+    notFound();
+  }
 
   if (data && post) {
     const {
@@ -64,22 +69,6 @@ export default async function PostPage({ params: { dinamicpage } }) {
             </div>
           </main>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div
-        style={{
-          padding: "1rem",
-          textAlign: "center",
-          height: 600,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <h1>404 - Página No Encontrada</h1>
-        <p>Oops! La página que buscas no existe.</p>
       </div>
     );
   }
