@@ -40,7 +40,7 @@ export default async function Home() {
   return (
     <main>
       <Suspense>
-        <Destacado1 />
+        <Destacado1 position={0} />
       </Suspense>
 
       <Suspense
