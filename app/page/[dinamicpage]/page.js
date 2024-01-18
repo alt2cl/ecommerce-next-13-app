@@ -10,7 +10,7 @@ export default async function PostPage({ params: { dinamicpage } }) {
     `pages/?filters[slug]=${dinamicpage}&populate=cover`
   );
 
-  const post = data?.data.length > 0 ? data?.data[0].attributes : null;
+  const post = data?.data?.length > 0 ? data?.data[0].attributes : null;
 
   if (!post) {
     notFound();

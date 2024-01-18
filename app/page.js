@@ -1,6 +1,7 @@
 //"use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import imagen1 from "@/public/img/pronto/img1.png";
 import imagen2 from "@/public/img/pronto/img2.png";
@@ -25,6 +26,7 @@ export default async function Home() {
           </div>
           <div className="col-span-6 lg:col-span-7">
             <Image src={imagen2} />
+            <Link href={"/home"}>__</Link>
           </div>
         </div>
       </div>

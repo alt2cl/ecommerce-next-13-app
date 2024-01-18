@@ -12,7 +12,7 @@ export default async function Destacado1({ position = 0 }) {
 
   //const pos = position ? position : 0;
 
-  const datafirst = data.data[position]?.attributes;
+  const datafirst = data?.data[position]?.attributes;
 
   if (!datafirst) {
     return false;
