@@ -85,14 +85,14 @@ export default async function ProductList({ shortPost, filter, categoria }) {
                 <Link
                   href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
                   alt={"Ver producto:" + titulo}
-                  className="grow mr-3 rounded-md text-center p-2 bg-primary-600 hover:bg-zinc-900 text-white"
+                  className="grow mr-3 rounded-md text-center p-2 bg-gray hover:bg-primary-500 text-white hover:text-gray"
                 >
                   Ver +
                 </Link>
 
                 <Link
                   href={`https://wa.me/+56974270756?text=Me interesa este producto: https://cafemas.cl/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
-                  className="rounded-md text-center p-2 bg-green-500 hover:bg-slate-900 text-white"
+                  className="rounded-md text-center p-2 bg-green-500 hover:bg-gray text-white"
                   target="_blank"
                   alt={"Abrir en Wjatsapp:" + titulo}
                 >

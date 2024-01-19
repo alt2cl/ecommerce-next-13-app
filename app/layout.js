@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
           gtag('config', 'G-R0DE61DHD4');
         `}
       </Script> */}
-      <body className=" bg-slate-100">
+      <body className=" bg-gray-100">
         <ThemeProvider>
           <CarritoProvider>
             <Header />

@@ -38,7 +38,7 @@ function AdStoreBtn({ product, imagen, nombre, precio }) {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="formulario border-gray-100 p-4 mt-5 bg-slate-300 rounded"
+        className="formulario border-gray-100 p-4 mt-5 bg-gray-300 rounded"
       >
         <div className="grid grid-cols-2 gap-5 mb-5">
           <label htmlFor="cantidad">Cantidad</label>
