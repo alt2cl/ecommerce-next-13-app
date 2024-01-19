@@ -40,7 +40,7 @@ export default function ProductList({
             key={`product-${post.id}`}
             href={`/tienda/${categorias?.data[0]?.attributes.slug}/${url}`}
             className={
-              "max-w-xs rounded overflow-hidden shadow-lg m-4 flex gap-3 p-3 bg-white"
+              " rounded overflow-hidden shadow-lg m-4 flex gap-3 p-3 bg-white"
             }
           >
             <div className="w-1/3">
