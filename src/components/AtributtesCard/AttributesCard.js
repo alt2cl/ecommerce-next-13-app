@@ -50,7 +50,7 @@ function AttributesCard({ data }) {
                 <Link
                   href={item.url}
                   alt={item.title}
-                  className="rounded-md text-center px-4 py-2 font-medium bg-primary-600 hover:bg-gray-900 text-white"
+                  className="rounded-md text-center px-4 py-2 font-medium bg-gray hover:bg-primary text-white"
                 >
                   {item.titlebutton}
                 </Link>
