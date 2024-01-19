@@ -19,15 +19,15 @@ export default function HeadSection({
     <div
       className={`wrapHeadSection flex flex-col ${center && "items-center"} `}
     >
-      <div className="flex">
+      <div className="flex items-center">
         {icon && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
+            stroke-width="6"
+            stroke="#fbd508"
+            class="w-6 h-6 mr-2"
           >
             <path
               stroke-linecap="round"
