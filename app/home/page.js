@@ -2,7 +2,7 @@
 
 import { Suspense, lazy } from "react";
 import Slider from "@/src/components/Slider/SliderImg";
-import Destacado1 from "@/src/components/Destacado1/Destcado1";
+import Destacado1 from "@/src/components/Destacado1/Destacado1";
 //import ProductList from "@/components/ProductList/productList";
 import HeadSection from "@/src/components/HeadSection/HeadSection";
 import AttributesCard from "@/src/components/AtributtesCard/AttributesCard";
@@ -39,7 +39,7 @@ export default async function Home() {
 
   return (
     <main>
-      <Suspense>
+      <Suspense fallback={<p>Cargando...</p>}>
         <Destacado1 position={0} />
       </Suspense>
 

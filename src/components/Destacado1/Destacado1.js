@@ -6,7 +6,7 @@ import Link from "next/link";
 import { fetchStrapiData } from "@/src/lib/api";
 
 export default async function Destacado1({ position = 0 }) {
-  const { data } = await fetchStrapiData(
+  const { data, error, loading } = await fetchStrapiData(
     `featured-blocks?populate[cover][fields][0]=url&populate=Links&populate[2]=Links.cover&sort=rank:asc`
   );
 
@@ -14,7 +14,8 @@ export default async function Destacado1({ position = 0 }) {
 
   const datafirst = data?.data[position]?.attributes;
 
-  if (!datafirst) {
+  if (!data || error != null) {
+    console.log("la data destacado 1", error);
     return false;
   }
 
