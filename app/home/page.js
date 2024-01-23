@@ -8,6 +8,7 @@ import HeadSection from "@/src/components/HeadSection/HeadSection";
 import AttributesCard from "@/src/components/AtributtesCard/AttributesCard";
 import { fetchStrapiData } from "@/src/lib/api";
 import BannerBlock from "@/src/components/BannerBlock/BannerBlock";
+import BannerBlock2 from "@/src/components/BannerBlock/BannerBlock2";
 
 const ProductList = lazy(() =>
   import("@/src/components/ProductList/productList")
@@ -61,6 +62,9 @@ export default async function Home() {
                 {getAttrList(0)}
               </Suspense>
             </section>
+            <section className="mb-20">
+              <BannerBlock2 />
+            </section>
 
             {dCategories.data.map((categoria) => {
               return (
@@ -83,6 +87,10 @@ export default async function Home() {
               );
             })}
 
+            <section className="mb-20">
+              <BannerBlock />
+            </section>
+
             {getAttrList(1) ? (
               <section className="mb-8">
                 <Suspense fallback={<p>Cargando atributos...</p>}>
@@ -90,8 +98,6 @@ export default async function Home() {
                 </Suspense>
               </section>
             ) : null}
-
-            <BannerBlock />
 
             {getAttrList(2) ? (
               <section className="mb-8">
