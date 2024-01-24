@@ -12,7 +12,7 @@ export default async function Destacado1({ position = 0 }) {
 
   //const pos = position ? position : 0;
 
-  const datafirst = data?.data[position]?.attributes;
+  const datafirst = data ? data?.data[position]?.attributes : null;
 
   if (!data || error != null) {
     console.log("la data destacado 1", error);
@@ -67,6 +67,7 @@ export default async function Destacado1({ position = 0 }) {
                       console.log("el item:", item);
                       return (
                         <Link
+                          key={item.url}
                           href={item.url}
                           className={
                             "rounded-lg text-center font-medium px-4 py-2 pb-4 bg-primary-600 hover:bg-zinc-800 text-white mr-2 leading-none"
