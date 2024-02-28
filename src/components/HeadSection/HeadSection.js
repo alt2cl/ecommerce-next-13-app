@@ -1,11 +1,11 @@
 import { Playfair_Display } from "next/font/google";
 
-import "./headsection.scss";
-
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400"],
 });
+
+console.log("FONT playfair: ", playfair);
 
 export default function HeadSection({
   titulo,
@@ -17,9 +17,15 @@ export default function HeadSection({
 }) {
   return (
     <div
-      className={`wrapHeadSection flex flex-col ${center && "items-center"} `}
+      className={`wrapHeadSection flex flex-col mb-5 ${
+        center && "items-center"
+      } `}
     >
-      <div className="flex items-center">
+      <div
+        className={`flex flex-col ${
+          center ? "lg:flex-col " : "lg:flex-row "
+        } items-center`}
+      >
         {icon && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,12 +43,13 @@ export default function HeadSection({
           </svg>
         )}
         <h2
-          className={`headSection ${playfair.className} ${
-            color && color
-          } ${fontStyle}`}
+          className={`headSection font-bold text-xl lg:text-3xl lg:text-nowrap  ${
+            playfair.style.fontFamily
+          } ${color && color} ${fontStyle}`}
         >
           {titulo}
         </h2>
+        <hr className="lg:grow border-t-2 lg:ml-5 w-10 my-3 border-primary-500" />
       </div>
       {subtitulo && <p>{subtitulo}</p>}
     </div>

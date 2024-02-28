@@ -13,6 +13,10 @@ import { fetchStrapiData } from "@/src/lib/api";
 export default async function Header(props) {
   const { data } = await fetchStrapiData(`menus/?populate=sociallinks`);
 
+  // if (!data) {
+  //   return false;
+  // }
+
   return (
     <>
       <div className="sticky top-0 z-30 lg:min-h-[88px] py-4 lg:py-1 bg-gray-900">

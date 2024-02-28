@@ -4,6 +4,8 @@ export const fetchStrapiData = async (url) => {
   let error = null;
   let data = null;
 
+  console.log("url fetch: ", `${process.env.NEXT_PUBLIC_STRAPI_URL}/${url}`);
+
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/${url}`,

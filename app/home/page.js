@@ -74,15 +74,13 @@ export default async function Home() {
                     subtitulo={categoria.attributes.subtitle}
                   />
 
-                  <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6">
-                    <Suspense fallback={<p>Cargando productos...</p>}>
-                      <ProductList
-                        shortPost
-                        filter={"featured_categories"}
-                        categoria={categoria.attributes.slug}
-                      />
-                    </Suspense>
-                  </div>
+                  <Suspense fallback={<p>Cargando productos...</p>}>
+                    <ProductList
+                      shortPost
+                      filter={"featured_categories"}
+                      categoria={categoria.attributes.slug}
+                    />
+                  </Suspense>
                 </section>
               );
             })}

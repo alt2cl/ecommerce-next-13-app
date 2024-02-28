@@ -27,7 +27,7 @@ export const metadata = {
 const barlow = Barlow({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "900"],
-  //variable: "--font-barlow",
+  variable: "--font-barlow",
 });
 
 export default function RootLayout({ children }) {
